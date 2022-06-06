@@ -10,11 +10,16 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TaskRepository extends CrudRepository<TaskModel, String> {
+    /* 
     boolean existsByName(String name);
 
     @Modifying
     @Query("UPDATE tasks set assignee = :user where id = :taskId")
     int assignTask(String taskId, UserModel user);
 
+    // This is just a dummy query.
+    @Modifying
+    @Query("UPDATE tasks set assignee = :user where id = :taskId")
     int updateTaskStatus(String taskId, TaskStatusEnum status);
+    */
 }

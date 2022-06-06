@@ -22,6 +22,7 @@ import static org.springframework.http.ResponseEntity.status;
 @RestController
 @RequestMapping("/task")
 public class TaskController {
+    /* 
     @Autowired
     private TaskService taskService;
 
@@ -66,5 +67,6 @@ public class TaskController {
 
         return status(HttpStatus.CREATED).body(null);
     }
+    */
 }
 
