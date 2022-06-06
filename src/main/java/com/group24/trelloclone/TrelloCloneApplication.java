@@ -1,13 +1,11 @@
-package com.group24.dashboard;
+package com.group24.trelloclone;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DashboardApplication {
-
+public class TrelloCloneApplication {
 	public static void main(String[] args) {
-		SpringApplication.run(DashboardApplication.class, args);
+		SpringApplication.run(TrelloCloneApplication.class, args);
 	}
-
 }
