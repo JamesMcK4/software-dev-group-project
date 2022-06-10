@@ -17,7 +17,6 @@ import static io.github.handsomecoder.utils.ObjectUtils.isNull;
 
 @Service
 public class TaskService {
-    /* 
     @Autowired
     private TaskRepository taskRepository;
 
@@ -48,6 +47,7 @@ public class TaskService {
         return taskRepository.assignTask(taskId, user) == 1;
     }
 
+    @Transactional
     public boolean updateTaskStatus(String taskId, TaskStatusEnum status) {
 
 //         TODO
@@ -56,10 +56,15 @@ public class TaskService {
 //         else update the task and return true on success
 //
 //         Perform update operation
-        
-        return false;
+
+        TaskModel task = taskRepository.getTaskById(taskId);
+
+        if (isNull(task)) {
+            return false;
+        }
+
+        return taskRepository.updateTaskStatus(taskId, status) == 1;
     }
-    */
 }
 
 

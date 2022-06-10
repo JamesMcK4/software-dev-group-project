@@ -22,7 +22,6 @@ import static org.springframework.http.ResponseEntity.status;
 @RestController
 @RequestMapping("/task")
 public class TaskController {
-    /* 
     @Autowired
     private TaskService taskService;
 
@@ -59,14 +58,14 @@ public class TaskController {
     @PutMapping("status/{taskId}")
     public ResponseEntity<Map<String, Object>> updateTaskStatus(@PathVariable("taskId") String taskId,
                                                                 @RequestParam("status") TaskStatusEnum status) {
-//         TODO
-//         Validate request parameters
-//         Need to return message Missing required field: [taskId]
-//
-//         Perform update operation
+// Validate request parameters
+// Need to return message Missing required field: [taskId]
+        if (isEmpty(taskId)) {
+            return status(HttpStatus.BAD_REQUEST).body(singletonMap(MESSAGE, "Missing required field: [taskId]"));
+        }
+//  Perform update operation
 
-        return status(HttpStatus.CREATED).body(null);
+        return status(HttpStatus.OK).body(singletonMap(STATUS, taskService.updateTaskStatus(taskId, status)));
     }
-    */
 }
 
