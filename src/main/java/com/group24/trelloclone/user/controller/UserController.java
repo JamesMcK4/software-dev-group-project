@@ -1,5 +1,6 @@
 package com.group24.trelloclone.user.controller;
 
+import com.group24.trelloclone.exception.InvalidUserIdException;
 import com.group24.trelloclone.user.model.UserModel;
 import com.group24.trelloclone.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ public class UserController
     }
 
     @GetMapping("/get_user/{id}")
-    public UserModel getUserById(@PathVariable("id") Long userId)
+    public UserModel getUserById(@PathVariable("id") Long userId) throws InvalidUserIdException
     {
         UserModel user =  userService.getUserById(userId);
         return user;
@@ -31,6 +32,12 @@ public class UserController
     public List<UserModel> getAllUsers()
     {
         return userService.getAllUsers();
+    }
+
+    @DeleteMapping("/delete_all_users")
+    public boolean deleteAllUsers()
+    {
+        return userService.deleteAllUsers();
     }
 }
 

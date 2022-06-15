@@ -1,4 +1,5 @@
 package com.group24.trelloclone.user.model;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -8,7 +9,7 @@ import javax.persistence.Id;
 public class UserModel
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String emailId;
@@ -19,9 +20,13 @@ public class UserModel
 
     private String lastName;
 
-    public UserModel(Long id, String firstName, String lastName, String emailId, String password)
+    private int role;
+
+    public UserModel() {
+    }
+
+    public UserModel(String firstName, String lastName, String emailId, String password)
     {
-        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.emailId = emailId;
@@ -77,6 +82,14 @@ public class UserModel
     public void setPassword(String password)
     {
         this.password = password;
+    }
+
+    public int getRole() {
+        return role;
+    }
+
+    public void setRole(int role) {
+        this.role = role;
     }
 }
 

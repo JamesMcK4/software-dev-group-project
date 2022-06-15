@@ -1,5 +1,6 @@
 package com.group24.trelloclone.task.controller;
 
+import com.group24.trelloclone.exception.InvalidUserIdException;
 import com.group24.trelloclone.task.model.TaskModel;
 import com.group24.trelloclone.task.model.TaskRequestModel;
 import com.group24.trelloclone.task.model.TaskStatusEnum;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 
-import static com.group24.trelloclone.constant.ApplicationConstant.*;
+import static com.group24.trelloclone.utils.ApplicationConstant.*;
 import static io.github.handsomecoder.utils.ObjectUtils.isNull;
 import static io.github.handsomecoder.utils.StringUtils.isEmpty;
 import static java.util.Collections.singletonMap;
@@ -25,7 +26,7 @@ public class TaskController {
     @Autowired
     private TaskService taskService;
 
-    @PostMapping("")
+    @PostMapping("/create_task")
     public ResponseEntity<Map<String, String>> createTask(@RequestBody TaskRequestModel request) {
 
         if (request.isEmpty()) {
@@ -39,14 +40,14 @@ public class TaskController {
         return status(status).body(singletonMap(ID, id));
     }
 
-    @GetMapping("")
+    @GetMapping("/get_all_tasks")
     public List<TaskModel> getTasks() {
         return taskService.getTasks();
     }
 
-    @PutMapping("{taskId}")
+    @PutMapping("/assign_task/{taskId}")
     public ResponseEntity<Map<String, Object>> assignTask(@PathVariable("taskId") String taskId,
-                                                          @RequestParam("userId") Long userId) {
+                                                          @RequestParam("userId") Long userId) throws InvalidUserIdException {
 
         if (isEmpty(taskId)) {
             return status(HttpStatus.BAD_REQUEST).body(singletonMap(MESSAGE, "Missing required field: [taskId]"));
@@ -58,14 +59,17 @@ public class TaskController {
     @PutMapping("status/{taskId}")
     public ResponseEntity<Map<String, Object>> updateTaskStatus(@PathVariable("taskId") String taskId,
                                                                 @RequestParam("status") TaskStatusEnum status) {
-// Validate request parameters
-// Need to return message Missing required field: [taskId]
         if (isEmpty(taskId)) {
             return status(HttpStatus.BAD_REQUEST).body(singletonMap(MESSAGE, "Missing required field: [taskId]"));
         }
-//  Perform update operation
 
         return status(HttpStatus.OK).body(singletonMap(STATUS, taskService.updateTaskStatus(taskId, status)));
+    }
+
+    @DeleteMapping("/delete_all_tasks")
+    public boolean deleteAllTasks()
+    {
+        return taskService.deleteAllTasks();
     }
 }
 
