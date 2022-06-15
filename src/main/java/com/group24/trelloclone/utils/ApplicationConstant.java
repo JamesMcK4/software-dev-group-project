@@ -1,4 +1,4 @@
-package com.group24.trelloclone.constant;
+package com.group24.trelloclone.utils;
 
 public class ApplicationConstant {
 

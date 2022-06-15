@@ -1,11 +1,12 @@
 package com.group24.trelloclone.task.model;
 
+import com.group24.trelloclone.board.model.BoardModel;
 import com.group24.trelloclone.user.model.UserModel;
-import io.github.handsomecoder.utils.UUIDUtils;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import java.util.Date;
 import java.util.Objects;
@@ -14,6 +15,7 @@ import java.util.Objects;
 public class TaskModel {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
 
     private String name;
@@ -21,20 +23,27 @@ public class TaskModel {
     private String description;
 
     @ManyToOne(targetEntity = UserModel.class)
-    @JoinColumn(insertable = false, updatable = false)
     private UserModel assignee;
+
+    @ManyToOne(targetEntity = BoardModel.class)
+    private BoardModel board;
 
     private TaskStatusEnum status;
 
     private Date createdOn;
 
-    private Date lastUpdatedOn;
+    private Date dueOn;
 
-    public TaskModel(String name, String description) {
-        this.id = UUIDUtils.generate();
+    public TaskModel(String name, String description, UserModel assignee, Date dueOn) {
         this.name = name;
         this.description = description;
-        this.createdOn = new Date();
+        this.assignee = assignee;
+        this.dueOn = dueOn;
+    }
+
+    public TaskModel(String name, String description) {
+        this.name = name;
+        this.description = description;
     }
 
     public TaskModel() {
@@ -92,14 +101,6 @@ public class TaskModel {
         this.createdOn = createdOn;
     }
 
-    public Date getLastUpdatedOn() {
-        return lastUpdatedOn;
-    }
-
-    public void setLastUpdatedOn(Date lastUpdatedOn) {
-        this.lastUpdatedOn = lastUpdatedOn;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -111,6 +112,22 @@ public class TaskModel {
     @Override
     public int hashCode() {
         return Objects.hash(id, name);
+    }
+
+    public Date getDueOn() {
+        return dueOn;
+    }
+
+    public void setDueOn(Date dueOn) {
+        this.dueOn = dueOn;
+    }
+
+    public BoardModel getBoard() {
+        return board;
+    }
+
+    public void setBoard(BoardModel board) {
+        this.board = board;
     }
 }
 
