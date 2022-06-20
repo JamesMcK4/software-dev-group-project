@@ -1,7 +1,7 @@
 import './App.css';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import {useEffect} from 'react';
-import {Home, RegisterForm, LoginForm, Header, CreateBoard, CreateWorkspace, NotFound, Board, Footer} from './index.js';
+import {Home, RegisterForm, LoginForm, Header, CreateBoard, CreateWorkspace, NotFound, Board, Footer, Workspace} from './index.js';
 
 function App() {
 
@@ -22,6 +22,7 @@ function App() {
         <Route path="/create-board" element={<CreateBoard/>}/>
         <Route path="/board/:boardId" element={<Board/>}/>
         <Route path="/home/:userId" element={<Home/>}/>
+        <Route path="/workspace/:workspaceId" element={<Workspace/>}/>
         <Route path="*" element={<NotFound/>}/>
       </Routes>
       <Footer></Footer>
