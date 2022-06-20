@@ -1,14 +1,31 @@
-import logo from './logo.svg';
 import './App.css';
-import Header from './components/header';
-import RegisterForm from './components/regform';
+import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import {useEffect} from 'react';
+import {Home, RegisterForm, LoginForm, Header, CreateBoard, CreateWorkspace, NotFound, Board, Footer} from './index.js';
 
 function App() {
+
+  useEffect(() => {
+    // example to add class to body element
+    // document.body.classList.add('bg-success');
+  }, []);
+
+  // React router: https://reactrouter.com/docs/en/v6/upgrading/v5
   return (
-    <div className="App">
-      <Header/>
-      <RegisterForm/>
-    </div>
+    <BrowserRouter>
+      <Header></Header>
+      <Routes>
+        <Route path="/" element={<LoginForm/>}/>
+        <Route path="/register" element={<RegisterForm/>}/>
+        <Route path="/login" element={<LoginForm/>}/>
+        <Route path="/create-workspace" element={<CreateWorkspace/>}/>
+        <Route path="/create-board" element={<CreateBoard/>}/>
+        <Route path="/board/:boardId" element={<Board/>}/>
+        <Route path="/home/:userId" element={<Home/>}/>
+        <Route path="*" element={<NotFound/>}/>
+      </Routes>
+      <Footer></Footer>
+    </BrowserRouter>
   );
 }
 
