@@ -39,7 +39,7 @@ function RegisterForm(){
 
     return(
         <Container>
-            <Row className="justify-content-md-center" style={{height: '100vh'}}>
+            <Row className="justify-content-md-center mt-5">
                 <Col md='6' className="align-self-center">
                     <h3>Register!</h3>
                     <Form>
