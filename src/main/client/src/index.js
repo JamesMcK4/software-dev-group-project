@@ -16,6 +16,8 @@ import Board from './pages/board';
 import NotFound from './components/common/notfound';
 import Workspace from './pages/workspace';
 import ForgotPass from './pages/forgetpass';
+import WorkspaceInfo from './components/workspace/workspace-info';
+import WorkspaceTabs from './components/workspace/workspace-tabs';
 
 /* Guidelines
 https://stackoverflow.com/questions/46984955/how-to-import-all-components-in-react
@@ -48,7 +50,9 @@ export {
   Footer,
   NotFound,
   Workspace,
-  ForgotPass
+  ForgotPass,
+  WorkspaceInfo,
+  WorkspaceTabs
 }
 
 ReactDOM.render(

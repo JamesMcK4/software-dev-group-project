@@ -17,7 +17,8 @@ function Header(){
                         <NavDropdown.Item href="/create-workspace">Create Workspace</NavDropdown.Item>
                         <NavDropdown.Item href="/forget-password">Forgot Password</NavDropdown.Item>
                         <NavDropdown.Divider />
-                        <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
+                        <NavDropdown.Item href="/workspace/1">Workspace</NavDropdown.Item>
+                        <NavDropdown.Item href="/board/1">Board</NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
                 </Navbar.Collapse>
