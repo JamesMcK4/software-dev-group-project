@@ -24,4 +24,4 @@ package:
     tags:
         - ugrad
     script: 
-        mvn package
+        - mvn package
