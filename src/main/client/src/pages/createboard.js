@@ -5,7 +5,7 @@ const CreateBoard = () => {
         <Container>
             <Row className="justify-content-md-center mt-5">
                 <Col md='6' className="align-self-center text-center">
-                    <h2 className>Create a new board</h2>
+                    <h2>Create a new board</h2>
                     <Form>
                         <Form.Group className="mb-3">
                             <Form.Label>Workspace Name</Form.Label>
