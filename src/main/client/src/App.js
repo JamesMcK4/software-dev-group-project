@@ -1,4 +1,5 @@
 import './App.css';
+import {Container} from 'react-bootstrap';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import {useEffect} from 'react';
 import {Home, RegisterForm, LoginForm, Header, CreateBoard, CreateWorkspace, NotFound, Board, Footer, Workspace, ForgotPass} from './index.js';
@@ -14,18 +15,20 @@ function App() {
   return (
     <BrowserRouter>
       <Header></Header>
-      <Routes>
-          <Route path="/" element={<Home/>}/>
-          <Route path="/register" element={<RegisterForm/>}/>
-          <Route path="/login" element={<LoginForm/>}/>
-          <Route path="/create-workspace" element={<CreateWorkspace/>}/>
-          <Route path="/create-board" element={<CreateBoard/>}/>
-          <Route path="/board/:boardId" element={<Board/>}/>
-          <Route path="/home/:userId" element={<Home/>}/>
-          <Route path="/workspace/:workspaceId" element={<Workspace/>}/>
-          <Route path="/forget-password" element={<ForgotPass/>}/>
-          <Route path="*" element={<NotFound/>}/>
-        </Routes>
+      <Container style={{minHeight: '100vh'}}>
+        <Routes>
+            <Route path="/" element={<Home/>}/>
+            <Route path="/register" element={<RegisterForm/>}/>
+            <Route path="/login" element={<LoginForm/>}/>
+            <Route path="/create-workspace" element={<CreateWorkspace/>}/>
+            <Route path="/create-board" element={<CreateBoard/>}/>
+            <Route path="/board/:boardId" element={<Board/>}/>
+            <Route path="/home/:userId" element={<Home/>}/>
+            <Route path="/workspace/:workspaceId" element={<Workspace/>}/>
+            <Route path="/forget-password" element={<ForgotPass/>}/>
+            <Route path="*" element={<NotFound/>}/>
+          </Routes>
+      </Container>
       <Footer></Footer>
     </BrowserRouter>
   );

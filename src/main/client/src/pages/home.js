@@ -17,31 +17,29 @@ const Home = () => {
                     </h2>
                 </Col>
             </Row>
-            <Row>
-                <Col md="4">
-                    <Card bg="dark" text="light">
-                        <Card.Header as="h3">Workspace Name</Card.Header>
-                        <Card.Body>
-                            <Card.Subtitle className="mb-2 text-warning">Total members: 10</Card.Subtitle>
-                            <Card.Text>
-                            This is a description of the work space.
-                            </Card.Text>
-                            <Button variant="warning">Visit</Button>
-                        </Card.Body>
-                        <Card.Body>
-                            <Card.Title>Boards</Card.Title>
-                        </Card.Body>
-                        <ListGroup className="list-group-flush">
-                            <ListGroupItem><a href="#" className="link-success">Board A</a></ListGroupItem>
-                            <ListGroupItem><a href="#" className="link-success">Board B</a></ListGroupItem>
-                            <ListGroupItem><a href="#" className="link-success">Board C</a></ListGroupItem>
-                        </ListGroup>
-                    </Card>
+            <Row xs={1} md={2} className="g-4">
+                {Array.from({ length: 4 }).map((_, idx) => (
+                <Col>
+                <Card bg="dark" text="light">
+                    <Card.Header as="h3">Workspace Name</Card.Header>
+                    <Card.Body>
+                        <Card.Subtitle className="mb-2 text-warning">Total members: 10</Card.Subtitle>
+                        <Card.Text>
+                        This is a description of the work space.
+                        </Card.Text>
+                        <Button variant="warning">Visit</Button>
+                    </Card.Body>
+                    <Card.Body>
+                        <Card.Title>Boards</Card.Title>
+                    </Card.Body>
+                    <ListGroup className="list-group-flush">
+                        <ListGroupItem><Card.Link href="#" className="link-success">Board A</Card.Link></ListGroupItem>
+                        <ListGroupItem><Card.Link href="#" className="link-success">Board B</Card.Link></ListGroupItem>
+                        <ListGroupItem><Card.Link href="#" className="link-success">Board C</Card.Link></ListGroupItem>
+                    </ListGroup>
+                </Card>
                 </Col>
-                <Col md="4">
-                </Col>
-                <Col md="4">
-                </Col>
+                ))}
             </Row>
         </Container>
     )
