@@ -7,6 +7,7 @@ import com.group24.trelloclone.board.model.BoardModel;
 public interface BoardService {
     public BoardModel saveBoard(BoardModel board);
     public List<BoardModel> getBoards();
+    public List<BoardModel> getBoardsByID(List<Long> ids);
     public BoardModel getBoardById(Long boardId);
     public BoardModel deleteBoard(Long boardId);
     public boolean deleteAllBoards();

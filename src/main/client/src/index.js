@@ -18,6 +18,8 @@ import Workspace from './pages/workspace';
 import ForgotPass from './pages/forgetpass';
 import WorkspaceInfo from './components/workspace/workspace-info';
 import WorkspaceTabs from './components/workspace/workspace-tabs';
+import WorkspaceCards from './components/workspace/workspace-cards';
+import BoardList from './components/board/boardlist';
 
 /* Guidelines
 https://stackoverflow.com/questions/46984955/how-to-import-all-components-in-react
@@ -52,7 +54,9 @@ export {
   Workspace,
   ForgotPass,
   WorkspaceInfo,
-  WorkspaceTabs
+  WorkspaceTabs,
+  WorkspaceCards,
+  BoardList
 }
 
 ReactDOM.render(
