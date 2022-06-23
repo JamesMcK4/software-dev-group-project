@@ -20,7 +20,7 @@ test:
         - mvn test
 
 package:
-    stage: test
+    stage: package
     tags:
         - ugrad
     script: 
