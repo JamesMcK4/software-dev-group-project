@@ -34,6 +34,14 @@ public class WorkspaceModel {
         this.users = users;
     }
 
+    public WorkspaceModel(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
+
+    public WorkspaceModel(){
+    }
+
     public Long getId() {
         return id;
     }
@@ -65,4 +73,14 @@ public class WorkspaceModel {
     public void setId(Long id) {
         this.id = id;
     }
+
+    public List<BoardModel> getBoards() {
+        return boards;
+    }
+
+    public void setBoards(List<BoardModel> boards) {
+        this.boards = boards;
+    }
+
+    
 }

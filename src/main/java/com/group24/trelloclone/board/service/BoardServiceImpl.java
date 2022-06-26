@@ -51,8 +51,11 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public List<BoardModel> getBoards() {
-		// TODO Auto-generated method stub
-		return null;
+		return boardRepository.findAll();
 	}
 
+	@Override
+	public List<BoardModel> getBoardsByID(List<Long> ids) {
+		return boardRepository.findAllById(ids);
+	}
 }

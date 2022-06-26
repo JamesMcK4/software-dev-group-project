@@ -27,8 +27,7 @@ public class WorkspaceServiceImpl implements WorkspaceService {
 
     @Override
     public List<WorkspaceModel> getAllWorkspaces() {
-        // TODO Auto-generated method stub
-        return null;
+        return workspaceRepository.findAll();
     }
 
     @Override
