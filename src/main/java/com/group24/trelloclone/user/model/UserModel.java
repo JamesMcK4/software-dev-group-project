@@ -91,5 +91,15 @@ public class UserModel
     public void setRole(int role) {
         this.role = role;
     }
-}
 
+
+    public String resetPasswordToken;
+
+    public void setResetPasswordToken(String resetPasswordToken) {
+        this.resetPasswordToken = resetPasswordToken;
+    }
+
+    public String getResetPasswordToken() {
+        return resetPasswordToken;
+    }
+}
