@@ -1,6 +1,9 @@
 package com.group24.trelloclone.workspace.service;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,31 +24,35 @@ public class WorkspaceServiceImpl implements WorkspaceService {
 
     @Override
     public WorkspaceModel getWorkspaceById(Long userId) {
-        // TODO Auto-generated method stub
-        return null;
+        WorkspaceModel space1=null;
+        Optional<WorkspaceModel> op1=workspaceRepository.findById(userId);
+        if (op1.isPresent()){
+            space1=op1.get();
+        }
+        return space1;
     }
 
     @Override
     public List<WorkspaceModel> getAllWorkspaces() {
-        // TODO Auto-generated method stub
-        return null;
+       return workspaceRepository.findAll();
     }
 
     @Override
     public WorkspaceModel deleteWorkspace(Long userId) {
-        // TODO Auto-generated method stub
-        return null;
+        WorkspaceModel m1=workspaceRepository.getById(userId);
+        workspaceRepository.delete(m1);
+        return m1;
     }
 
     @Override
     public boolean deleteAllUsers() {
-        // TODO Auto-generated method stub
-        return false;
+
+
     }
 
     @Override
     public boolean addUser(Long workspaceId, Long userId) {
-        // TODO Auto-generated method stub
+
         return false;
     }
 
