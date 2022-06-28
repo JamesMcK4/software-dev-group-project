@@ -31,8 +31,8 @@ public class UserController
     }
     @GetMapping("/get_email/{id}")
     public UserModel getUserByEmail(@PathVariable("id") String emailId) throws InvalidCredentialsException {
-        UserModel user = userService.getUserByEmailId(emailId);
-        return user;
+        return userService.getUserByEmailId(emailId);
+
     }
 
     @GetMapping("/get_all_users")
@@ -47,16 +47,17 @@ public class UserController
         return userService.deleteAllUsers();
     }
 
+    @DeleteMapping("/delete_user")
+    public UserModel deleteUser(@PathVariable("id") Long id) throws InvalidUserIdException { return userService.deleteUser(id); }
+
+
     //Work on this for validation - need a mapping to test with Postman
-    @PostMapping("/validate_user/")
-        public boolean validateUser(@PathVariable("id") Long userId) throws InvalidUserIdException, EmptyPasswordException, InvalidCredentialsException
+    @GetMapping("/validate_user/") //THIS DOESNT WORK YET
+        public boolean validateUser(@PathVariable("id") String emailId, String password) throws InvalidUserIdException, EmptyPasswordException, InvalidCredentialsException
     {
-            UserModel user  = userService.getUserById(userId);
-
-            String email = user.getEmailId();
-            String password = user.getPassword();
-
-            return userService.validateUser(email,password);
+            return userService.validateUser(emailId,password);
     }
+
+
 
 }

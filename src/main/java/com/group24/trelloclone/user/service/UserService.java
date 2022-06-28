@@ -19,5 +19,5 @@ public interface UserService
     public boolean updatePassword(Long userId, String password) throws EmptyPasswordException, InvalidUserIdException;
     //TODO Reset password
 
-    public void updatePassword(UserModel user, String newPassword);
+
 }

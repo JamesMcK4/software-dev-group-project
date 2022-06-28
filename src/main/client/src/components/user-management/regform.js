@@ -18,16 +18,29 @@ function RegisterForm({registerUser}){
     const lastNameRef = useRef();
     const emailRef = useRef();
     const passwordRef = useRef();
-
+    
+    
+    function passwordCheck(inputPassword){
+        var passwordToCheck = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+        if(inputPassword.match(passwordToCheck)){ 
+            return true; 
+        }
+        else{
+            //should probably add an alert here to notify wrong password
+            alert('Invalid Password!')
+            return false;
+        }
+    }
     
         const submissionHandler = (e) => {
             e.preventDefault();
-
+            
             const firstName = firstNameRef.current.value;
             const lastName = lastNameRef.current.value;
             const email = emailRef.current.value;
             const password = passwordRef.current.value;
-
+            const passwordChecker = passwordCheck(password);
+            if(passwordChecker === true){
             const user = {firstName, lastName, email, password};
             console.log(user);
            
@@ -37,8 +50,12 @@ function RegisterForm({registerUser}){
             console.log(password);
 
             registerUser.registerUser(user);
-
         }
+        else{
+            alert('Invalid Password!');
+        }
+        
+    }
     
         
     

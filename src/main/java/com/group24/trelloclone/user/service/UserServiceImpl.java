@@ -1,3 +1,5 @@
+package com.group24.trelloclone.user.service;
+
 import com.group24.trelloclone.exception.EmptyPasswordException;
 import com.group24.trelloclone.exception.InvalidCredentialsException;
 import com.group24.trelloclone.exception.InvalidUserIdException;
@@ -44,7 +46,7 @@ public class UserServiceImpl implements UserService
     @Override
     public UserModel getUserByEmailId(String emailId) throws InvalidCredentialsException {
 
-        UserModel user = userRepository.findByEmailId(emailId);;
+        UserModel user = userRepository.findByEmailId(emailId);
 
         return user;
     }
@@ -64,7 +66,7 @@ public class UserServiceImpl implements UserService
         UserModel user = null;
         Optional<UserModel> optionalUser = Optional.ofNullable(userRepository.findByEmailId(emailId));
 
-        if(!optionalUser.isPresent()){
+        if(optionalUser.isEmpty()){
            throw new InvalidCredentialsException();
         }
         else {
@@ -83,6 +85,7 @@ public class UserServiceImpl implements UserService
     public UserModel deleteUser(Long userId) throws InvalidUserIdException {
 
         Optional<UserModel> optionalUser = userRepository.findById(userId);
+
         if(optionalUser.isEmpty()){
             throw new InvalidUserIdException();
         }
@@ -96,7 +99,8 @@ public class UserServiceImpl implements UserService
    @Override
     public boolean updatePassword(Long userId, String password) throws EmptyPasswordException, InvalidUserIdException {
 
-        String newPassword = "";
+        //Probably dont need to make a whole new variable for the argument being passed in, but I like neatness
+        String newPassword = password;
         Optional<UserModel> optionalUser = userRepository.findById(userId);
         UserModel user = null;
         if(optionalUser.isEmpty()){
@@ -105,40 +109,13 @@ public class UserServiceImpl implements UserService
         else{
             user = optionalUser.get();
         }
-        if(!user.getPassword().equals(password)){
-            throw new EmptyPasswordException();
-        }
-
-        else{
-		    user.getPassword() = user.setPassword();//something here..
-        }
-        return false;
-    }//NOT SURE I WANNA USE THIS ONE
-
-    /*
-    public void resetPasswordToken(String email) throws InvalidCredentialsException {
-
-        UserModel user = userRepository.findByEmailId(email);
-        if(user != null){
-            //SOMETHING HERE
-            userRepository.save(user); //not sure if its save or addUser****
-        }
-        else{
-            throw new InvalidCredentialsException();
-        }
-    }
-
-    public UserModel getResetPasswordToken(String token){
-        return userRepository.findResetPassword(token);
-    }
-
-    public void updatePassword (UserModel user, String newPassword){
 
         user.setPassword(newPassword);
-        user.setResetPasswordToken(null);
-        userRepository.save(user);
+
+        return true;
     }
-*/
+
+
     public boolean validatePassword(String password){
 
         String regexpression = "^(?=.*[0-9])" + "(?=.*[a-z])(?=.*[A-Z])" + "(?=.*[@#$%^&+=])"

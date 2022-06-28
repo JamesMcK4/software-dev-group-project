@@ -6,11 +6,12 @@ function RegisterPage(){
     const history = useHistory();
 
     function registerUserHandler(user){
-        fetch("http://localhost:3003/user/save_user", {
+        fetch("http://localhost:3000/user/save_user", {
             method: 'POST',
             body: JSON.stringify(user),
             headers: {'Content-Type': 'application/json'}
         }).then(() => history.replace('/login'));
+        
     }
     return (
         <div>
