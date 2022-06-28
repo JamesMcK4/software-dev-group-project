@@ -1,10 +1,14 @@
 package com.group24.trelloclone.workspace.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.group24.trelloclone.board.model.BoardModel;
+import com.group24.trelloclone.board.service.BoardService;
+import com.group24.trelloclone.exception.UnableTooAddBoardException;
 import com.group24.trelloclone.workspace.model.WorkspaceModel;
 import com.group24.trelloclone.workspace.repository.WorkspaceRepository;
 
@@ -14,15 +18,25 @@ public class WorkspaceServiceImpl implements WorkspaceService {
     @Autowired
     private WorkspaceRepository workspaceRepository;
 
+    @Autowired
+    private BoardService boardService;
+
     @Override
     public WorkspaceModel saveWorkspace(WorkspaceModel workspace) {
         return workspaceRepository.save(workspace);
     }
 
     @Override
-    public WorkspaceModel getWorkspaceById(Long userId) {
-        // TODO Auto-generated method stub
-        return null;
+    public WorkspaceModel getWorkspaceById(Long workspaceId) {
+        WorkspaceModel workspace = null;
+        Optional<WorkspaceModel> optionalWorkspace = workspaceRepository.findById(workspaceId);
+
+        if(optionalWorkspace.isPresent())
+        {
+            workspace = optionalWorkspace.get();
+        }
+
+        return workspace;
     }
 
     @Override
@@ -43,50 +57,69 @@ public class WorkspaceServiceImpl implements WorkspaceService {
     }
 
     @Override
-    public boolean addUser(Long workspaceId, Long userId) {
+    public WorkspaceModel addUser(Long workspaceId, Long userId) {
         // TODO Auto-generated method stub
-        return false;
+        return null;
     }
 
     @Override
-    public boolean addUsers(Long workspaceId, List<Long> usersId) {
+    public WorkspaceModel addUsers(Long workspaceId, List<Long> usersId) {
         // TODO Auto-generated method stub
-        return false;
+        return null;
     }
 
     @Override
-    public boolean deleteUser(Long workspaceId, Long userId) {
+    public WorkspaceModel deleteUser(Long workspaceId, Long userId) {
         // TODO Auto-generated method stub
-        return false;
+        return null;
     }
 
     @Override
-    public boolean deleteUsers(Long workspaceId, List<Long> usersId) {
+    public WorkspaceModel deleteUsers(Long workspaceId, List<Long> usersId) {
         // TODO Auto-generated method stub
-        return false;
+        return null;
     }
 
     @Override
-    public boolean updateWorkspaceName(Long workspaceId, String name) {
+    public WorkspaceModel updateWorkspaceName(Long workspaceId, String name) {
         // TODO Auto-generated method stub
-        return false;
+        return null;
     }
 
     @Override
-    public boolean updateWorkspaceDescription(Long workspaceId, String description) {
+    public WorkspaceModel updateWorkspaceDescription(Long workspaceId, String description) {
         // TODO Auto-generated method stub
-        return false;
+        return null;
     }
 
     @Override
-    public boolean addBoard(Long workspaceId, Long boardId) {
-        // TODO Auto-generated method stub
-        return false;
+    public WorkspaceModel addBoard(Long workspaceId, BoardModel board) throws UnableTooAddBoardException {
+        WorkspaceModel workspace = getWorkspaceById(workspaceId);
+        BoardModel savedBoard = boardService.saveBoard(board);
+        if (workspace != null && savedBoard != null){
+            workspace.getBoards().add(savedBoard);
+        }
+        else{
+            throw new UnableTooAddBoardException();
+        }
+        return workspaceRepository.save(workspace);
+    }
+
+    // saveBoard(BoardModel) - BoardService -> calls workspaceService.addBoard()
+
+    @Override
+    public WorkspaceModel deleteBoard(Long workspaceId, Long boardId) {
+        WorkspaceModel workspace = getWorkspaceById(workspaceId);
+        if (workspace != null){
+            BoardModel deletedBoard = boardService.getBoardById(boardId);
+            workspace.getBoards().remove(deletedBoard);
+        }
+        return workspaceRepository.save(workspace);
     }
 
     @Override
-    public boolean deleteBoard(Long workspaceId, Long boardId) {
+    public WorkspaceModel addBoard(Long workspaceId, Long boardId) {
         // TODO Auto-generated method stub
-        return false;
+        return null;
     }
 }

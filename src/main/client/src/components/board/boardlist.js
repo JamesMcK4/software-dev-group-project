@@ -1,19 +1,27 @@
 import {ListGroupItem, ListGroup} from 'react-bootstrap';
 import {useState, useEffect} from 'react';
 
-const BoardList = ({boardIDs}) => {
+const BoardList = ({workspaceBoards}) => {
 
     var [boards, setBoards] = useState([]);
 
     useEffect(() => {
-        if (boardIDs !== undefined){
-            getBoardsByID();
-        }
-        else{
-            getAllBoards();
+        if (workspaceBoards !== undefined){
+            setBoards(boards);
         }
     }, []);
 
+    return (
+    <ListGroup className="list-group-flush">
+        {workspaceBoards.map((board, key) => (
+        <ListGroupItem key={key}><a href= {"/board/" + board.id} className="link-success">{board.name}</a></ListGroupItem>))}
+    </ListGroup>
+    )
+}
+export default BoardList;
+
+
+    /*
     async function getBoardsByID() {
         // You can await here
         console.log(boardIDs);
@@ -24,7 +32,7 @@ const BoardList = ({boardIDs}) => {
         }, {mode: 'cors'});
         response.json().then((value) => {
             console.log(value);
-            setBoards(Boards => value);
+            setBoards(value);
         });
     }
 
@@ -35,15 +43,7 @@ const BoardList = ({boardIDs}) => {
         }, {mode: 'cors'});
         response.json().then((value) => {
             console.log(value);
-            setBoards(Boards => value);
+            setBoards(value);
         });
     }
-
-    return (
-    <ListGroup className="list-group-flush">
-        {boards.map((data, key) => (
-        <ListGroupItem key={key}><a href= {"/board/" + data.id} className="link-success">{data.name}</a></ListGroupItem>))}
-    </ListGroup>
-    )
-}
-export default BoardList;
+    */

@@ -2,6 +2,7 @@ package com.group24.trelloclone.workspace.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,7 +26,7 @@ public class WorkspaceModel {
     @ManyToMany(targetEntity = UserModel.class)
     private List<UserModel> users;
 
-    @OneToMany(targetEntity = BoardModel.class)
+    @OneToMany(targetEntity = BoardModel.class, cascade=CascadeType.ALL, orphanRemoval = true)
     private List<BoardModel> boards;
 
     public WorkspaceModel(String name, String description, List<UserModel> users) {
