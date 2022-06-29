@@ -1,17 +1,18 @@
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import LoginForm from '../components/user-management/loginform';
 
 
 
 function LoginPage(){
 
-    const history = useHistory();
+    const nav = useNavigate();
 
     function loginUserHandler(user){
-        fetch('http://localhost:3000/user/save_user')
-        .then(() => { 
-            //remember to validate
-            history.replace('/home')});
+        fetch('http://localhost:9000/user/save_user', {
+            method: 'Get',
+            body: JSON.stringify(user),
+            headers: {'Content-Type': 'application/json'}
+        }).then(() => nav('../home'));
     }
 
 

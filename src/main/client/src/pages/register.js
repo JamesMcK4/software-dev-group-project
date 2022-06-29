@@ -10,7 +10,7 @@ function RegisterPage(){
             method: 'POST',
             body: JSON.stringify(user),
             headers: {'Content-Type': 'application/json'}
-        }).then(() => history.replace('/login'));
+        }).then(() => history.push('/login'));
         
     }
     return (

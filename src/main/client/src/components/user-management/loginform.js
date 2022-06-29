@@ -2,12 +2,20 @@ import React from 'react';
 import {Form, Container, Row, Col, Button} from 'react-bootstrap';
 import { useRef } from 'react';
 import { propTypes } from 'react-bootstrap/esm/Image';
+import { useNavigate } from 'react-router-dom';
 
-function LoginForm({loginUser}){
+function LoginForm(){
     const emailRef = useRef();
     const passwordRef = useRef();
-
-
+    const nav = useNavigate();
+    
+    function loginUser(user){
+        fetch("http://localhost:3000/user/get_email/{id}", {
+            method: 'GET',
+            mode: 'cors',
+            headers: {'Content-Type': 'application/json'}
+        }).then(() => nav('/home'));
+    }
 
     function submissionHandler(e){
         e.preventDefault();
@@ -38,7 +46,7 @@ function LoginForm({loginUser}){
                             Submit
                         </Button>
                         <br></br>
-                        <a href="/@{/forgot_password}" className="link-primary">Forgot your password?</a>
+                        <a href="http://localhost:3000/forget-password" className="link-primary">Forgot your password?</a>
                     </Form>
                 </Col>
             </Row>

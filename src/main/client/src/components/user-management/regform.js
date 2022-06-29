@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from "react-router-dom";
 import { useState } from 'react';
 import { useRef } from 'react';
 import './regform.css';
@@ -10,7 +11,7 @@ import Container from 'react-bootstrap/Container';
 
 
 
-function RegisterForm({registerUser}){
+function RegisterForm(){
 
 
     //Setting up new constants for each section of form using useRef (from tutorial vid) in order to link to backend
@@ -18,8 +19,18 @@ function RegisterForm({registerUser}){
     const lastNameRef = useRef();
     const emailRef = useRef();
     const passwordRef = useRef();
+    const nav = useNavigate();
     
-    
+    function registerUser(user){
+        fetch("http://localhost:9000/user/save_user", {
+            method: 'POST',
+            mode: 'cors',
+            body: JSON.stringify(user),
+            headers: {'Content-Type': 'application/json'}
+        }).then(() => nav('/login'));
+    }
+
+        
     function passwordCheck(inputPassword){
         var passwordToCheck = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
         if(inputPassword.match(passwordToCheck)){ 
@@ -49,11 +60,9 @@ function RegisterForm({registerUser}){
             console.log(email);
             console.log(password);
 
-            registerUser.registerUser(user);
+            registerUser(user);
         }
-        else{
-            alert('Invalid Password!');
-        }
+        
         
     }
     
