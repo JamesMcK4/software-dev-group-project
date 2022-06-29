@@ -8,7 +8,7 @@ public interface BoardService {
     public BoardModel saveBoard(BoardModel board);
     public List<BoardModel> getBoards();
     public List<BoardModel> getBoardsByID(List<Long> ids);
-    public BoardModel getBoardById(Long boardId);
+    public BoardModel getBoardByID(Long boardId);
     public BoardModel deleteBoard(Long boardId);
     public boolean deleteAllBoards();
     public boolean updateBoardName(Long boardId, String name);

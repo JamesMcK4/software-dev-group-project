@@ -28,7 +28,7 @@ import com.group24.trelloclone.task.service.TaskService;
 import com.group24.trelloclone.task.service.TaskServiceImpl;
 
 @ExtendWith(MockitoExtension.class)
-public class TasksServiceImplTests {
+public class TaskServiceImplTests {
 	
 	@Mock
 	@Autowired

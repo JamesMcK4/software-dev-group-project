@@ -22,9 +22,9 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public BoardModel deleteBoard(Long boardId) {
-		BoardModel deletedBoard = getBoardById(boardId);
+		BoardModel deletedBoard = getBoardByID(boardId);
 		boardRepository.deleteById(boardId);
-		if (getBoardById(boardId) == null){
+		if (getBoardByID(boardId) == null){
 			return deletedBoard;
 		}
 		return null;
@@ -41,7 +41,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public BoardModel getBoardById(Long boardId) {
+	public BoardModel getBoardByID(Long boardId) {
 		BoardModel board = null;
         Optional<BoardModel> optionalBoard = boardRepository.findById(boardId);
         if(optionalBoard.isPresent())

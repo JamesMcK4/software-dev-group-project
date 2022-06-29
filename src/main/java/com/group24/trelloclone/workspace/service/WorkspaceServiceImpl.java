@@ -111,7 +111,7 @@ public class WorkspaceServiceImpl implements WorkspaceService {
     public WorkspaceModel deleteBoard(Long workspaceId, Long boardId) {
         WorkspaceModel workspace = getWorkspaceById(workspaceId);
         if (workspace != null){
-            BoardModel deletedBoard = boardService.getBoardById(boardId);
+            BoardModel deletedBoard = boardService.getBoardByID(boardId);
             workspace.getBoards().remove(deletedBoard);
         }
         return workspaceRepository.save(workspace);
