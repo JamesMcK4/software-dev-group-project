@@ -10,7 +10,8 @@ build:
     tags:
         - ugrad
     script: 
-        - mvn compile
+        - mvn clean package -DskipTests
+        - echo "Build completed"
 
 test:
     stage: test
@@ -18,6 +19,7 @@ test:
         - ugrad
     script: 
         - mvn test
+        - echo "Test completed"
 
 package:
     stage: package
