@@ -8,7 +8,7 @@ stages:
 build:
     stage: build
     tags:
-        - ugrad
+        - dalfcs_docker_autoscale
     script: 
         - mvn clean package -DskipTests
         - echo "Build completed"
