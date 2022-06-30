@@ -30,4 +30,3 @@ package:
     tags:
         - ugrad
     script: 
-        - mvn deploy
