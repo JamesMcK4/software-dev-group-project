@@ -60,6 +60,7 @@ public class UserServiceImpl implements UserService
         return false;
     }
 
+    //Not sure this method is needed for anything..
     @Override
     public boolean validateUser(String emailId, String password) throws EmptyPasswordException, InvalidCredentialsException {
 
@@ -81,6 +82,7 @@ public class UserServiceImpl implements UserService
 
     }
 
+    //Not sure this method is needed either, as there is already a deleteAll
     @Override
     public UserModel deleteUser(Long userId) throws InvalidUserIdException {
 
@@ -116,7 +118,7 @@ public class UserServiceImpl implements UserService
     }
 
 
-    public boolean validatePassword(String password){
+    /*public boolean validatePassword(String password){
 
         String regexpression = "^(?=.*[0-9])" + "(?=.*[a-z])(?=.*[A-Z])" + "(?=.*[@#$%^&+=])"
                 + "(?=\\S+$).{8,20}$";
@@ -133,5 +135,5 @@ public class UserServiceImpl implements UserService
         Matcher matcher = regPattern.matcher(password);
 
         return matcher.matches();
-    }
+    }*/
 }

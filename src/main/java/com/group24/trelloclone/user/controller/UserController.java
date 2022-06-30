@@ -38,7 +38,6 @@ public class UserController
         return userService.getUserByEmailId(emailId);
 
     }
-
     @CrossOrigin
     @GetMapping("/get_all_users")
     public List<UserModel> getAllUsers()

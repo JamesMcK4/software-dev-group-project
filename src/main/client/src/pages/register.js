@@ -5,14 +5,14 @@ function RegisterPage(){
 
     const history = useHistory();
 
-    function registerUserHandler(user){
-        fetch("http://localhost:3000/user/save_user", {
-            method: 'POST',
-            body: JSON.stringify(user),
-            headers: {'Content-Type': 'application/json'}
-        }).then(() => history.push('/login'));
+    //function registerUserHandler(user){
+    //    fetch("http://localhost:3000/user/save_user", {
+    //        method: 'POST',
+    //        body: JSON.stringify(user),
+    //        headers: {'Content-Type': 'application/json'}
+    //    }).then(() => history.push('/login'));
         
-    }
+    //}
     return (
         <div>
             <RegisterForm registerUser={registerUserHandler}/>

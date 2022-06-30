@@ -8,13 +8,13 @@ function LoginForm(){
     const emailRef = useRef();
     const passwordRef = useRef();
     const nav = useNavigate();
-    
+
     function loginUser(user){
         fetch("http://localhost:3000/user/get_email/{id}", {
             method: 'GET',
             mode: 'cors',
             headers: {'Content-Type': 'application/json'}
-        }).then(() => nav('/home'));
+        }).then(() => nav('/'));
     }
 
     function submissionHandler(e){

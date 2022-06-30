@@ -12,7 +12,7 @@ function LoginPage(){
             method: 'Get',
             body: JSON.stringify(user),
             headers: {'Content-Type': 'application/json'}
-        }).then(() => nav('../home'));
+        }).then(() => nav('/'));
     }
 
 
