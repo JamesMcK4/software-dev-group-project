@@ -3,7 +3,7 @@ image: maven:latest
 stages:
     - build
     - test
-    - package
+    - deploy
 
 build:
     stage: build
@@ -12,6 +12,10 @@ build:
     script: 
         - mvn clean package -DskipTests
         - echo "Build completed"
+    artifacts:
+        paths:
+            - target/*.jar
+        expire_in: 1 week
 
 test:
     stage: test
@@ -22,8 +26,8 @@ test:
         - echo "Test completed"
 
 package:
-    stage: package
+    stage: deploy
     tags:
         - ugrad
     script: 
-        - mvn package
+        - mvn deploy
