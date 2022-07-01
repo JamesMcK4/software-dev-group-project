@@ -35,4 +35,6 @@ public class BoardController {
     public List<BoardModel> getBoardsByID(@RequestParam("ids") List<Long> ids){
         return boardService.getBoardsByID(ids);
     }
+    
+    
 }
