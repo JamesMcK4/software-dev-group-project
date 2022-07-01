@@ -1,12 +1,21 @@
 import {Form, Button, Container, Row, Col, InputGroup} from 'react-bootstrap';
 
 const CreateBoard = () => {
+    const BoardNameRef=useRef();
+    const descriptionRef=useRef();
+    function createHandler(event){
+        event.preventDefault();
+        const BoardName=BoardNameRef.current.value;
+        const description=descriptionRef.current.value;
+        const workspace={BoardName,description};
+        console.log(board);
+    }
     return (
         <Container>
             <Row className="justify-content-md-center mt-5">
                 <Col md='6' className="align-self-center text-center">
                     <h2 className>Create a new board</h2>
-                    <Form>
+                    <Form onSubmit={createHandler}>
                         <Form.Group className="mb-3">
                             <Form.Label>Workspace Name</Form.Label>
                             <Form.Control placeholder="Fixed workspace name" disabled />

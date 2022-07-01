@@ -21,31 +21,27 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public BoardModel deleteBoard(Long boardId) {
-		
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public boolean deleteAllBoards() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public BoardModel getBoardById(Long boardId) {
-		// TODO Auto-generated method stub
-		return null;
+		return boardRepository.getById(boardId);
 	}
 
 	@Override
 	public boolean updateBoardName(Long boardId, String name) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean updateBoardDescription(Long boardId, String description) {
+
 		// TODO Auto-generated method stub
 		return false;
 	}
