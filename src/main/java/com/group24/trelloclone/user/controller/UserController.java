@@ -52,17 +52,25 @@ public class UserController
         return userService.deleteAllUsers();
     }
 
+    //Not sure this is needed either, as there really isn't a reason to delete a single user, and we already have a delete all
     @CrossOrigin
-    @DeleteMapping("/delete_user")
+    @DeleteMapping("/delete_user/{id}")
     public UserModel deleteUser(@PathVariable("id") Long id) throws InvalidUserIdException { return userService.deleteUser(id); }
 
 
-    //Work on this for validation - need a mapping to test with Postman
+    //Work on this for validation.  Edit 06/30/2022 Not sure this is needed for anything really..
     @CrossOrigin
-    @GetMapping("/validate_user/") //THIS DOESNT WORK YET
-        public boolean validateUser(@PathVariable("id") String emailId, String password) throws InvalidUserIdException, EmptyPasswordException, InvalidCredentialsException
+    @GetMapping("/validate_user/{id}") //THIS DOESNT WORK YET
+    public boolean validateUser(@PathVariable("id") String emailId, String password) throws InvalidUserIdException, EmptyPasswordException, InvalidCredentialsException
     {
             return userService.validateUser(emailId,password);
+    }
+
+    //needs insight - ask questions
+    @CrossOrigin
+    @GetMapping("/updatePassword")
+    public boolean updatePassword(String email, String newPassword) throws EmptyPasswordException, InvalidUserIdException {
+        return userService.updatePassword(email, newPassword);
     }
 
 }

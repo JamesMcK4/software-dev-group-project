@@ -1,9 +1,8 @@
-import { useHistory } from "react-router-dom";
 import RegisterForm from "../components/user-management/regform";
 
 function RegisterPage(){
 
-    const history = useHistory();
+   
 
     //function registerUserHandler(user){
     //    fetch("http://localhost:3000/user/save_user", {

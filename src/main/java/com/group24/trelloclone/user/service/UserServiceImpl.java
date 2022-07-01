@@ -98,12 +98,12 @@ public class UserServiceImpl implements UserService
 
         return null; //not sure what to return here since its a delete, maybe change to void?
     }
-   @Override
-    public boolean updatePassword(Long userId, String password) throws EmptyPasswordException, InvalidUserIdException {
+
+    public boolean updatePassword(String email, String password) throws EmptyPasswordException, InvalidUserIdException {
 
         //Probably dont need to make a whole new variable for the argument being passed in, but I like neatness
         String newPassword = password;
-        Optional<UserModel> optionalUser = userRepository.findById(userId);
+        Optional<UserModel> optionalUser = Optional.ofNullable(userRepository.findByEmailId(email));
         UserModel user = null;
         if(optionalUser.isEmpty()){
             throw new InvalidUserIdException();

@@ -10,7 +10,7 @@ function LoginForm(){
     const nav = useNavigate();
 
     function loginUser(user){
-        fetch("http://localhost:3000/user/get_email/{id}", {
+        fetch("http://localhost:9000/user/get_email/{id}", {
             method: 'GET',
             mode: 'cors',
             headers: {'Content-Type': 'application/json'}
