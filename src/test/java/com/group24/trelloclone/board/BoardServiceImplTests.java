@@ -31,9 +31,9 @@ public class BoardServiceImplTests {
 
 	private BoardModel board;
 	private BoardModel board2;
-	private List<BoardModel> boards;
-	List<Long> boardIds = new ArrayList<Long>();
-	Long boardId = (long) 1;
+	private List<BoardModel> boards = new ArrayList<BoardModel>();
+	private List<Long> boardIds = new ArrayList<Long>();
+	private Long boardId = (long) 1;
 
 	@BeforeEach
 	public void setUp() {
@@ -42,10 +42,8 @@ public class BoardServiceImplTests {
 		boardId = (long) 1;
 		board.setId((long) boardId);
 		board2.setId((long) 2);
-		boardIds = new ArrayList<Long>();
 		boardIds.add((long)1);
 		boardIds.add((long)2);
-		boards = new ArrayList<BoardModel>();
 		boards.add(board);
 		boards.add(board2);
 	}

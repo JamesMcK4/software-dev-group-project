@@ -1,5 +1,6 @@
 package com.group24.trelloclone.workspace.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -33,11 +34,14 @@ public class WorkspaceModel {
         this.name = name;
         this.description = description;
         this.users = users;
+        this.boards = new ArrayList<BoardModel>();
     }
 
     public WorkspaceModel(String name, String description) {
         this.name = name;
         this.description = description;
+        this.boards = new ArrayList<BoardModel>();
+        this.users = new ArrayList<UserModel>();
     }
 
     public WorkspaceModel(){
