@@ -28,7 +28,7 @@ const WorkspaceCards = () => {
             <Card bg="dark" text="light">
                 <Card.Header as="h3" className="text-capitalize">{workspace.name}</Card.Header>
                 <Card.Body>
-                    <Card.Subtitle className="mb-2 text-warning">Total members: 10</Card.Subtitle>
+                    <Card.Subtitle className="mb-2 text-warning">Total members: {workspace.users.length}</Card.Subtitle>
                     <Card.Text>
                     {workspace.description}
                     </Card.Text>
@@ -37,7 +37,7 @@ const WorkspaceCards = () => {
                 <Card.Body>
                     <Card.Title>Boards</Card.Title>
                 </Card.Body>
-                <BoardList boardIDs={workspace.boards}>
+                <BoardList workspaceBoards={workspace.boards}>
                 </BoardList>
             </Card>
         </Col>))}

@@ -1,6 +1,7 @@
 package com.group24.trelloclone.board.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,17 +22,36 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public BoardModel deleteBoard(Long boardId) {
+		BoardModel deletedBoard = getBoardById(boardId);
+		boardRepository.deleteById(boardId);
+		if (getBoardById(boardId) == null){
+			return deletedBoard;
+		}
+
 		return null;
 	}
 
 	@Override
 	public boolean deleteAllBoards() {
-		return false;
+		// TODO Auto-generated method stub
+		boardRepository.deleteAll();
+        if (boardRepository.count()==0){
+            return true;
+        }
+        return false;
+
 	}
 
 	@Override
 	public BoardModel getBoardById(Long boardId) {
-		return boardRepository.getById(boardId);
+		BoardModel board = null;
+        Optional<BoardModel> optionalBoard = boardRepository.findById(boardId);
+        if(optionalBoard.isPresent())
+        {
+            board = optionalBoard.get();
+        }
+        return board;
+
 	}
 
 	@Override

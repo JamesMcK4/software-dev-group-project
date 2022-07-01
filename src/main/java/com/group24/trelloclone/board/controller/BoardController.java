@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +28,12 @@ public class BoardController {
 		return boardService.saveBoard(board);
 	}
 
+    @DeleteMapping("/delete_board/{id}")
+    public BoardModel deleteBoard(@PathVariable("id") Long boardId)
+    {
+        return boardService.deleteBoard(boardId);
+    }
+
 	@GetMapping(path = "/get_all_boards")
     public List<BoardModel> getBoards(){
         return boardService.getBoards();
@@ -35,6 +43,11 @@ public class BoardController {
     public List<BoardModel> getBoardsByID(@RequestParam("ids") List<Long> ids){
         return boardService.getBoardsByID(ids);
     }
-    
-    
+
+    @DeleteMapping("/delete_all_boards")
+    public boolean deleteAllUsers()
+    {
+        return boardService.deleteAllBoards();
+    }
+
 }
