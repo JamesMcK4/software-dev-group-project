@@ -14,7 +14,7 @@ const CreateWorkspace = () => {
                         <Form.Group className="mb-3" controlId="formBoardDescription">
                             <InputGroup>
                                 <InputGroup.Text>Description</InputGroup.Text>
-                                <Form.Control as="textarea" aria-label="Description" />
+                                <Form.Control as="textarea" aria-label="Description"/>
                             </InputGroup>
                         </Form.Group>
                         <Button variant="warning" type="submit">
