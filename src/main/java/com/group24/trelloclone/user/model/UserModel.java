@@ -1,5 +1,6 @@
 package com.group24.trelloclone.user.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,6 +13,7 @@ public class UserModel
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(unique=true)
     private String emailId;
 
     private String password;
@@ -91,5 +93,16 @@ public class UserModel
     public void setRole(int role) {
         this.role = role;
     }
-}
 
+    /* 
+    public String resetPasswordToken;
+
+    public void setResetPasswordToken(String resetPasswordToken) {
+        this.resetPasswordToken = resetPasswordToken;
+    }
+
+    public String getResetPasswordToken() {
+        return resetPasswordToken;
+    }
+    */
+}

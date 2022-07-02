@@ -8,7 +8,7 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import RegisterForm from './components/user-management/regform';
 import Home from './pages/home';
 import Header from './components/common/header';
-import LoginForm  from './components/user-management/login';
+import LoginForm  from './components/user-management/loginform';
 import CreateWorkspace from './pages/createworkspace';
 import Footer from './components/common/footer';
 import CreateBoard from './pages/createboard';

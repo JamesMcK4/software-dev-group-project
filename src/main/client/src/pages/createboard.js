@@ -2,6 +2,7 @@ import {Form, Button, Container, Row, Col, InputGroup} from 'react-bootstrap';
 
 const CreateBoard = () => {
     return (
+        // Create board for workspace id = 1. 
         <Container>
             <Row className="justify-content-md-center mt-5">
                 <Col md='6' className="align-self-center text-center">
