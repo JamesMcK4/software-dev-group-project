@@ -1,6 +1,7 @@
 import {Card, Nav, Button, Tab, Form, ListGroup} from 'react-bootstrap';
+import {BoardList} from "../../index.js";
 
-const WorkspaceTabs = () => {
+const WorkspaceTabs = ({workspace}) => {
     return (
         <Tab.Container defaultActiveKey="boards">
                     <Card>
@@ -26,14 +27,12 @@ const WorkspaceTabs = () => {
                         <Card.Text>
                         List of boards and their respective links.
                         </Card.Text>
-                        <ListGroup className="list-group-flush">
-                            <ListGroup.Item><Card.Link href="/board/1" className="link-success">Board Link</Card.Link></ListGroup.Item>
-                            <ListGroup.Item><Card.Link href="/board/1" className="link-success">Board Link</Card.Link></ListGroup.Item>
-                            <ListGroup.Item><Card.Link href="/board/1" className="link-success">Board Link</Card.Link></ListGroup.Item>
-                        </ListGroup>
+                        <BoardList workspaceBoards={workspace.boards == undefined? [] : workspace.boards}>
+                        </BoardList>
                     </Tab.Pane>
                     <Tab.Pane eventKey="members">
                         <Card.Title>Members</Card.Title>
+                        <Card.Subtitle className="mb-2 text-warning">Total members: {workspace.users == undefined? 0 : workspace.users.length}</Card.Subtitle>
                         <Card.Text>
                         List of members.
                         </Card.Text>
@@ -51,12 +50,12 @@ const WorkspaceTabs = () => {
                         <Form>
                         <Form.Group className="mb-3" controlId="formWorkspaceName">
                             <Form.Label>Name</Form.Label>
-                            <Form.Control type="text" value="workspace name"/>
+                            <Form.Control type="text" placeholder={workspace.name == undefined? "workspace name": workspace.name}/>
                         </Form.Group>
 
                         <Form.Group className="mb-3" controlId="formWorkspaceDescription">
                             <Form.Label>Description</Form.Label>
-                            <Form.Control type="text" value="workpspace description" />
+                            <Form.Control type="text" placeholder={workspace.description == undefined? "workspace description": workspace.description}/>
                         </Form.Group>
                         <Button variant="warning" type="submit">
                             Change

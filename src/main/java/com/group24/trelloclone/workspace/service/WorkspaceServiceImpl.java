@@ -45,14 +45,14 @@ public class WorkspaceServiceImpl implements WorkspaceService {
     }
 
     @Override
-    public WorkspaceModel deleteWorkspace(Long userId) {
-        // TODO Auto-generated method stub
-        return null;
+    public WorkspaceModel deleteWorkspace(Long workspaceId) {
+        WorkspaceModel workspace = getWorkspaceById(workspaceId);
+        workspaceRepository.delete(workspace);
+        return workspace;
     }
 
     @Override
     public boolean deleteAllUsers() {
-        // TODO Auto-generated method stub
         return false;
     }
 

@@ -1,29 +1,24 @@
-import {Form, Button, Container, Row, Col, InputGroup} from 'react-bootstrap';
+import CreateWorkspaceForm from "../components/workspace/createworkspaceform";
 
+import {useNavigate} from "react-router-dom";
+import React, {useRef} from "react";
 const CreateWorkspace = () => {
+    const navigate=useNavigate();
+
+    function createWorkspace(workspace){
+        fetch("http://localhost:9001/workspace/save_workspace", {
+            method: 'POST',
+            mode: 'cors',
+            body: JSON.stringify(workspace),
+            headers: {'Content-Type': 'application/json'}
+        }).then((res) => res.json()).
+        then((data) => {
+            navigate('/workspace/' + data.id)
+        });
+    }
+
     return (
-        <Container>
-            <Row className="justify-content-md-center mt-5">
-                <Col md='6' className="align-self-center text-center">
-                    <h2>Create a new workspace</h2>
-                    <Form>
-                        <Form.Group className="mb-3" controlId="formBoardName">
-                            <Form.Label>Workspace name</Form.Label>
-                            <Form.Control placeholder="Workspace name" />
-                        </Form.Group>
-                        <Form.Group className="mb-3" controlId="formBoardDescription">
-                            <InputGroup>
-                                <InputGroup.Text>Description</InputGroup.Text>
-                                <Form.Control as="textarea" aria-label="Description" />
-                            </InputGroup>
-                        </Form.Group>
-                        <Button variant="warning" type="submit">
-                            Create
-                        </Button>
-                    </Form>
-                </Col>
-            </Row>
-        </Container>
+        <CreateWorkspaceForm createWorkspace={createWorkspace}/>
       );
 }
 export default CreateWorkspace ;

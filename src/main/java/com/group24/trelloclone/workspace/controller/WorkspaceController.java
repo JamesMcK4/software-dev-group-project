@@ -29,6 +29,12 @@ public class WorkspaceController {
         return workspaceService.saveWorkspace(workspace);
     }
 
+    @DeleteMapping("/delete_workspace/{id}")
+    public WorkspaceModel deleteWorkspace(@PathVariable("id") Long workspaceId)
+    {
+        return workspaceService.deleteWorkspace(workspaceId);
+    }
+
     @PostMapping(path = "/add_board/{id}", consumes = "application/json", produces = "application/json" )
     public WorkspaceModel addBoard(@PathVariable("id") Long workspaceId, @RequestBody BoardModel board) throws UnableTooAddBoardException{
         return workspaceService.addBoard(workspaceId, board);
