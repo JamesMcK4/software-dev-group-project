@@ -1,5 +1,5 @@
 import {Card, Nav, Button, Tab, Form, ListGroup} from 'react-bootstrap';
-import {BoardList} from "../../index.js";
+import {BoardList, UserList} from "../../index.js";
 
 const WorkspaceTabs = ({workspace}) => {
     return (
@@ -42,11 +42,7 @@ const WorkspaceTabs = ({workspace}) => {
                         <Card.Text>
                         List of members.
                         </Card.Text>
-                        <ListGroup className="list-group-flush">
-                            <ListGroup.Item>Cras justo odio</ListGroup.Item>
-                            <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
-                            <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
-                        </ListGroup>
+                        <UserList workspaceUsers={workspace.users === undefined? [] : workspace.users}></UserList>
                     </Tab.Pane>
                     <Tab.Pane eventKey="settings">
                         <Card.Title>Settings</Card.Title>

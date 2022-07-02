@@ -21,6 +21,7 @@ import WorkspaceTabs from './components/workspace/workspace-tabs';
 import WorkspaceCards from './components/workspace/workspace-cards';
 import BoardList from './components/board/boardlist';
 import AddUser from './pages/add-user';
+import UserList from './components/user-management/userlist';
 
 /* Guidelines
 https://stackoverflow.com/questions/46984955/how-to-import-all-components-in-react
@@ -58,7 +59,8 @@ export {
   WorkspaceTabs,
   WorkspaceCards,
   BoardList,
-  AddUser
+  AddUser,
+  UserList
 }
 
 ReactDOM.render(

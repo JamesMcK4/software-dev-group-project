@@ -14,7 +14,7 @@ const BoardList = ({workspaceBoards}) => {
     return (
     <ListGroup className="list-group-flush">
         {workspaceBoards.map((board, key) => (
-        <ListGroupItem key={key}><a href= {"/board/" + board.id} className="link-success">{board.name}</a></ListGroupItem>))}
+        <ListGroupItem action href= {"/board/" + board.id} key={key} className="link-success">{board.name}</ListGroupItem>))}
     </ListGroup>
     )
 }

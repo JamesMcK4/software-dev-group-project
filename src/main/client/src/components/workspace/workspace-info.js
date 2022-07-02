@@ -7,13 +7,13 @@ const WorkspaceInfo = ({workspace}) => {
         <Container className="d-flex p-0 mb-2 align-items-start">
             <div className="bg-warning text-white d-flex" style={{width: '3em', height: '3em'}}>
                 <p className="my-auto mx-auto d-block display-6">
-                    {workspace.name == undefined? "W": workspace.name.charAt(0)}
+                    {workspace.name === undefined? "W": workspace.name.charAt(0)}
                 </p>
             </div>
-            <Card.Title className="my-auto p-2">{"name" in workspace? "workspace name": workspace.name}</Card.Title>
+            <Card.Title className="my-auto p-2">{workspace.name == undefined? "workspace name": workspace.name}</Card.Title>
         </Container>
         <Card.Text>
-            {workspace.description == undefined? "workspace description": workspace.description}
+            {workspace.description === undefined? "workspace description": workspace.description}
         </Card.Text>
     </Card>
     );
