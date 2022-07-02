@@ -2,7 +2,7 @@ import './App.css';
 import {Container} from 'react-bootstrap';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import {useEffect} from 'react';
-import {Home, RegisterForm, LoginForm, Header, CreateBoard, CreateWorkspace, NotFound, Board, Footer, Workspace, ForgotPass} from './index.js';
+import {Home, RegisterForm, LoginForm, Header, CreateBoard, CreateWorkspace, NotFound, Board, Footer, Workspace, ForgotPass, AddUser} from './index.js';
 
 function App() {
 
@@ -21,11 +21,12 @@ function App() {
             <Route path="/register" element={<RegisterForm/>}/>
             <Route path="/login" element={<LoginForm/>}/>
             <Route path="/create-workspace" element={<CreateWorkspace/>}/>
-            <Route path="/create-board" element={<CreateBoard/>}/>
+            <Route path="/create-board/:workspaceId" element={<CreateBoard/>}/>
             <Route path="/board/:boardId" element={<Board/>}/>
             <Route path="/home/:userId" element={<Home/>}/>
             <Route path="/workspace/:workspaceId" element={<Workspace/>}/>
             <Route path="/forget-password" element={<ForgotPass/>}/>
+            <Route path="/add-user/:workspaceId" element={<AddUser/>}/>
             <Route path="*" element={<NotFound/>}/>
           </Routes>
       </Container>

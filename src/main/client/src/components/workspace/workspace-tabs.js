@@ -27,12 +27,18 @@ const WorkspaceTabs = ({workspace}) => {
                         <Card.Text>
                         List of boards and their respective links.
                         </Card.Text>
-                        <BoardList workspaceBoards={workspace.boards == undefined? [] : workspace.boards}>
+                        <Button variant="warning" href={"/create-board/" + workspace.id}>
+                            Create a board
+                        </Button>
+                        <BoardList workspaceBoards={workspace.boards === undefined? [] : workspace.boards}>
                         </BoardList>
                     </Tab.Pane>
                     <Tab.Pane eventKey="members">
                         <Card.Title>Members</Card.Title>
-                        <Card.Subtitle className="mb-2 text-warning">Total members: {workspace.users == undefined? 0 : workspace.users.length}</Card.Subtitle>
+                        <Card.Subtitle className="mb-2 text-warning">Total members: {workspace.users === undefined? 0 : workspace.users.length}</Card.Subtitle>
+                        <Button variant="warning" href={"/add-user/" + workspace.id}>
+                            Add a new user
+                        </Button>
                         <Card.Text>
                         List of members.
                         </Card.Text>
@@ -45,17 +51,16 @@ const WorkspaceTabs = ({workspace}) => {
                     <Tab.Pane eventKey="settings">
                         <Card.Title>Settings</Card.Title>
                         <Card.Text>
-                        With supporting text below as a natural lead-in to additional content.
+                        Change the workspace and description here.
                         </Card.Text>
                         <Form>
                         <Form.Group className="mb-3" controlId="formWorkspaceName">
                             <Form.Label>Name</Form.Label>
-                            <Form.Control type="text" placeholder={workspace.name == undefined? "workspace name": workspace.name}/>
+                            <Form.Control type="text" placeholder={workspace.name === undefined? "workspace name": workspace.name}/>
                         </Form.Group>
-
                         <Form.Group className="mb-3" controlId="formWorkspaceDescription">
                             <Form.Label>Description</Form.Label>
-                            <Form.Control type="text" placeholder={workspace.description == undefined? "workspace description": workspace.description}/>
+                            <Form.Control type="text" placeholder={workspace.description === undefined? "workspace description": workspace.description}/>
                         </Form.Group>
                         <Button variant="warning" type="submit">
                             Change

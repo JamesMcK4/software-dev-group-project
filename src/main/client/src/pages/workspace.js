@@ -1,9 +1,11 @@
 import {WorkspaceTabs, WorkspaceInfo} from '../index.js';
 import {Container, Row, Col} from 'react-bootstrap';
 import {useState, useEffect} from 'react';
-import {useParams} from 'react-router-dom';
+import {useParams, useNavigate} from 'react-router-dom';
 
 const Workspace = () => {
+
+    const navigate = useNavigate();
 
     var [workspace, setWorkspace] = useState({});
     const workspaceId = useParams().workspaceId;
@@ -24,6 +26,9 @@ const Workspace = () => {
         response.json().then((value) => {
             console.log(value);
             setWorkspace(value);
+        }).catch((e) => {
+            alert("Fail to fetch the workspace. It might not exist.");
+            navigate("/");
         });
     }
 

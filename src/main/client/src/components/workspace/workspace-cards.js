@@ -32,7 +32,7 @@ const WorkspaceCards = () => {
                     <Card.Text>
                     {workspace.description}
                     </Card.Text>
-                    <Button variant="warning">Visit</Button>
+                    <Button variant="warning" href={"/workspace/" + workspace.id}>Visit</Button>
                 </Card.Body>
                 <Card.Body>
                     <Card.Title>Boards</Card.Title>

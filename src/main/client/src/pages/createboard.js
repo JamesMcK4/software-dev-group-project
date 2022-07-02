@@ -6,15 +6,15 @@ const CreateBoard = () => {
         <Container>
             <Row className="justify-content-md-center mt-5">
                 <Col md='6' className="align-self-center text-center">
-                    <h2 className>Create a new board</h2>
+                    <h2>Create a new board</h2>
                     <Form>
                         <Form.Group className="mb-3">
-                            <Form.Label>Workspace Name</Form.Label>
-                            <Form.Control placeholder="Fixed workspace name" disabled />
+                            <Form.Label>Workspace ID</Form.Label>
+                            <Form.Control placeholder="Workspace ID" disabled />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formBoardName">
                             <Form.Label>Board name</Form.Label>
-                            <Form.Control placeholder="Board name" />
+                            <Form.Control placeholder="Board name"/>
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formBoardDescription">
                             <InputGroup>

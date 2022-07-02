@@ -13,7 +13,7 @@ function Header(){
                         <Nav.Link href="/register">Register</Nav.Link>
                         <Nav.Link href="/login">Log in</Nav.Link>
                         <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                        <NavDropdown.Item href="/create-board">Create Board</NavDropdown.Item>
+                        <NavDropdown.Item href="/create-board/1">Create Board</NavDropdown.Item>
                         <NavDropdown.Item href="/create-workspace">Create Workspace</NavDropdown.Item>
                         <NavDropdown.Item href="/forget-password">Forgot Password</NavDropdown.Item>
                         <NavDropdown.Divider />
