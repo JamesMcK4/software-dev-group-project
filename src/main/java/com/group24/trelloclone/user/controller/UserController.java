@@ -43,7 +43,6 @@ public class UserController
     @GetMapping("/get_email/{id}")
     public UserModel getUserByEmail(@PathVariable("id") String emailId) throws InvalidCredentialsException {
         return userService.getUserByEmailId(emailId);
-
     }
 
     @GetMapping("/get_all_users")
