@@ -11,11 +11,11 @@ import { useParams } from 'react-router-dom';
 
     function ResetPasswordForm(){
     const email = useParams().emailId;
-    const passwordRef = null;
+    const passwordRef = useRef();
     const nav = useNavigate();
     
     function resetPassword(password){
-         fetch("http://localhost:9000/user/save_user", {
+         fetch("http://localhost:9000/user/updatePassword", {
             method: 'POST',
             mode: 'cors',
             body: JSON.stringify(password),
@@ -30,7 +30,7 @@ import { useParams } from 'react-router-dom';
         const password = passwordRef.current.value;
         console.log(password);
 
-        //resetPassword(password);   
+        resetPassword(password);   
 }
 
     return(
@@ -40,7 +40,7 @@ import { useParams } from 'react-router-dom';
                 <Form onSubmit={submissionHandler}>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1" >
                     <Form.Label>Please Enter A New Password</Form.Label>
-                    <Form.Control type="email" placeholder="New Password?" />
+                    <Form.Control type="password" placeholder="New Password?" ref={passwordRef}/>
                 </Form.Group>
                 <Button variant="warning" type="submit">
                     Submit

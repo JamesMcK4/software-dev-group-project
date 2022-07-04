@@ -80,7 +80,7 @@ public class UserController
     }
 
     //needs insight - ask questions
-    @PutMapping("/updatePassword/")
+    @PutMapping("/updatePassword")
     public ResponseEntity<Map<String, Object>> updatePassword(@RequestBody UserLoginModel userLoginModel) throws EmptyPasswordException, InvalidUserIdException {
         UserModel user;
         try{
