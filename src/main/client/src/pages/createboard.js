@@ -14,12 +14,6 @@ const CreateBoard = () => {
         console.log(name);
         console.log(description);
         if (workspaceId !== undefined){
-            if (name === ""){
-                alert("Please enter a name for the board");
-            }
-            if (description === ""){
-                alert("Please enter a description for the board");
-            }
             if (name !== "" && description !== ""){
                 const board = {name, description};
                 var data = await createBoard(workspaceId, board);
@@ -56,12 +50,12 @@ const CreateBoard = () => {
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formBoardName">
                             <Form.Label>Board name</Form.Label>
-                            <Form.Control placeholder="Board name" name="name"/>
+                            <Form.Control placeholder="Board name" name="name" required/>
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formBoardDescription">
                             <InputGroup>
                                 <InputGroup.Text>Description</InputGroup.Text>
-                                <Form.Control as="textarea" aria-label="Description" name="description"/>
+                                <Form.Control as="textarea" aria-label="Description" name="description" required/>
                             </InputGroup>
                         </Form.Group>
                         <Button variant="warning" type="submit">

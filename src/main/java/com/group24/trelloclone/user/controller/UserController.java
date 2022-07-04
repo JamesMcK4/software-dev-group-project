@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -41,8 +42,19 @@ public class UserController
     }
 
     @GetMapping("/get_email/{id}")
-    public UserModel getUserByEmail(@PathVariable("id") String emailId) throws InvalidCredentialsException {
-        return userService.getUserByEmailId(emailId);
+    public ResponseEntity<Map<String, Object>> getUserByEmail(@PathVariable("id") String emailId) throws InvalidCredentialsException {
+        UserModel user;
+        try{
+            user = userService.getUserByEmailId(emailId);
+        }
+        catch(Exception e){
+            System.out.println(e);
+            return status(HttpStatus.OK).body(singletonMap(VALIDATION_STATUS, false));
+        }
+        Map<String, Object> returnBody = new HashMap<>();
+        returnBody.put(VALIDATION_STATUS, true);
+        returnBody.put(ID, user.getId());
+        return status(HttpStatus.OK).body(returnBody);
     }
 
     @GetMapping("/get_all_users")

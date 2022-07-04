@@ -43,13 +43,16 @@ public class UserServiceImpl implements UserService
     }
 
     @Override
-    public UserModel getUserByEmailId(String emailId) {
+    public UserModel getUserByEmailId(String emailId) throws InvalidCredentialsException {
 
         Optional<UserModel> optionalUser = userRepository.findByEmailId(emailId);
         UserModel user = null;
 
         if(!optionalUser.isEmpty()){
             user = optionalUser.get();
+        }
+        else{
+            throw new InvalidCredentialsException();
         }
 
         return user;
