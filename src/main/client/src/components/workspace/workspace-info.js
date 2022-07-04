@@ -10,7 +10,7 @@ const WorkspaceInfo = ({workspace}) => {
                     {workspace.name === undefined? "W": workspace.name.charAt(0)}
                 </p>
             </div>
-            <Card.Title className="my-auto p-2">{workspace.name == undefined? "workspace name": workspace.name}</Card.Title>
+            <Card.Title className="my-auto p-2">{workspace.name === undefined? "workspace name": workspace.name}</Card.Title>
         </Container>
         <Card.Text>
             {workspace.description === undefined? "workspace description": workspace.description}

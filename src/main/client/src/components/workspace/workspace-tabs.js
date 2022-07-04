@@ -1,7 +1,27 @@
-import {Card, Nav, Button, Tab, Alert} from 'react-bootstrap';
+import {Card, Nav, Button, Tab} from 'react-bootstrap';
 import {BoardList, UserList, WorkspaceSetting} from "../../index.js";
 
 const WorkspaceTabs = ({workspace}) => {
+
+    async function handleDelete(e){
+        const boardId = e.target.id;
+        console.log(boardId);
+        await deleteBoard(workspace.id, boardId);
+        alert("Delete board sucessfully!");
+        window.location.reload(false);
+    }
+
+    async function deleteBoard(workspaceId, boardId){
+        const response = await fetch("http://localhost:9001/workspace/delete_board/" + workspaceId + "/" + boardId, {
+            method: 'DELETE',
+            mode: 'cors',
+            headers: {'Content-Type': 'application/json'}
+        })
+        var data = await response.json();
+        console.log(data);
+        return data;
+    }
+
     return (
         <Tab.Container defaultActiveKey="boards">
             <Card>
@@ -30,7 +50,7 @@ const WorkspaceTabs = ({workspace}) => {
                         <Button variant="warning" href={"/create-board/" + workspace.id}>
                             Create a board
                         </Button>
-                        <BoardList workspaceBoards={workspace.boards === undefined? [] : workspace.boards}>
+                        <BoardList workspaceBoards={workspace.boards === undefined? [] : workspace.boards} handleDelete={handleDelete}>
                         </BoardList>
                     </Tab.Pane>
                     <Tab.Pane eventKey="members">
