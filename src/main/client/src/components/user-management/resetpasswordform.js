@@ -14,14 +14,22 @@ import { useParams } from 'react-router-dom';
     const passwordRef = useRef();
     const nav = useNavigate();
     
-    function resetPassword(password){
-         fetch("http://localhost:9000/user/updatePassword", {
-            method: 'POST',
+    async function resetPassword(userLogin){
+         const response = await fetch("http://localhost:9000/user/updatePassword", {
+            method: 'PUT',
             mode: 'cors',
-            body: JSON.stringify(password),
+            body: JSON.stringify(userLogin),
             headers: {'Content-Type': 'application/json'}
         });
-        
+
+        var data = await response.json();
+        console.log(data);
+        if(data.object===null){
+            alert("Nothing worked, try again!");
+        }
+        else{
+            nav("/login");
+        }
     }
 
     function submissionHandler(e){
@@ -29,9 +37,11 @@ import { useParams } from 'react-router-dom';
         
         const password = passwordRef.current.value;
         console.log(password);
+        const userLogin = {email, password};
 
-        resetPassword(password);   
+        resetPassword(userLogin);   
 }
+
 
     return(
         <Container>
