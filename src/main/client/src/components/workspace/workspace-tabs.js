@@ -3,12 +3,16 @@ import {BoardList, UserList, WorkspaceSetting} from "../../index.js";
 
 const WorkspaceTabs = ({workspace}) => {
 
-    async function handleDelete(e){
+    async function handleDeleteBoard(e){
         const boardId = e.target.id;
         console.log(boardId);
         await deleteBoard(workspace.id, boardId);
         alert("Delete board sucessfully!");
         window.location.reload(false);
+    }
+
+    async function handleDeleteUser(e){
+
     }
 
     async function deleteBoard(workspaceId, boardId){
@@ -50,7 +54,7 @@ const WorkspaceTabs = ({workspace}) => {
                         <Button variant="warning" href={"/create-board/" + workspace.id}>
                             Create a board
                         </Button>
-                        <BoardList workspaceBoards={workspace.boards === undefined? [] : workspace.boards} handleDelete={handleDelete}>
+                        <BoardList workspaceBoards={workspace.boards === undefined? [] : workspace.boards} handleDelete={handleDeleteBoard}>
                         </BoardList>
                     </Tab.Pane>
                     <Tab.Pane eventKey="members">
@@ -62,7 +66,7 @@ const WorkspaceTabs = ({workspace}) => {
                         <Card.Text>
                         List of members.
                         </Card.Text>
-                        <UserList workspaceUsers={workspace.users === undefined? [] : workspace.users}></UserList>
+                        <UserList workspaceUsers={workspace.users === undefined? [] : workspace.users} handleDelete={handleDeleteUser}></UserList>
                     </Tab.Pane>
                     <Tab.Pane eventKey="settings">
                         <Card.Title>Settings</Card.Title>

@@ -15,6 +15,7 @@ public interface UserService
     public List<UserModel> getAllUsers();
     public UserModel getUserByEmailId(String emailId) throws InvalidCredentialsException;
     public UserModel deleteUser(Long userId) throws InvalidUserIdException;
+    public UserModel updateUser(UserModel user) throws InvalidUserIdException;
     public boolean deleteAllUsers();
     public boolean validateUser(UserLoginModel loginCredentials) throws EmptyPasswordException, InvalidCredentialsException;
     public boolean updatePassword(String email, String password) throws EmptyPasswordException, InvalidUserIdException;

@@ -1,7 +1,7 @@
 package com.group24.trelloclone.workspace.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.group24.trelloclone.board.model.BoardModel;
 import com.group24.trelloclone.user.model.UserModel;
 
@@ -25,24 +26,25 @@ public class WorkspaceModel {
 
     private String description;
 
-    @ManyToMany(targetEntity = UserModel.class, fetch = FetchType.EAGER)
-    private List<UserModel> users;
+    @ManyToMany(targetEntity = UserModel.class, fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @JsonIgnoreProperties("workspaces")
+    private Set<UserModel> users;
 
     @OneToMany(targetEntity = BoardModel.class, cascade=CascadeType.ALL, orphanRemoval = true)
-    private List<BoardModel> boards;
+    private Set<BoardModel> boards;
 
-    public WorkspaceModel(String name, String description, List<UserModel> users) {
+    public WorkspaceModel(String name, String description, Set<UserModel> users) {
         this.name = name;
         this.description = description;
         this.users = users;
-        this.boards = new ArrayList<BoardModel>();
+        this.boards = new HashSet<BoardModel>();
     }
 
     public WorkspaceModel(String name, String description) {
         this.name = name;
         this.description = description;
-        this.boards = new ArrayList<BoardModel>();
-        this.users = new ArrayList<UserModel>();
+        this.boards = new HashSet<BoardModel>();
+        this.users = new HashSet<UserModel>();
     }
 
     public WorkspaceModel(){
@@ -68,11 +70,11 @@ public class WorkspaceModel {
         this.description = description;
     }
 
-    public List<UserModel> getUsers() {
+    public Set<UserModel> getUsers() {
         return users;
     }
 
-    public void setUsers(List<UserModel> users) {
+    public void setUsers(Set<UserModel> users) {
         this.users = users;
     }
 
@@ -80,13 +82,11 @@ public class WorkspaceModel {
         this.id = id;
     }
 
-    public List<BoardModel> getBoards() {
+    public Set<BoardModel> getBoards() {
         return boards;
     }
 
-    public void setBoards(List<BoardModel> boards) {
+    public void setBoards(Set<BoardModel> boards) {
         this.boards = boards;
     }
-
-    
 }

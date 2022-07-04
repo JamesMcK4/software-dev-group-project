@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.group24.trelloclone.board.model.BoardModel;
+import com.group24.trelloclone.exception.InvalidUserIdException;
 import com.group24.trelloclone.exception.UnableTooAddBoardException;
 import com.group24.trelloclone.workspace.model.WorkspaceModel;
 import com.group24.trelloclone.workspace.service.WorkspaceService;
@@ -66,6 +67,33 @@ public class WorkspaceController {
             return status(HttpStatus.OK).body(singletonMap(OBJECT, null));
         }
         return status(HttpStatus.OK).body(singletonMap(OBJECT, workspace));
+    }
+
+    @PostMapping("/add_user/{workspace_id}/{user_id}")
+    public ResponseEntity<Map<String, Object>> addUser(@PathVariable("workspace_id") Long workspaceId, @PathVariable("user_id") Long userId)
+    {
+        WorkspaceModel workspace;
+        try{
+            workspace = workspaceService.addUser(workspaceId, userId);  
+        }
+        catch(Exception e){
+            System.out.println(e);
+            return status(HttpStatus.OK).body(singletonMap(OBJECT, null));
+        }
+        return status(HttpStatus.OK).body(singletonMap(OBJECT, workspace));
+    }
+
+    @DeleteMapping(path = "/delete_all_users/{workspace_id}")
+    public ResponseEntity<Map<String, Object>> deleteAllUsers(@PathVariable("workspace_id") Long workspaceId)
+    {   
+        try{
+            workspaceService.deleteAllUsers(workspaceId);
+        }
+        catch(Exception e){
+            System.out.println(e);
+            return status(HttpStatus.OK).body(singletonMap(STATUS, false));
+        }
+        return status(HttpStatus.OK).body(singletonMap(STATUS, true));
     }
 
     @DeleteMapping("/delete_board/{workspace_id}/{board_id}")

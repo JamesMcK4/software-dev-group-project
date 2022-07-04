@@ -1,10 +1,18 @@
 package com.group24.trelloclone.user.model;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.group24.trelloclone.workspace.model.WorkspaceModel;
 
 @Entity(name = "users")
 public class UserModel
@@ -23,6 +31,10 @@ public class UserModel
     private String lastName;
 
     private int role;
+
+    @ManyToMany(targetEntity = WorkspaceModel.class, fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @JsonIgnoreProperties("users")
+    private Set<WorkspaceModel> workspaces;
 
     public UserModel() {
     }
@@ -92,6 +104,14 @@ public class UserModel
 
     public void setRole(int role) {
         this.role = role;
+    }
+
+    public Set<WorkspaceModel> getWorkspaces() {
+        return workspaces;
+    }
+
+    public void setWorkspaces(Set<WorkspaceModel> workspaces) {
+        this.workspaces = workspaces;
     }
 
     /* 

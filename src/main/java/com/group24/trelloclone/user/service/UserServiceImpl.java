@@ -6,6 +6,7 @@ import com.group24.trelloclone.exception.InvalidUserIdException;
 import com.group24.trelloclone.user.model.UserLoginModel;
 import com.group24.trelloclone.user.model.UserModel;
 import com.group24.trelloclone.user.repository.UserRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -124,6 +125,19 @@ public class UserServiceImpl implements UserService
         user.setPassword(newPassword);
 
         return true;
+    }
+
+    @Override
+    public UserModel updateUser(UserModel user) throws InvalidUserIdException {
+        UserModel dbUser = getUserById(user.getId());
+        if (dbUser != null){
+            userRepository.save(user);
+        }
+        else{
+            throw new InvalidUserIdException();
+        }
+
+        return user;
     }
 
 

@@ -8,8 +8,11 @@ import org.springframework.stereotype.Service;
 
 import com.group24.trelloclone.board.model.BoardModel;
 import com.group24.trelloclone.board.service.BoardService;
+import com.group24.trelloclone.exception.InvalidUserIdException;
 import com.group24.trelloclone.exception.InvalidWorkspaceIdException;
 import com.group24.trelloclone.exception.UnableTooAddBoardException;
+import com.group24.trelloclone.user.model.UserModel;
+import com.group24.trelloclone.user.service.UserService;
 import com.group24.trelloclone.workspace.model.WorkspaceModel;
 import com.group24.trelloclone.workspace.repository.WorkspaceRepository;
 
@@ -21,6 +24,9 @@ public class WorkspaceServiceImpl implements WorkspaceService {
 
     @Autowired
     private BoardService boardService;
+
+    @Autowired
+    private UserService userService;
 
     @Override
     public WorkspaceModel saveWorkspace(WorkspaceModel workspace) {
@@ -53,14 +59,49 @@ public class WorkspaceServiceImpl implements WorkspaceService {
     }
 
     @Override
-    public boolean deleteAllUsers() {
+    public boolean deleteAllUsers(Long workspaceId) throws InvalidWorkspaceIdException {
+        WorkspaceModel workspace = getWorkspaceById(workspaceId);
+        if (workspace == null){
+            throw new InvalidWorkspaceIdException();
+        }
+        for (UserModel user : workspace.getUsers()) {
+            for (WorkspaceModel userWorkspace: user.getWorkspaces()){
+                if (userWorkspace.getId() == workspaceId){
+                    user.getWorkspaces().remove(userWorkspace);
+                    try {
+                        userService.updateUser(user);
+                    } catch (InvalidUserIdException e) {
+                        return false;
+                    }
+                    break;
+                }
+            }
+        }
+        workspace.getUsers().clear();
+        if (workspace.getUsers().size()==0){
+            workspaceRepository.save(workspace);
+            return true;
+        }
         return false;
     }
 
     @Override
-    public WorkspaceModel addUser(Long workspaceId, Long userId) {
-        // TODO Auto-generated method stub
-        return null;
+    public WorkspaceModel addUser(Long workspaceId, Long userId) throws InvalidWorkspaceIdException, InvalidUserIdException{
+        WorkspaceModel workspace = getWorkspaceById(workspaceId);
+        if (workspace == null){
+            throw new InvalidWorkspaceIdException();
+        }
+
+        UserModel user = userService.getUserById(userId);
+        if (user == null){
+            throw new InvalidUserIdException();
+        }
+
+        workspace.getUsers().add(user);
+        user.getWorkspaces().add(workspace);
+        userService.updateUser(user);
+
+        return workspaceRepository.save(workspace);
     }
 
     @Override
@@ -71,7 +112,6 @@ public class WorkspaceServiceImpl implements WorkspaceService {
 
     @Override
     public WorkspaceModel deleteUser(Long workspaceId, Long userId) {
-        // TODO Auto-generated method stub
         return null;
     }
 
