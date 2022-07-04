@@ -3,25 +3,34 @@ image: maven:latest
 stages:
     - build
     - test
+<<<<<<< HEAD
     - deploy
+=======
+    - package
+>>>>>>> 1c4088258ddc8a9538f040e237f7fe2effb34819
 
 build:
     stage: build
     tags:
         - ugrad
     script: 
+<<<<<<< HEAD
         - mvn clean package -DskipTests
         - echo "Build completed"
     artifacts:
         paths:
             - target/*.jar
         expire_in: 1 week
+=======
+        - mvn compile
+>>>>>>> 1c4088258ddc8a9538f040e237f7fe2effb34819
 
 test:
     stage: test
     tags:
         - ugrad
     script: 
+<<<<<<< HEAD
         - mvn clean verify
         - echo "Test completed"
 
@@ -31,3 +40,13 @@ deploy:
         - ugrad
     script: 
         - echo "Not deployed yet"
+=======
+        - mvn test
+
+package:
+    stage: package
+    tags:
+        - ugrad
+    script: 
+        - mvn package
+>>>>>>> 1c4088258ddc8a9538f040e237f7fe2effb34819

@@ -27,6 +27,7 @@ public class BoardServiceImpl implements BoardService {
 		if (getBoardByID(boardId) == null){
 			return deletedBoard;
 		}
+
 		return null;
 	}
 
@@ -38,6 +39,7 @@ public class BoardServiceImpl implements BoardService {
             return true;
         }
         return false;
+
 	}
 
 	@Override
@@ -49,16 +51,17 @@ public class BoardServiceImpl implements BoardService {
             board = optionalBoard.get();
         }
         return board;
+
 	}
 
 	@Override
 	public boolean updateBoardName(Long boardId, String name) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean updateBoardDescription(Long boardId, String description) {
+
 		// TODO Auto-generated method stub
 		return false;
 	}

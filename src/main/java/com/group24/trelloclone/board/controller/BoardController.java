@@ -49,4 +49,5 @@ public class BoardController {
     {
         return boardService.deleteAllBoards();
     }
+
 }
