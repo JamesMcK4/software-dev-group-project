@@ -56,8 +56,16 @@ public class WorkspaceController {
     }
 
     @PostMapping(path = "/add_board/{id}", consumes = "application/json", produces = "application/json" )
-    public WorkspaceModel addBoard(@PathVariable("id") Long workspaceId, @RequestBody BoardModel board) throws UnableTooAddBoardException{
-        return workspaceService.addBoard(workspaceId, board);
+    public ResponseEntity<Map<String, Object>> addBoard(@PathVariable("id") Long workspaceId, @RequestBody BoardModel board) throws UnableTooAddBoardException{
+        WorkspaceModel workspace;
+        try{
+            workspace = workspaceService.addBoard(workspaceId, board);        
+        }
+        catch(Exception e){
+            System.out.println(e);
+            return status(HttpStatus.OK).body(singletonMap(OBJECT, null));
+        }
+        return status(HttpStatus.OK).body(singletonMap(OBJECT, workspace));
     }
 
     @DeleteMapping("/delete_board/{workspace_id}/{board_id}")
