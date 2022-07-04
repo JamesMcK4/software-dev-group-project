@@ -6,7 +6,6 @@ import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { Modal } from 'react-bootstrap';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -31,10 +30,7 @@ import { useParams } from 'react-router-dom';
         const password = passwordRef.current.value;
         console.log(password);
 
-        //resetPassword(password);
-
-        
-        
+        //resetPassword(password);   
 }
 
     return(

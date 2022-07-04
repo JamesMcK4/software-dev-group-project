@@ -65,11 +65,6 @@ public class UserController
         return userService.deleteAllUsers();
     }
 
-    //Not sure this is needed either, as there really isn't a reason to delete a single user, and we already have a delete all
-    @DeleteMapping("/delete_user/{id}")
-    public UserModel deleteUser(@PathVariable("id") Long id) throws InvalidUserIdException { return userService.deleteUser(id); }
-
-
     //Work on this for validation.
     @PostMapping(path = "/validate_user", consumes = "application/json", produces = "application/json")
     public ResponseEntity<Map<String, Object>> validateUser(@RequestBody UserLoginModel userloginModel)
@@ -85,7 +80,7 @@ public class UserController
     }
 
     //needs insight - ask questions
-    @PostMapping("/updatePassword/")
+    @PutMapping("/updatePassword/")
     public ResponseEntity<Map<String, Object>> updatePassword(@RequestBody UserLoginModel userLoginModel) throws EmptyPasswordException, InvalidUserIdException {
         UserModel user;
         try{
@@ -96,7 +91,7 @@ public class UserController
             return status(HttpStatus.OK).body(singletonMap(OBJECT, null)); //this shouldnt be VALIDATION STATUS but not sure what to put here..ask advicepo
         }
         return status(HttpStatus.OK).body(singletonMap(OBJECT, user));
-        //
+
     }
 
 }

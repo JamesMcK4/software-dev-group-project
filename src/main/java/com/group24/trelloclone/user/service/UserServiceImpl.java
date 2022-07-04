@@ -90,22 +90,6 @@ public class UserServiceImpl implements UserService
         }
     }
 
-    //Not sure this method is needed either, as there is already a deleteAll
-    @Override
-    public UserModel deleteUser(Long userId) throws InvalidUserIdException {
-
-        Optional<UserModel> optionalUser = userRepository.findById(userId);
-
-        if(optionalUser.isEmpty()){
-            throw new InvalidUserIdException();
-        }
-        else{
-            userRepository.deleteById(userId);
-        }
-
-
-        return null;
-    }
 
     public UserModel updatePassword(UserLoginModel loginCredentials) throws EmptyPasswordException, InvalidUserIdException {
 
@@ -125,6 +109,5 @@ public class UserServiceImpl implements UserService
         user.setPassword(password);
         userRepository.save(user);
         return user;
-        //commit comment to fix
     }
 }

@@ -35,7 +35,7 @@ function ForgotPassForm(){
 
     function updatePass(){
         fetch("http://localhost:9000/user/updatePassword/" + emailRef.value, {
-            method: 'POST',
+            method: 'PUT',
             mode: 'cors',
             body: JSON.stringify(),
             headers: {'Content-Type': 'application/json'}
