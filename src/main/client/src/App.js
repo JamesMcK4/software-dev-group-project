@@ -17,13 +17,14 @@ function App() {
       <Header></Header>
       <Container style={{minHeight: '100vh'}}>
         <Routes>
-            <Route path="/" element={<Home/>}/>
+          {localStorage.getItem("userId") !== null? 
+            <Route path="/" element={<Home userId = {localStorage.getItem("userId")}/>}/>:
+            <Route path="/" element={<LoginForm/>}/>
+          }
             <Route path="/register" element={<RegisterForm/>}/>
-            <Route path="/login" element={<LoginForm/>}/>
             <Route path="/create-workspace" element={<CreateWorkspace/>}/>
             <Route path="/create-board/:workspaceId" element={<CreateBoard/>}/>
             <Route path="/board/:boardId" element={<Board/>}/>
-            <Route path="/home/:userId" element={<Home/>}/>
             <Route path="/workspace/:workspaceId" element={<Workspace/>}/>
             <Route path="/forget-password" element={<ForgotPass/>}/>
             <Route path="/add-user/:workspaceId" element={<AddUser/>}/>

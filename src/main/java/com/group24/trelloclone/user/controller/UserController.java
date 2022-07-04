@@ -78,14 +78,18 @@ public class UserController
     @PostMapping(path = "/validate_user", consumes = "application/json", produces = "application/json")
     public ResponseEntity<Map<String, Object>> validateUser(@RequestBody UserLoginModel userloginModel)
     {   
+        UserModel user;
         try{
-            userService.validateUser(userloginModel);
+            user = userService.validateUser(userloginModel);
         }
         catch(Exception e){
             System.out.println(e);
             return status(HttpStatus.OK).body(singletonMap(VALIDATION_STATUS, false));
         }
-        return status(HttpStatus.OK).body(singletonMap(VALIDATION_STATUS, true));
+        Map<String, Object> returnBody = new HashMap<>();
+        returnBody.put(VALIDATION_STATUS, true);
+        returnBody.put(ID, user.getId());
+        return status(HttpStatus.OK).body(returnBody);
     }
 
     //needs insight - ask questions

@@ -69,7 +69,7 @@ public class UserServiceImpl implements UserService
     }
 
     @Override
-    public boolean validateUser(UserLoginModel loginCredentials) throws EmptyPasswordException, InvalidCredentialsException {
+    public UserModel validateUser(UserLoginModel loginCredentials) throws EmptyPasswordException, InvalidCredentialsException {
 
         String emailId = loginCredentials.getEmailId();
         String password = loginCredentials.getPassword();
@@ -88,7 +88,7 @@ public class UserServiceImpl implements UserService
             throw new InvalidCredentialsException();
         }
         else{
-            return true;
+            return user;
         }
     }
 

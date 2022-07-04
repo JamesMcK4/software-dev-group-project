@@ -1,8 +1,40 @@
 import React from 'react';
-import {Navbar, Nav, NavDropdown, Container} from 'react-bootstrap'
+import {Navbar, Nav, NavDropdown, Container} from 'react-bootstrap';
+import {useNavigate} from 'react-router-dom';
 
 function Header(){
+
+    const navigate = useNavigate();
+
+    function logout(e){
+        e.preventDefault();
+        localStorage.clear();
+        navigate('/');
+    }
+
     return (
+        <Navbar bg="success" expand="lg" variant="dark" sticky="top" >
+            <Container>
+                <Navbar.Brand href="/">Trello-clone</Navbar.Brand>
+                {localStorage.getItem("userId") !== null? 
+                    <Navbar.Toggle aria-controls="basic-navbar-nav">
+                        <Navbar.Collapse  className="justify-content-end">
+                            <Nav>
+                                <Nav.Link onClick={logout}>Logout</Nav.Link>
+                            </Nav>
+                        </Navbar.Collapse>
+                    </Navbar.Toggle>:
+                    <></>
+                }
+            </Container>
+        </Navbar>
+    );
+};
+
+export default Header;
+
+/*
+
         <Navbar bg="success" expand="lg" variant="dark" sticky="top" >
             <Container>
                 <Navbar.Brand href="/">Trello-clone</Navbar.Brand>
@@ -29,7 +61,5 @@ function Header(){
                 </Navbar.Collapse>
             </Container>
         </Navbar>
-    );
-};
 
-export default Header;
+*/

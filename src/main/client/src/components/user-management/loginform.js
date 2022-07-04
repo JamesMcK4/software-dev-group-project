@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 function LoginForm(){
     const emailRef = useRef();
     const passwordRef = useRef();
-    const nav = useNavigate();
+    const navigate = useNavigate();
 
     async function validateUser(userLogin){
         console.log(userLogin['emailId']);
@@ -21,7 +21,14 @@ function LoginForm(){
         response.json().then((data) => {
             console.log(data.validated);
             // If data.validated is true then go to home page
-            // else alert user and stay on the page.
+            if (data.validated){
+                localStorage.setItem("userId", data.id);
+                console.log(localStorage.getItem("userId"));
+                window.location.reload(false);
+            }
+            else{
+                alert("Your login credential is invalid. Please try again.")
+            }
         });
     }
 

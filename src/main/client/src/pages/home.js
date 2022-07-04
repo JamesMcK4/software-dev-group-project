@@ -1,7 +1,7 @@
 import {Row, Col, Container} from 'react-bootstrap';
 import {WorkspaceCards} from '../index.js';
 
-const Home = () => {
+const Home = ({userId}) => {
     return (
         <Container style={{width: "90%"}}>
             <Row className="justify-content-md-center mt-5">
