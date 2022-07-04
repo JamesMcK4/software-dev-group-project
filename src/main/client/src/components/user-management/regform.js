@@ -20,7 +20,7 @@ function RegisterForm(){
     const nav = useNavigate();
     
     function registerUser(user){
-        fetch("http://localhost:9001/user/save_user", {
+        fetch("http://localhost:9000/user/save_user", {
             method: 'POST',
             mode: 'cors',
             body: JSON.stringify(user),

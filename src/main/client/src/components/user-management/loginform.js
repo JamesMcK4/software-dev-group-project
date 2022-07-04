@@ -11,7 +11,7 @@ function LoginForm(){
     async function validateUser(userLogin){
         console.log(userLogin['emailId']);
         console.log(userLogin['password']);
-        const response = await fetch("http://localhost:9001/user/validate_user", {
+        const response = await fetch("http://localhost:9000/user/validate_user", {
             method: 'POST',
             mode: 'cors',
             body: JSON.stringify(userLogin),
@@ -19,6 +19,7 @@ function LoginForm(){
         })
 
         response.json().then((data) => {
+            
             console.log(data.validated);
             // If data.validated is true then go to home page
             // else alert user and stay on the page.

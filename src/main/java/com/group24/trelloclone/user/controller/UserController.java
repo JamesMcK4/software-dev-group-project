@@ -41,8 +41,15 @@ public class UserController
     }
 
     @GetMapping("/get_email/{id}")
-    public UserModel getUserByEmail(@PathVariable("id") String emailId) throws InvalidCredentialsException {
-        return userService.getUserByEmailId(emailId);
+    public ResponseEntity<Map<String, UserModel>> getUserByEmail(@PathVariable("id") String emailId) throws InvalidCredentialsException {
+        UserModel user;
+        try {
+            user = userService.getUserByEmailId(emailId);
+        } catch (Exception e) {
+            System.out.println(e);
+            return status(HttpStatus.BAD_REQUEST).body(singletonMap("user", null));
+        }
+        return status(HttpStatus.OK).body(singletonMap("user", user));
 
     }
 
@@ -78,9 +85,17 @@ public class UserController
     }
 
     //needs insight - ask questions
-    @GetMapping("/updatePassword")
-    public boolean updatePassword(String email, String newPassword) throws EmptyPasswordException, InvalidUserIdException {
-        return userService.updatePassword(email, newPassword);
+    @PostMapping("/updatePassword")
+    public ResponseEntity<Map<String, Boolean>> updatePassword(@RequestBody UserLoginModel userLoginModel, String newPassword) throws EmptyPasswordException, InvalidUserIdException {
+        try{
+            String emailId = userLoginModel.getEmailId();
+            userService.updatePassword(emailId, newPassword);
+        }
+        catch(Exception e) {
+            System.out.println(e);
+            return status(HttpStatus.OK).body(singletonMap(VALIDATION_STATUS, false)); //this shouldnt be VALIDATION STATUS but not sure what to put here..ask advicepo
+        }
+        return status(HttpStatus.OK).body(singletonMap(VALIDATION_STATUS, true));
     }
 
 }

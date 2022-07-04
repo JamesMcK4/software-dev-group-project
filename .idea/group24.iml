@@ -14,7 +14,9 @@
       <configuration>
         <setting name="validation-enabled" value="true" />
         <setting name="provider-name" value="Hibernate" />
-        <datasource-mapping />
+        <datasource-mapping>
+          <factory-entry name="group24" value="947b95d8-87db-41bd-be17-7227a1cb572b" />
+        </datasource-mapping>
         <naming-strategy-map />
       </configuration>
     </facet>
@@ -76,7 +78,6 @@
     <orderEntry type="library" name="Maven: org.springframework:spring-orm:5.3.19" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-context:5.3.19" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-tx:5.3.19" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-beans:5.3.19" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.36" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-aspects:5.3.19" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-security:2.6.7" level="project" />
@@ -92,7 +93,6 @@
     <orderEntry type="library" name="Maven: org.apache.tomcat.embed:tomcat-embed-core:9.0.62" level="project" />
     <orderEntry type="library" name="Maven: org.apache.tomcat.embed:tomcat-embed-el:9.0.62" level="project" />
     <orderEntry type="library" name="Maven: org.apache.tomcat.embed:tomcat-embed-websocket:9.0.62" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-web:5.3.19" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-webmvc:5.3.19" level="project" />
     <orderEntry type="library" name="Maven: mysql:mysql-connector-java:8.0.28" level="project" />
     <orderEntry type="library" name="Maven: io.github.handsomecoder:java-utility:1.0.0" level="project" />
@@ -132,5 +132,8 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.springframework.security:spring-security-test:5.6.3" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.security:spring-security-core:5.6.3" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.security:spring-security-crypto:5.6.3" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.mockito:mockito-all:1.9.5" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-web:5.3.20" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-beans:5.3.19" level="project" />
   </component>
 </module>

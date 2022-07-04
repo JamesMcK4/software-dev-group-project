@@ -43,13 +43,16 @@ public class UserServiceImpl implements UserService
     }
 
     @Override
-    public UserModel getUserByEmailId(String emailId) {
+    public UserModel getUserByEmailId(String emailId) throws InvalidCredentialsException{
 
         Optional<UserModel> optionalUser = userRepository.findByEmailId(emailId);
         UserModel user = null;
 
         if(!optionalUser.isEmpty()){
             user = optionalUser.get();
+        }
+        else{
+            throw new InvalidCredentialsException();
         }
 
         return user;
@@ -79,8 +82,7 @@ public class UserServiceImpl implements UserService
         else {
             user = optionalUser.get();
         }
-
-        if(!user.getPassword().equals(password)){
+        if(!user.getPassword().equals(password) || !user.getEmailId().equals(emailId)){
             throw new InvalidCredentialsException();
         }
         else{
@@ -102,44 +104,26 @@ public class UserServiceImpl implements UserService
         }
 
 
-        return null; //not sure what to return here since its a delete, maybe change to void?
+        return null;
     }
 
-    public boolean updatePassword(String email, String password) throws EmptyPasswordException, InvalidUserIdException {
+    public boolean updatePassword(String emailId, String newPassword) throws EmptyPasswordException, InvalidUserIdException {
 
-        //Probably dont need to make a whole new variable for the argument being passed in, but I like neatness
-        String newPassword = password;
+        //String emailId = loginCredentials.getEmailId();
+        //String password = loginCredentials.getPassword();
+
         UserModel user = null;
-        Optional<UserModel> optionalUser = userRepository.findByEmailId(email);
-        if(optionalUser.isEmpty()){
-            throw new InvalidUserIdException();
+        Optional<UserModel> optionalUser = userRepository.findByEmailId(emailId);
+
+        if(optionalUser.isPresent()){
+            user = optionalUser.get();
         }
         else{
-            user = optionalUser.get();
+            throw new InvalidUserIdException();
         }
 
         user.setPassword(newPassword);
-
+        userRepository.save(user);
         return true;
     }
-
-
-    /*public boolean validatePassword(String password){
-
-        String regexpression = "^(?=.*[0-9])" + "(?=.*[a-z])(?=.*[A-Z])" + "(?=.*[@#$%^&+=])"
-                + "(?=\\S+$).{8,20}$";
-
-        //use Pattern class to compile the regular expression to later use for matching
-        Pattern regPattern = Pattern.compile(regexpression);
-
-        //check if password is empty
-        if(password == null){
-            return false;
-        }
-
-        //setup matcher from Pattern class to check regex against password
-        Matcher matcher = regPattern.matcher(password);
-
-        return matcher.matches();
-    }*/
 }
