@@ -7,22 +7,30 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { Modal } from 'react-bootstrap';
-import { useState } from 'react';
+import { useEffect } from 'react';
 
 
 function ForgotPassForm(){
 
     const emailRef = useRef();
-    const passwordRef = useRef();
+    
     const nav = useNavigate();
 
 
-    function forgetPass(){
-        fetch("http://localhost:9000/user/get_email/" + emailRef.value, {
+    async function forgetPass(email){
+        const response = await fetch("http://localhost:9000/user/get_email/" + email, {
             method: 'GET',
             mode: 'cors',
             headers: {'Content-Type': 'application/json'}
-        }).then(() => updatePass()); //or then(() => Popup() for getting the popup and then call updatePass function?
+        })
+        
+        var data = await response.json();
+        if(data.user===null){
+            alert("Your email is incorrect!");
+        }
+        else{
+            nav("/resetpassword/" + email);
+        }
     }
 
     function updatePass(){
@@ -34,32 +42,6 @@ function ForgotPassForm(){
         }).then(() => nav('/'));
     }
 
-    // function Popup() {
-    //     const [show, setShow] = useState(false);
-      
-    //     const closed = () => setShow(false);
-    //     const open = () => setShow(true);
-      
-    //     return (
-    //       <>
-    //      
-    //         <Modal show={show} onHide={closed}>
-    //           <Modal.Header closeButton>
-    //             <Modal.Title>Update Password</Modal.Title>
-    //           </Modal.Header>
-    //           <Modal.Body>Please enter your new password</Modal.Body>
-    //           <Modal.Footer>
-    //             <Button variant="secondary" onClick={closed}>
-    //               Close
-    //             </Button>
-    //             <Button variant="primary" onClick={open}>
-    //               Save Changes
-    //             </Button>
-    //           </Modal.Footer>
-    //         </Modal>
-    //       </>
-    //     );
-    //   }
     
     function submissionHandler(e){
         e.preventDefault();
@@ -67,10 +49,10 @@ function ForgotPassForm(){
         const email = emailRef.current.value;
         //const password = passwordRef.current.value; //for some reason, this isnt being read properly.  If I remove .current, it just shows up
         //as undefined, if I leave current in, it gives me a different error, but still undefined.  Not sure its needed?
-        const user = {email};
+        //const user = {email};
 
         console.log(email);
-        forgetPass(user);   
+        forgetPass(email);   
 }
 
 

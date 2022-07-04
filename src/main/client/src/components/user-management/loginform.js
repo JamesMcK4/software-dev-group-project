@@ -21,6 +21,13 @@ function LoginForm(){
         response.json().then((data) => {
             
             console.log(data.validated);
+
+            if(data.validated = true){
+                nav("/");
+            }
+            else{
+                alert("Invalid information, try again");
+            }
             // If data.validated is true then go to home page
             // else alert user and stay on the page.
         });
