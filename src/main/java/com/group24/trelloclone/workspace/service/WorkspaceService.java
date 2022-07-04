@@ -3,6 +3,7 @@ package com.group24.trelloclone.workspace.service;
 import java.util.List;
 
 import com.group24.trelloclone.board.model.BoardModel;
+import com.group24.trelloclone.exception.InvalidWorkspaceIdException;
 import com.group24.trelloclone.exception.UnableTooAddBoardException;
 import com.group24.trelloclone.workspace.model.WorkspaceModel;
 
@@ -18,6 +19,7 @@ public interface WorkspaceService {
     public WorkspaceModel deleteUsers(Long workspaceId, List<Long> usersId);
     public WorkspaceModel updateWorkspaceName(Long workspaceId, String name);
     public WorkspaceModel updateWorkspaceDescription(Long workspaceId, String description);
+    public WorkspaceModel updateWorkspace(WorkspaceModel workspace) throws InvalidWorkspaceIdException;
     public WorkspaceModel addBoard(Long workspaceId, Long boardId);
     public WorkspaceModel addBoard(Long workspaceId, BoardModel board) throws UnableTooAddBoardException;
     public WorkspaceModel deleteBoard(Long workspaceId, Long boardId);

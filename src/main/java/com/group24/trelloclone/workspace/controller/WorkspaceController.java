@@ -1,8 +1,11 @@
 package com.group24.trelloclone.workspace.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +20,10 @@ import com.group24.trelloclone.exception.UnableTooAddBoardException;
 import com.group24.trelloclone.workspace.model.WorkspaceModel;
 import com.group24.trelloclone.workspace.service.WorkspaceService;
 
+import static com.group24.trelloclone.utils.ApplicationConstant.*;
+import static java.util.Collections.singletonMap;
+import static org.springframework.http.ResponseEntity.status;
+
 @CrossOrigin()
 @RestController
 @RequestMapping("/workspace")
@@ -27,6 +34,19 @@ public class WorkspaceController {
     @PostMapping(path = "/save_workspace", consumes = "application/json", produces = "application/json" )
     public WorkspaceModel saveWorkspace(@RequestBody WorkspaceModel workspace){
         return workspaceService.saveWorkspace(workspace);
+    }
+
+    @PostMapping(path = "/update_workspace", consumes = "application/json", produces = "application/json" )
+    public ResponseEntity<Map<String, Object>>  udpdateWorkspace(@RequestBody WorkspaceModel workspace){
+        WorkspaceModel updatedWorkspace;
+        try{
+            updatedWorkspace = workspaceService.updateWorkspace(workspace);        
+        }
+        catch(Exception e){
+            System.out.println(e);
+            return status(HttpStatus.OK).body(singletonMap(OBJECT, null));
+        }
+        return status(HttpStatus.OK).body(singletonMap(OBJECT, updatedWorkspace));
     }
 
     @DeleteMapping("/delete_workspace/{id}")

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.group24.trelloclone.board.model.BoardModel;
 import com.group24.trelloclone.board.service.BoardService;
+import com.group24.trelloclone.exception.InvalidWorkspaceIdException;
 import com.group24.trelloclone.exception.UnableTooAddBoardException;
 import com.group24.trelloclone.workspace.model.WorkspaceModel;
 import com.group24.trelloclone.workspace.repository.WorkspaceRepository;
@@ -81,18 +82,6 @@ public class WorkspaceServiceImpl implements WorkspaceService {
     }
 
     @Override
-    public WorkspaceModel updateWorkspaceName(Long workspaceId, String name) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public WorkspaceModel updateWorkspaceDescription(Long workspaceId, String description) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
     public WorkspaceModel addBoard(Long workspaceId, BoardModel board) throws UnableTooAddBoardException {
         WorkspaceModel workspace = getWorkspaceById(workspaceId);
         BoardModel savedBoard = boardService.saveBoard(board);
@@ -121,5 +110,32 @@ public class WorkspaceServiceImpl implements WorkspaceService {
     public WorkspaceModel addBoard(Long workspaceId, Long boardId) {
         // TODO Auto-generated method stub
         return null;
+    }
+
+    @Override
+    public WorkspaceModel updateWorkspaceName(Long workspaceId, String name) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public WorkspaceModel updateWorkspaceDescription(Long workspaceId, String description) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public WorkspaceModel updateWorkspace(WorkspaceModel workspace) throws InvalidWorkspaceIdException {
+        WorkspaceModel dbWorkspace = getWorkspaceById(workspace.getId());
+        if (dbWorkspace != null){
+            dbWorkspace.setName(workspace.getName());
+            dbWorkspace.setDescription(workspace.getDescription());
+            workspaceRepository.save(dbWorkspace);
+        }
+        else{
+            throw new InvalidWorkspaceIdException();
+        }
+
+        return dbWorkspace;
     }
 }

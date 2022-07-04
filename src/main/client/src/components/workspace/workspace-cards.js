@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import {Card, Button, Row, Col} from 'react-bootstrap';
-import {BoardList} from '../../index.js';
+import {BoardListHome} from '../../index.js';
 
 const WorkspaceCards = () => {
 
@@ -37,8 +37,8 @@ const WorkspaceCards = () => {
                 <Card.Body>
                     <Card.Title>Boards</Card.Title>
                 </Card.Body>
-                <BoardList workspaceBoards={workspace.boards}>
-                </BoardList>
+                <BoardListHome workspaceBoards={workspace.boards}>
+                </BoardListHome>
             </Card>
         </Col>))}
         </Row>

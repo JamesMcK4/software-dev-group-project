@@ -1,10 +1,10 @@
-import {Card, Nav, Button, Tab, Form, ListGroup} from 'react-bootstrap';
-import {BoardList, UserList} from "../../index.js";
+import {Card, Nav, Button, Tab, Alert} from 'react-bootstrap';
+import {BoardList, UserList, WorkspaceSetting} from "../../index.js";
 
 const WorkspaceTabs = ({workspace}) => {
     return (
         <Tab.Container defaultActiveKey="boards">
-                    <Card>
+            <Card>
             <Card.Header>
                 <Nav variant="tabs">
                 <Nav.Item>
@@ -49,19 +49,7 @@ const WorkspaceTabs = ({workspace}) => {
                         <Card.Text>
                         Change the workspace and description here.
                         </Card.Text>
-                        <Form>
-                        <Form.Group className="mb-3" controlId="formWorkspaceName">
-                            <Form.Label>Name</Form.Label>
-                            <Form.Control type="text" placeholder={workspace.name === undefined? "workspace name": workspace.name}/>
-                        </Form.Group>
-                        <Form.Group className="mb-3" controlId="formWorkspaceDescription">
-                            <Form.Label>Description</Form.Label>
-                            <Form.Control type="text" placeholder={workspace.description === undefined? "workspace description": workspace.description}/>
-                        </Form.Group>
-                        <Button variant="warning" type="submit">
-                            Change
-                        </Button>
-                        </Form>
+                        <WorkspaceSetting workspace={workspace}></WorkspaceSetting>
                     </Tab.Pane>
                     </Tab.Content>
             </Card.Body>

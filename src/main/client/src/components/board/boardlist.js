@@ -1,4 +1,4 @@
-import {ListGroupItem, ListGroup} from 'react-bootstrap';
+import {ListGroupItem, ListGroup, Button, Container} from 'react-bootstrap';
 import {useState, useEffect} from 'react';
 
 const BoardList = ({workspaceBoards}) => {
@@ -11,10 +11,20 @@ const BoardList = ({workspaceBoards}) => {
         }
     }, []);
 
+    const handleDelete = (e) => {
+        console.log(e.target.id);
+    }
+
     return (
-    <ListGroup className="list-group-flush">
+    <ListGroup className="list-group-flush mt-3">
         {workspaceBoards.map((board, key) => (
-        <ListGroupItem action href= {"/board/" + board.id} key={key} className="link-success">{board.name}</ListGroupItem>))}
+            <Container key={key} className="d-flex flex-row">
+                <ListGroupItem action href= {"/board/" + board.id} className="link-success">{board.name}</ListGroupItem>
+                <Button id={board.id} variant="danger" onClick={handleDelete}>
+                Delete
+                </Button>
+            </Container>
+        ))}
     </ListGroup>
     )
 }

@@ -8,6 +8,7 @@ const Workspace = () => {
     const navigate = useNavigate();
 
     var [workspace, setWorkspace] = useState({});
+
     const workspaceId = useParams().workspaceId;
 
     useEffect(() => {
