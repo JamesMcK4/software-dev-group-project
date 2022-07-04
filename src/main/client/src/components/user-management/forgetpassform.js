@@ -70,11 +70,7 @@ function ForgotPassForm(){
         const user = {email};
 
         console.log(email);
-        //console.log(passwordRef);
-
-
-        forgetPass(user);
-        
+        forgetPass(user);   
 }
 
 
