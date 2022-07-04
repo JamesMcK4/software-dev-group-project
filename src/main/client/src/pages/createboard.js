@@ -1,12 +1,14 @@
 import {Form, Button, Container, Row, Col, InputGroup} from 'react-bootstrap';
 import { useRef } from 'react';
+import { useParams } from 'react-router-dom';
 
 const CreateBoard = () => {
     const nameRef=useRef();
     const descriptionRef=useRef();
+    const workspaceId = useParams().workspaceId;
     
     function createBoard(board) {
-        fetch("http://localhost:9001/workspace/add_board/1", {
+        fetch("http://localhost:9001/workspace/add_board/" + workspaceId, {
                 method: 'POST',
                 mode: 'cors',
                 body: JSON.stringify(board),
@@ -30,7 +32,7 @@ const CreateBoard = () => {
                     <Form onSubmit={createHandler}>
                         <Form.Group className="mb-3">
                             <Form.Label>Workspace ID</Form.Label>
-                            <Form.Control placeholder="Workspace ID" disabled />
+                            <Form.Control placeholder= {workspaceId} disabled />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formBoardName">
                             <Form.Label>Board name</Form.Label>
