@@ -1,9 +1,10 @@
 package com.group24.trelloclone.workspace;
 
-
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -43,7 +44,7 @@ public class WorkspaceServiceImplTests {
 	private List<WorkspaceModel> workspaces = new ArrayList<WorkspaceModel>();
 	private long workspaceId = 1;
 	private long boardId = 1;
-	private List<BoardModel> boards = new ArrayList<BoardModel>();
+	private Set<BoardModel> boards = new HashSet<BoardModel>();
 
 	@BeforeEach
 	public void setUp() {
@@ -51,7 +52,7 @@ public class WorkspaceServiceImplTests {
 		workspace2 = new WorkspaceModel("sample workspace 2", "sample description 2");
 		board = new BoardModel();
 		workspace.setId(workspaceId);
-		List<BoardModel> boards = new ArrayList<BoardModel>();
+		Set<BoardModel> boards = new HashSet<BoardModel>();
 		boards.add(board);
 		workspaces.add(workspace);
 		workspaces.add(workspace2);

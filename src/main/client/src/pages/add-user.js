@@ -35,9 +35,11 @@ const AddUser = () => {
         else{
             if (data.id !== undefined){
                 const userId = data.id;
-                const status = await addUser(userId, workspaceId);
-                console.log(status);
-                handleShow();
+                var data = await addUser(userId, workspaceId);
+                console.log(data);
+                if (data.object !== undefined){
+                    handleShow();
+                }
             }
         }
     }
@@ -52,7 +54,14 @@ const AddUser = () => {
     }
 
     async function addUser(userId, workspaceId) {
-        return true;
+        // You can await here
+        const response = await fetch("http://localhost:9001/workspace/add_user/" + workspaceId + "/" + userId, {
+            method: 'POST',
+            mode: 'cors',
+            headers: {'Content-Type': 'application/json'}
+            });
+        var data = await response.json();
+        return data;
     }
 
     return (
