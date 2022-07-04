@@ -125,5 +125,6 @@ public class UserServiceImpl implements UserService
         user.setPassword(newPassword);
         userRepository.save(user);
         return true;
+        //commit comment to fix
     }
 }
