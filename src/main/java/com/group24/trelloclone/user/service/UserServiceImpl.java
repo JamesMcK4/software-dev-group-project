@@ -107,10 +107,10 @@ public class UserServiceImpl implements UserService
         return null;
     }
 
-    public boolean updatePassword(String emailId, String newPassword) throws EmptyPasswordException, InvalidUserIdException {
+    public UserModel updatePassword(UserLoginModel loginCredentials) throws EmptyPasswordException, InvalidUserIdException {
 
-        //String emailId = loginCredentials.getEmailId();
-        //String password = loginCredentials.getPassword();
+        String emailId = loginCredentials.getEmailId();
+        String password = loginCredentials.getPassword();
 
         UserModel user = null;
         Optional<UserModel> optionalUser = userRepository.findByEmailId(emailId);
@@ -122,9 +122,9 @@ public class UserServiceImpl implements UserService
             throw new InvalidUserIdException();
         }
 
-        user.setPassword(newPassword);
+        user.setPassword(password);
         userRepository.save(user);
-        return true;
+        return user;
         //commit comment to fix
     }
 }

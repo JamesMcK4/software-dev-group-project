@@ -85,17 +85,17 @@ public class UserController
     }
 
     //needs insight - ask questions
-    @PostMapping("/updatePassword")
-    public ResponseEntity<Map<String, Boolean>> updatePassword(@RequestBody UserLoginModel userLoginModel, String newPassword) throws EmptyPasswordException, InvalidUserIdException {
+    @PostMapping("/updatePassword/")
+    public ResponseEntity<Map<String, Object>> updatePassword(@RequestBody UserLoginModel userLoginModel) throws EmptyPasswordException, InvalidUserIdException {
+        UserModel user;
         try{
-            String emailId = userLoginModel.getEmailId();
-            userService.updatePassword(emailId, newPassword);
+            user = userService.updatePassword(userLoginModel);
         }
         catch(Exception e) {
             System.out.println(e);
-            return status(HttpStatus.OK).body(singletonMap(VALIDATION_STATUS, false)); //this shouldnt be VALIDATION STATUS but not sure what to put here..ask advicepo
+            return status(HttpStatus.OK).body(singletonMap(OBJECT, null)); //this shouldnt be VALIDATION STATUS but not sure what to put here..ask advicepo
         }
-        return status(HttpStatus.OK).body(singletonMap(VALIDATION_STATUS, true));
+        return status(HttpStatus.OK).body(singletonMap(OBJECT, user));
     }
 
 }
