@@ -19,10 +19,10 @@ function App() {
         {localStorage.getItem("userId") === null? 
             <Routes>
               <Route path="*" element={<LoginForm/>}/>
+              <Route path="/register" element={<RegisterForm/>}/>
             </Routes>
           :
             <Routes>
-              <Route path="/register" element={<RegisterForm/>}/>
               <Route path="/create-workspace" element={<CreateWorkspace/>}/>
               <Route path="/create-board/:workspaceId" element={<CreateBoard/>}/>
               <Route path="/board/:boardId" element={<Board/>}/>

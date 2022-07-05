@@ -1,12 +1,10 @@
 import React from 'react';
-import {Form, Container, Row, Col, Button} from 'react-bootstrap';
+import {Form, Container, Row, Col, Button, Nav} from 'react-bootstrap';
 import { useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 function LoginForm(){
     const emailRef = useRef();
     const passwordRef = useRef();
-    const navigate = useNavigate();
 
     async function validateUser(userLogin){
         console.log(userLogin['emailId']);
@@ -57,8 +55,10 @@ function LoginForm(){
                         <Button variant="warning" type="submit">
                             Submit
                         </Button>
-                        <br></br>
-                        <a href="http://localhost:3000/forget-password" className="link-primary">Forgot your password?</a>
+                        <Nav className="flex-column">
+                            <Nav.Link variant="success" href="forget-password" className="px-0 link-success">Forgot your password?</Nav.Link>
+                            <Nav.Link variant="success" href="/register" className="px-0 link-success">Don't have an account?</Nav.Link>
+                        </Nav>
                     </Form>
                 </Col>
             </Row>

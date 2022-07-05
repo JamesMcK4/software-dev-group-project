@@ -32,7 +32,7 @@ public class UserModel
 
     private int role;
 
-    @ManyToMany(targetEntity = WorkspaceModel.class, fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @ManyToMany(targetEntity = WorkspaceModel.class, fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JsonIgnoreProperties("users")
     private Set<WorkspaceModel> workspaces;
 
