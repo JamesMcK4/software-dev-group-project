@@ -24,6 +24,8 @@ import AddUser from './pages/add-user';
 import UserList from './components/user-management/userlist';
 import WorkspaceSetting from './components/workspace/workspace-setting';
 import BoardListHome from './components/board/boardlist-home';
+import ResetPassword from './pages/resetpassword';
+import ResetPasswordForm from './components/user-management/resetpasswordform';
 
 /* Guidelines
 https://stackoverflow.com/questions/46984955/how-to-import-all-components-in-react
@@ -64,7 +66,9 @@ export {
   BoardList,
   BoardListHome,
   AddUser,
-  UserList
+  UserList,
+  ResetPassword,
+  ResetPasswordForm
 }
 
 ReactDOM.render(

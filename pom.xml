@@ -73,7 +73,12 @@
 			<version>1.9.5</version>
 			<scope>test</scope>
 		</dependency>
-	</dependencies>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>5.3.20</version>
+        </dependency>
+    </dependencies>
 
 	<build>
 		<finalName>trello-clone</finalName>

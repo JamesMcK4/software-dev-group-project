@@ -2,7 +2,7 @@ import './App.css';
 import {Container} from 'react-bootstrap';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import {useEffect} from 'react';
-import {Home, RegisterForm, LoginForm, Header, CreateBoard, CreateWorkspace, NotFound, Board, Footer, Workspace, ForgotPass, AddUser} from './index.js';
+import {Home, RegisterForm, LoginForm, Header, CreateBoard, CreateWorkspace, NotFound, Board, Footer, Workspace, ForgotPass, AddUser, ResetPassword} from './index.js';
 
 function App() {
 
@@ -20,6 +20,8 @@ function App() {
             <Routes>
               <Route path="*" element={<LoginForm/>}/>
               <Route path="/register" element={<RegisterForm/>}/>
+              <Route path="/forget-password" element={<ForgotPass/>}/>
+              <Route path="/reset-password/:emailId" element={<ResetPassword/>}/>
             </Routes>
           :
             <Routes>

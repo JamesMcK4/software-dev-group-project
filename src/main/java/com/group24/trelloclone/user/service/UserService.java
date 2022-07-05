@@ -18,6 +18,6 @@ public interface UserService
     public UserModel updateUser(UserModel user) throws InvalidUserIdException;
     public boolean deleteAllUsers();
     public UserModel validateUser(UserLoginModel loginCredentials) throws EmptyPasswordException, InvalidCredentialsException;
-    public boolean updatePassword(String email, String password) throws EmptyPasswordException, InvalidUserIdException;
-    //TODO Reset password
+    public UserModel updatePassword(UserLoginModel loginCredentials) throws EmptyPasswordException, InvalidUserIdException;
+
 }

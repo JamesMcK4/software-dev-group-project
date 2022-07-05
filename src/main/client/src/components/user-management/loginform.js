@@ -17,8 +17,8 @@ function LoginForm(){
         })
 
         response.json().then((data) => {
+            
             console.log(data.validated);
-            // If data.validated is true then go to home page
             if (data.validated){
                 localStorage.setItem("userId", data.id);
                 console.log(localStorage.getItem("userId"));
@@ -36,7 +36,7 @@ function LoginForm(){
         const password = passwordRef.current.value;
         const userLogin = {emailId, password};
         validateUser(userLogin);
-}
+    }
 
     return (
         <Container>

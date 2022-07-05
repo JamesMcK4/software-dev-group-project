@@ -12,7 +12,7 @@ const WorkspaceTabs = ({workspace}) => {
     }
 
     async function handleDeleteUser(e){
-
+        alert("Not implemented yet. Not in deliverable 2.");
     }
 
     async function deleteBoard(workspaceId, boardId){
