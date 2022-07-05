@@ -16,20 +16,22 @@ function App() {
     <BrowserRouter>
       <Header></Header>
       <Container style={{minHeight: '100vh'}}>
-        <Routes>
-          {localStorage.getItem("userId") !== null? 
-            <Route path="/" element={<Home userId = {localStorage.getItem("userId")}/>}/>:
-            <Route path="/" element={<LoginForm/>}/>
+        {localStorage.getItem("userId") === null? 
+            <Routes>
+              <Route path="*" element={<LoginForm/>}/>
+            </Routes>
+          :
+            <Routes>
+              <Route path="/register" element={<RegisterForm/>}/>
+              <Route path="/create-workspace" element={<CreateWorkspace/>}/>
+              <Route path="/create-board/:workspaceId" element={<CreateBoard/>}/>
+              <Route path="/board/:boardId" element={<Board/>}/>
+              <Route path="/workspace/:workspaceId" element={<Workspace/>}/>
+              <Route path="/forget-password" element={<ForgotPass/>}/>
+              <Route path="/add-user/:workspaceId" element={<AddUser/>}/>
+              <Route path="*" element={<Home userId = {localStorage.getItem("userId")}/>}/>
+            </Routes>
           }
-            <Route path="/register" element={<RegisterForm/>}/>
-            <Route path="/create-workspace" element={<CreateWorkspace/>}/>
-            <Route path="/create-board/:workspaceId" element={<CreateBoard/>}/>
-            <Route path="/board/:boardId" element={<Board/>}/>
-            <Route path="/workspace/:workspaceId" element={<Workspace/>}/>
-            <Route path="/forget-password" element={<ForgotPass/>}/>
-            <Route path="/add-user/:workspaceId" element={<AddUser/>}/>
-            <Route path="*" element={<NotFound/>}/>
-          </Routes>
       </Container>
       <Footer></Footer>
     </BrowserRouter>
