@@ -67,4 +67,4 @@ const CreateBoard = () => {
         </Container>
       );
 }
-export default CreateBoard ;
+export default CreateBoard;
