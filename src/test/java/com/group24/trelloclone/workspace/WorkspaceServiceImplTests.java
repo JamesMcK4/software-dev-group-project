@@ -1,11 +1,19 @@
 package com.group24.trelloclone.workspace;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.ArgumentMatchers.any;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import org.apache.catalina.User;
+import org.hibernate.jdbc.Work;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,7 +28,11 @@ import com.group24.trelloclone.workspace.service.WorkspaceService;
 import com.group24.trelloclone.workspace.service.WorkspaceServiceImpl;
 import com.group24.trelloclone.board.model.BoardModel;
 import com.group24.trelloclone.board.service.BoardService;
+import com.group24.trelloclone.exception.InvalidUserIdException;
+import com.group24.trelloclone.exception.InvalidWorkspaceIdException;
 import com.group24.trelloclone.exception.UnableTooAddBoardException;
+import com.group24.trelloclone.user.model.UserModel;
+import com.group24.trelloclone.user.service.UserService;
 import com.group24.trelloclone.workspace.model.WorkspaceModel;
 import com.group24.trelloclone.workspace.repository.WorkspaceRepository;;
 
@@ -34,16 +46,22 @@ public class WorkspaceServiceImplTests {
 	@Mock
 	@Autowired
 	private BoardService boardService;
+
+	@Mock
+	@Autowired
+	private UserService userService;
 	
 	@InjectMocks
 	private WorkspaceService workspaceServiceImpl = new WorkspaceServiceImpl();
 
 	private WorkspaceModel workspace;
 	private BoardModel board;
+	private UserModel user;
 	private WorkspaceModel workspace2;
 	private List<WorkspaceModel> workspaces = new ArrayList<WorkspaceModel>();
 	private long workspaceId = 1;
 	private long boardId = 1;
+	private long userId = 1;
 	private Set<BoardModel> boards = new HashSet<BoardModel>();
 
 	@BeforeEach
@@ -56,6 +74,8 @@ public class WorkspaceServiceImplTests {
 		boards.add(board);
 		workspaces.add(workspace);
 		workspaces.add(workspace2);
+		user = new UserModel("first name", "last name", "email", "password");
+		user.setId(userId);
 	}
 
 	@Test
@@ -94,4 +114,19 @@ public class WorkspaceServiceImplTests {
 		Mockito.when(workspaceRepository.save(workspace)).thenReturn(workspace);
 		Assertions.assertEquals(workspace, workspaceServiceImpl.saveWorkspace(workspace));
 	}
+
+	@Test
+	public void addUserTest() throws InvalidUserIdException, InvalidWorkspaceIdException{
+		
+		Mockito.when(workspaceRepository.findById(workspaceId)).thenReturn(Optional.of(workspace));
+		Mockito.when(userService.getUserById(userId)).thenReturn(user);
+
+
+		workspace.getUsers().add(user);
+
+		Mockito.when(workspaceRepository.save(workspace)).thenReturn(workspace);
+
+		Assertions.assertEquals(workspace,workspaceServiceImpl.addUser(workspaceId, userId));
+	}
+
 }
