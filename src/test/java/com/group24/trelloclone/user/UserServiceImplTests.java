@@ -6,6 +6,8 @@ import com.group24.trelloclone.exception.EmptyPasswordException;
 import com.group24.trelloclone.exception.InvalidCredentialsException;
 import com.group24.trelloclone.exception.InvalidUserIdException;
 
+import com.group24.trelloclone.user.model.UserLoginModel;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -35,7 +37,7 @@ public class UserServiceImplTests {
 
 	@InjectMocks
 	private UserService usersServiceImpl = new UserServiceImpl();
-
+    private UserLoginModel userLoginModel;
     //setting up objects and other needed entities for testing purposes.
     private UserModel user1;
     private UserModel user2;
@@ -54,6 +56,7 @@ public class UserServiceImplTests {
         //Add users to list to test getAllUsers
         userList.add(user1);
         userList.add(user2);
+        userLoginModel = new UserLoginModel("testemail@test.com", "test");
     }
 
     @Test
@@ -84,7 +87,6 @@ public class UserServiceImplTests {
     }
     @Test
     public void validateUserTest() throws EmptyPasswordException, InvalidCredentialsException {
-
         String emailId = userLoginModel.getEmailId();
         String password = userLoginModel.getPassword();
 
@@ -96,13 +98,11 @@ public class UserServiceImplTests {
 
         Mockito.when(userRepository.findByEmailId(userLoginModel1.getEmailId())).thenReturn(Optional.of(dummyUser));
 
-        Assertions.assertTrue(usersServiceImpl.validateUser(userLoginModel1));
-
+        Assertions.assertEquals(dummyUser, usersServiceImpl.validateUser(userLoginModel1));
     }
 
     @Test
     public void validateUserFalseEmail() throws EmptyPasswordException, InvalidCredentialsException {
-        UserRepository mock = org.mockito.Mockito.mock(UserRepository.class);
 
         String emailId = userLoginModel.getEmailId();
         String password = userLoginModel.getPassword();
@@ -114,7 +114,7 @@ public class UserServiceImplTests {
         dummyUser.setPassword("incorrect");
 
         Mockito.when(userRepository.findByEmailId(userLoginModel1.getEmailId())).thenReturn(Optional.of(dummyUser));
-        Assertions.assertFalse(usersServiceImpl.validateUser(userLoginModel1));
+        Assertions.assertThrows(InvalidCredentialsException.class, () -> usersServiceImpl.validateUser(userLoginModel1));
     }
 
     @Test
@@ -125,22 +125,21 @@ public class UserServiceImplTests {
         UserLoginModel userLoginModel1 = new UserLoginModel(emailId, password);
         UserModel dummyUser = new UserModel();
 
+        Mockito.when(userRepository.findByEmailId(userLoginModel1.getEmailId())).thenReturn(Optional.of(dummyUser));
         dummyUser.setPassword("newpassword");
 
-        Mockito.when(userRepository.findByEmailId(userLoginModel1.getEmailId())).thenReturn(Optional.of(dummyUser));
-        Assertions.assertNotEquals(usersServiceImpl.updatePassword(userLoginModel1), dummyUser.getPassword());
-
+        Mockito.when(userRepository.save(dummyUser)).thenReturn(dummyUser);
+        Assertions.assertEquals(dummyUser, usersServiceImpl.updatePassword(userLoginModel1));
     }
 
-    /*@Test
+    @Test
     public void updateUserTest() throws InvalidUserIdException {
-        //Todo This does not work for whatever reason, though Im sure it's my test and not the method.  Please update and correct mistakes as necessary. (Always user = null)
-
-        Mockito.when(userRepository.save(user1)).thenReturn(user1);
-        assertEquals(user1, usersServiceImpl.updateUser(user1));
-
-    }*/
+        Mockito.when(userRepository.existsById((long) 1)).thenReturn(true);
+		Mockito.when(userRepository.save(user1)).thenReturn(user1);
+		Assertions.assertEquals(user1, usersServiceImpl.updateUser(user1));
+    }
 }
+
 
 /*References
 1. https://stackoverflow.com/questions/30946167/mockito-error-with-method-that-returns-optionalt for reference of Optional.of
