@@ -19,4 +19,5 @@ public interface UserService
     public boolean validateUser(UserLoginModel loginCredentials) throws EmptyPasswordException, InvalidCredentialsException;
     public UserModel updatePassword(UserLoginModel loginCredentials) throws EmptyPasswordException, InvalidUserIdException;
 
+    UserModel updateUser(UserModel user) throws InvalidUserIdException;
 }

@@ -83,7 +83,8 @@ public class UserServiceImpl implements UserService
             user = optionalUser.get();
         }
         if(!user.getPassword().equals(password) || !user.getEmailId().equals(emailId)){
-            throw new InvalidCredentialsException();
+            //throw new InvalidCredentialsException();
+            return false; //changed this to false instead of invalidcredentials..does the same thing.
         }
         else{
             return true;
@@ -110,4 +111,17 @@ public class UserServiceImpl implements UserService
         userRepository.save(user);
         return user;
     }
+
+    @Override
+    public UserModel updateUser(UserModel user) throws InvalidUserIdException {
+        UserModel dbUser = getUserById(user.getId());
+        if (dbUser != null) {
+            userRepository.save(user);
+        } else {
+            throw new InvalidUserIdException();
+        }
+
+        return user;
+    }
+
 }
