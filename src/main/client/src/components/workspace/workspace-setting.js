@@ -25,7 +25,7 @@ const WorkspaceSetting = ({workspace}) => {
 
     async function updateWorkspace(workspace){
         const response = await fetch("http://localhost:9001/workspace/update_workspace", {
-            method: 'POST',
+            method: 'PUT',
             mode: 'cors',
             body: JSON.stringify(workspace),
             headers: {'Content-Type': 'application/json'}

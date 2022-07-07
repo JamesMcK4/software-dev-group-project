@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,7 +38,7 @@ public class WorkspaceController {
     }
 
     // TODO PUT MAPPING
-    @PostMapping(path = "/update_workspace", consumes = "application/json", produces = "application/json" )
+    @PutMapping(path = "/update_workspace", consumes = "application/json", produces = "application/json" )
     public ResponseEntity<Map<String, Object>>  udpdateWorkspace(@RequestBody WorkspaceModel workspace){
         WorkspaceModel updatedWorkspace;
         try{
@@ -57,7 +58,7 @@ public class WorkspaceController {
     }
 
     // TODO PUT MAPPING
-    @PostMapping(path = "/add_board/{id}", consumes = "application/json", produces = "application/json" )
+    @PutMapping(path = "/add_board/{id}", consumes = "application/json", produces = "application/json" )
     public ResponseEntity<Map<String, Object>> addBoard(@PathVariable("id") Long workspaceId, @RequestBody BoardModel board) throws UnableTooAddBoardException{
         WorkspaceModel workspace;
         try{
@@ -71,7 +72,7 @@ public class WorkspaceController {
     }
 
     //TODO PUT MAPPING
-    @PostMapping("/add_user/{workspace_id}/{user_id}")
+    @PutMapping("/add_user/{workspace_id}/{user_id}")
     public ResponseEntity<Map<String, Object>> addUser(@PathVariable("workspace_id") Long workspaceId, @PathVariable("user_id") Long userId)
     {
         WorkspaceModel workspace;

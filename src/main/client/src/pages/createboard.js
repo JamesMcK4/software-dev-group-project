@@ -26,7 +26,7 @@ const CreateBoard = () => {
     async function createBoard(workspaceId, board) {
         // You can await here
         const response = await fetch("http://localhost:9001/workspace/add_board/" + workspaceId, {
-        method: 'POST',
+        method: 'PUT',
         mode: 'cors',
         body: JSON.stringify(board),
         headers: {'Content-Type': 'application/json'}

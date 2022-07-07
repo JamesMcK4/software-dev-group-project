@@ -56,7 +56,7 @@ const AddUser = () => {
     async function addUser(userId, workspaceId) {
         // You can await here
         const response = await fetch("http://localhost:9001/workspace/add_user/" + workspaceId + "/" + userId, {
-            method: 'POST',
+            method: 'PUT',
             mode: 'cors',
             headers: {'Content-Type': 'application/json'}
             });
