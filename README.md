@@ -5,7 +5,7 @@
 
 # Team
 
-- Team Name: Group XX
+- Team Name: Group 24
 - Team Members:
   - (B00848357) | [Nhi Ly | email@dal.ca](email@dal.ca)
   - (B00830592) | [Jason Nguyen | ng839815@dal.ca]
