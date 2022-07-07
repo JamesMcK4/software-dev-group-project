@@ -1,18 +1,16 @@
 # CSCI 3130 - Software Engineering (Summer 2022)
 
-- Date Created: 2022 07 06
-- Date Modified: 2022 07 06
+- Date Created: 2022-07-06
+- Date Modified: 2022-07-07
 
 # Team
 
 - Team Name: Group 24
 - Team Members:
-  - (B00848357) | [Nhi Ly | email@dal.ca](email@dal.ca)
-  - (B00830592) | [Jason Nguyen | ng839815@dal.ca]
-  - (B00867096) | [James McKinlay | jm651986@dal.ca]
-  - (B00770902) | [Name | hm778892@dal.ca] 
-  - (B00XXXXXX) | [Name | email@dal.ca](email@dal.ca)
-  - (B00XXXXXX) | [Name | email@dal.ca](email@dal.ca)
+  - (B00848357) | [Nhi Ly | nh915648@dal.ca](nh915648@dal.ca)
+  - (B00830592) | [Jason Nguyen | ng839815@dal.ca](ng839815@dal.ca)
+  - (B00867096) | [James McKinlay | jm651986@dal.ca](jm651986@dal.ca)
+  - (B00770902) | [Haoming Chen | hm778892@dal.ca](hm778892@dal.ca)
 
 # Project
 
@@ -34,12 +32,18 @@
 ## Installation
 
 - Please ensure that you have a version of node.js installed on your device (if not, download can be found here: https://nodejs.org/en/download/)
-- Please ensure that you are in the correct directory in order to start the React application using the 'npm start' command in the terminal(in this case, it is group24/src/main/client/src).
-- If npm is not installed on your device, you can move into the project folder using a cd command, and then run 'npm install' to install npm on your device. 
+- Please ensure that you have npm package manager installed (https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
+- Please ensure that you are in the correct directory in order to start the React application using the 'npm start' command in the terminal(in this case, it is src/main/client). 
 
 ## Running the Frontend
 
 - Once you have npm successfully installed, as well as node.js, please move to the correct directory (see above) using the cd command, and run 'npm start' in your terminal window.  This should start the front end service.
+- The front end uses port 3000, so please make sure it is not used by another application.
+- Before log-in, you need to register first. Or you can use the following credentials to log in:
+
+> emailId : "testuser@gmail.com",
+>
+> password: "NewPassword!8@2"
 
 # Backend
 
@@ -52,11 +56,12 @@
 ## Installation
 
 - Please see above for instructions on how to install Maven if it is not installed on your device.
-- Please make sure you have access to the Dalhousie network, as it is required to run the server and database
+- Please make sure you have access to the Dalhousie network, as it is required to run the server and database.
 
 ## Running the Backend
 
-- Once you are sure that you have all the prerequistites installed for the backend, please build and run the server by using your IDE run processes.
+- Once you are sure that you have all the prerequistites installed for the backend, please build and run the server by using your IDE run processes, type mvn spring-boot:run in the terminal window or run the JAR file in target.
+- Please make sure port 9001 is not used by another application.
 
 ## Dependancies
 
@@ -68,4 +73,4 @@
 
 # Teaching Assistant
 
-- [Name | email@dal.ca](email@dal.ca)
+- [Shathish Annamalai | sh495601@dal.ca](sh495601@dal.ca)
