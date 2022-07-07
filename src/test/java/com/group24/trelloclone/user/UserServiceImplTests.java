@@ -2,6 +2,7 @@ package com.group24.trelloclone.user;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import com.group24.trelloclone.exception.EmptyPasswordException;
 import com.group24.trelloclone.exception.InvalidCredentialsException;
 import com.group24.trelloclone.exception.InvalidUserIdException;
 
@@ -82,13 +83,63 @@ public class UserServiceImplTests {
         //had to check Nhi's version of this test, it stumped me for awhile
     }
     @Test
-    public void validateUserTest(){
-        //Need to finish this
+    public void validateUserTest() throws EmptyPasswordException, InvalidCredentialsException {
+
+        String emailId = userLoginModel.getEmailId();
+        String password = userLoginModel.getPassword();
+
+        UserLoginModel userLoginModel1 = new UserLoginModel(emailId, password);
+        UserModel dummyUser = new UserModel();
+
+        dummyUser.setEmailId("testemail@test.com");
+        dummyUser.setPassword("test");
+
+        Mockito.when(userRepository.findByEmailId(userLoginModel1.getEmailId())).thenReturn(Optional.of(dummyUser));
+
+        Assertions.assertTrue(usersServiceImpl.validateUser(userLoginModel1));
+
     }
+
     @Test
-    public void updatePasswordTest(){
-        
+    public void validateUserFalseEmail() throws EmptyPasswordException, InvalidCredentialsException {
+        UserRepository mock = org.mockito.Mockito.mock(UserRepository.class);
+
+        String emailId = userLoginModel.getEmailId();
+        String password = userLoginModel.getPassword();
+
+        UserLoginModel userLoginModel1 = new UserLoginModel(emailId, password);
+        UserModel dummyUser = new UserModel();
+
+        dummyUser.setEmailId("incorrect@incorrect.com");
+        dummyUser.setPassword("incorrect");
+
+        Mockito.when(userRepository.findByEmailId(userLoginModel1.getEmailId())).thenReturn(Optional.of(dummyUser));
+        Assertions.assertFalse(usersServiceImpl.validateUser(userLoginModel1));
     }
+
+    @Test
+    public void updatePasswordTest() throws EmptyPasswordException, InvalidUserIdException {
+        String emailId = userLoginModel.getEmailId();
+        String password = userLoginModel.getPassword();
+
+        UserLoginModel userLoginModel1 = new UserLoginModel(emailId, password);
+        UserModel dummyUser = new UserModel();
+
+        dummyUser.setPassword("newpassword");
+
+        Mockito.when(userRepository.findByEmailId(userLoginModel1.getEmailId())).thenReturn(Optional.of(dummyUser));
+        Assertions.assertNotEquals(usersServiceImpl.updatePassword(userLoginModel1), dummyUser.getPassword());
+
+    }
+
+    /*@Test
+    public void updateUserTest() throws InvalidUserIdException {
+        //Todo This does not work for whatever reason, though Im sure it's my test and not the method.  Please update and correct mistakes as necessary. (Always user = null)
+
+        Mockito.when(userRepository.save(user1)).thenReturn(user1);
+        assertEquals(user1, usersServiceImpl.updateUser(user1));
+
+    }*/
 }
 
 /*References
