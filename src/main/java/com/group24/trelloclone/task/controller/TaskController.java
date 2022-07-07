@@ -33,11 +33,11 @@ public class TaskController {
             return status(HttpStatus.BAD_REQUEST).body(singletonMap(MESSAGE, "Missing required fields: [name, description]"));
         }
 
-        String id = taskService.createTask(request);
+        TaskModel task = taskService.createTask(request);
 
-        HttpStatus status = isNull(id) ? HttpStatus.CONFLICT : HttpStatus.CREATED;
+        HttpStatus status = isNull(task) ? HttpStatus.CONFLICT : HttpStatus.CREATED;
 
-        return status(status).body(singletonMap(ID, id));
+        return status(status).body(singletonMap(ID, Long.toString(task.getId())));
     }
 
     @GetMapping("/get_all_tasks")
@@ -53,7 +53,7 @@ public class TaskController {
             return status(HttpStatus.BAD_REQUEST).body(singletonMap(MESSAGE, "Missing required field: [taskId]"));
         }
 
-        return status(HttpStatus.OK).body(singletonMap(STATUS, taskService.assignTask(taskId, userId)));
+        return status(HttpStatus.OK).body(singletonMap(STATUS, taskService.assignTask(Long.parseLong(taskId), userId)));
     }
 
     @PutMapping("status/{taskId}")
@@ -63,7 +63,7 @@ public class TaskController {
             return status(HttpStatus.BAD_REQUEST).body(singletonMap(MESSAGE, "Missing required field: [taskId]"));
         }
 
-        return status(HttpStatus.OK).body(singletonMap(STATUS, taskService.updateTaskStatus(taskId, status)));
+        return status(HttpStatus.OK).body(singletonMap(STATUS, taskService.updateTaskStatus(Long.parseLong(taskId), status)));
     }
 
     @DeleteMapping("/delete_all_tasks")

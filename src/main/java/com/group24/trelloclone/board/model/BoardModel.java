@@ -20,6 +20,10 @@ public class BoardModel {
         this.description = description;
     }
 
+    public BoardModel(){
+        
+    }
+
     public Long getId() {
         return id;
     }

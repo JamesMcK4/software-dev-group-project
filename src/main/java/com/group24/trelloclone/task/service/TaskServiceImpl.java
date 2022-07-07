@@ -25,19 +25,19 @@ public class TaskServiceImpl implements TaskService{
     @Autowired
     private UserService userService;
 
-    public String createTask(TaskRequestModel request) {
+    public TaskModel createTask(TaskRequestModel request) {
         if (taskRepository.existsByName(request.getName())) {
             return null;
         }
 
-        return taskRepository.save(TaskModel.create(request)).getId();
+        return taskRepository.save(TaskModel.create(request));
     }
 
     public List<TaskModel> getTasks() {
         return Streamable.of(taskRepository.findAll()).toList();
     }
 
-    public TaskModel getTaskById(String taskId){
+    public TaskModel getTaskById(Long taskId){
         TaskModel task = null;
         Optional<TaskModel> optionalTask = taskRepository.findById(taskId);
         if(optionalTask.isPresent())
@@ -48,7 +48,7 @@ public class TaskServiceImpl implements TaskService{
     }
 
     @Transactional
-    public boolean assignTask(String taskId, Long userId) throws InvalidUserIdException {
+    public boolean assignTask(Long taskId, Long userId) throws InvalidUserIdException {
         TaskModel task = getTaskById(taskId);
         UserModel assignee= userService.getUserById(userId);
 
@@ -63,7 +63,7 @@ public class TaskServiceImpl implements TaskService{
     }
 
     @Transactional
-    public boolean updateTaskStatus(String taskId, TaskStatusEnum status) {
+    public boolean updateTaskStatus(Long taskId, TaskStatusEnum status) {
 
         TaskModel task = getTaskById(taskId);
 
