@@ -121,6 +121,7 @@ public class WorkspaceServiceImpl implements WorkspaceService {
         return null;
     }
 
+    // TODO refactoring
     @Override
     public WorkspaceModel addBoard(Long workspaceId, BoardModel board) throws UnableTooAddBoardException {
         WorkspaceModel workspace = getWorkspaceById(workspaceId);
@@ -166,16 +167,13 @@ public class WorkspaceServiceImpl implements WorkspaceService {
 
     @Override
     public WorkspaceModel updateWorkspace(WorkspaceModel workspace) throws InvalidWorkspaceIdException {
-        WorkspaceModel dbWorkspace = getWorkspaceById(workspace.getId());
-        if (dbWorkspace != null){
-            dbWorkspace.setName(workspace.getName());
-            dbWorkspace.setDescription(workspace.getDescription());
-            workspaceRepository.save(dbWorkspace);
+        if (workspaceRepository.existsById(workspace.getId())){
+            workspace = workspaceRepository.save(workspace);
         }
         else{
             throw new InvalidWorkspaceIdException();
         }
 
-        return dbWorkspace;
+        return workspace;
     }
 }

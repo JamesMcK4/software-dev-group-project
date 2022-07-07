@@ -1,19 +1,11 @@
 package com.group24.trelloclone.workspace;
 
-import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.ArgumentMatchers.any;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-import org.apache.catalina.User;
-import org.hibernate.jdbc.Work;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -117,16 +109,17 @@ public class WorkspaceServiceImplTests {
 
 	@Test
 	public void addUserTest() throws InvalidUserIdException, InvalidWorkspaceIdException{
-		
 		Mockito.when(workspaceRepository.findById(workspaceId)).thenReturn(Optional.of(workspace));
 		Mockito.when(userService.getUserById(userId)).thenReturn(user);
-
-
 		workspace.getUsers().add(user);
-
 		Mockito.when(workspaceRepository.save(workspace)).thenReturn(workspace);
-
-		Assertions.assertEquals(workspace,workspaceServiceImpl.addUser(workspaceId, userId));
+		Assertions.assertEquals(workspace, workspaceServiceImpl.addUser(workspaceId, userId));
 	}
 
+	@Test
+	public void updateWorkspaceTest() throws InvalidWorkspaceIdException {
+		Mockito.when(workspaceRepository.existsById(workspaceId)).thenReturn(true);
+		Mockito.when(workspaceRepository.save(workspace)).thenReturn(workspace);
+		Assertions.assertEquals(workspace, workspaceServiceImpl.updateWorkspace(workspace));
+	}
 }
