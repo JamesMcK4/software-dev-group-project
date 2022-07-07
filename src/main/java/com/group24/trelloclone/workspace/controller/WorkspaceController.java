@@ -36,6 +36,7 @@ public class WorkspaceController {
         return workspaceService.saveWorkspace(workspace);
     }
 
+    // TODO PUT MAPPING
     @PostMapping(path = "/update_workspace", consumes = "application/json", produces = "application/json" )
     public ResponseEntity<Map<String, Object>>  udpdateWorkspace(@RequestBody WorkspaceModel workspace){
         WorkspaceModel updatedWorkspace;
@@ -55,6 +56,7 @@ public class WorkspaceController {
         return workspaceService.deleteWorkspace(workspaceId);
     }
 
+    // TODO PUT MAPPING
     @PostMapping(path = "/add_board/{id}", consumes = "application/json", produces = "application/json" )
     public ResponseEntity<Map<String, Object>> addBoard(@PathVariable("id") Long workspaceId, @RequestBody BoardModel board) throws UnableTooAddBoardException{
         WorkspaceModel workspace;
@@ -68,6 +70,7 @@ public class WorkspaceController {
         return status(HttpStatus.OK).body(singletonMap(OBJECT, workspace));
     }
 
+    //TODO PUT MAPPING
     @PostMapping("/add_user/{workspace_id}/{user_id}")
     public ResponseEntity<Map<String, Object>> addUser(@PathVariable("workspace_id") Long workspaceId, @PathVariable("user_id") Long userId)
     {

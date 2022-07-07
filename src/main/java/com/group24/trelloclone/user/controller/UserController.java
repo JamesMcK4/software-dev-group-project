@@ -98,7 +98,6 @@ public class UserController
             return status(HttpStatus.OK).body(singletonMap(OBJECT, ERROR)); //this shouldnt be VALIDATION STATUS but not sure what to put here..ask advicepo
         }
         return status(HttpStatus.OK).body(singletonMap(OBJECT, user));
-
     }
 
 }
