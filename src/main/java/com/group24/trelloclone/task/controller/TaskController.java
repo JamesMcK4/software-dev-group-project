@@ -39,6 +39,11 @@ public class TaskController {
 
         return status(status).body(singletonMap(ID, Long.toString(task.getId())));
     }
+    @PostMapping(value = "/save_task",consumes = "application/json", produces = "application/json")
+    public TaskModel saveTask(@RequestBody TaskModel task){
+        return taskService.saveTask(task);
+    }
+
 
     @GetMapping("/get_all_tasks")
     public List<TaskModel> getTasks() {

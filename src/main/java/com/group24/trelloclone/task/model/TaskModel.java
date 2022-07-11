@@ -34,16 +34,22 @@ public class TaskModel {
 
     private Date dueOn;
 
+    private String date;
     public TaskModel(String name, String description, UserModel assignee, Date dueOn) {
         this.name = name;
         this.description = description;
         this.assignee = assignee;
         this.dueOn = dueOn;
     }
-
     public TaskModel(String name, String description) {
         this.name = name;
         this.description = description;
+    }
+
+    public TaskModel(String name, String description, String date) {
+        this.name = name;
+        this.description = description;
+        this.date=date;
     }
 
     public TaskModel() {

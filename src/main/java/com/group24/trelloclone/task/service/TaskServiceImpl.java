@@ -32,9 +32,12 @@ public class TaskServiceImpl implements TaskService{
 
         return taskRepository.save(TaskModel.create(request));
     }
-
+    @Override
+    public TaskModel saveTask(TaskModel task) {
+        return taskRepository.save(task);
+    }
     public List<TaskModel> getTasks() {
-        return Streamable.of(taskRepository.findAll()).toList();
+        return (List<TaskModel>) taskRepository.findAll();
     }
 
     public TaskModel getTaskById(Long taskId){
