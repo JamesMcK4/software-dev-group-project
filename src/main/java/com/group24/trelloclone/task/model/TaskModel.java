@@ -3,6 +3,7 @@ package com.group24.trelloclone.task.model;
 import com.group24.trelloclone.board.model.BoardModel;
 import com.group24.trelloclone.user.model.UserModel;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,9 +16,10 @@ import java.util.Objects;
 public class TaskModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(unique=true)
     private String name;
 
     private String description;
@@ -34,22 +36,16 @@ public class TaskModel {
 
     private Date dueOn;
 
-    private String date;
     public TaskModel(String name, String description, UserModel assignee, Date dueOn) {
         this.name = name;
         this.description = description;
         this.assignee = assignee;
         this.dueOn = dueOn;
     }
+
     public TaskModel(String name, String description) {
         this.name = name;
         this.description = description;
-    }
-
-    public TaskModel(String name, String description, String date) {
-        this.name = name;
-        this.description = description;
-        this.date=date;
     }
 
     public TaskModel() {

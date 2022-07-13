@@ -4,14 +4,14 @@ import React, {useRef} from "react";
 const CreateTaskForm = ({createTask}) => {
     const taskNameRef=useRef();
     const descriptionRef=useRef();
-
+    const deadlineRef=useRef();
 
     function createHandler(event){
         event.preventDefault();
         const name = taskNameRef.current.value;
         const description = descriptionRef.current.value;
-
-        const task = {name,description};
+        const deadline=deadlineRef.current.value;
+        const task = {name,description,deadline};
         console.log(task);
         createTask(task);
     }
@@ -26,7 +26,10 @@ const CreateTaskForm = ({createTask}) => {
                             <Form.Label>Task name</Form.Label>
                             <Form.Control placeholder="Task name" ref={taskNameRef}/>
                         </Form.Group>
-
+                        <Form.Group className="mb-3" controlId="formTaskName">
+                            <Form.Label>Dealine</Form.Label>
+                            <Form.Control placeholder="Due Day" ref={deadlineRef}/>
+                        </Form.Group>
                         <Form.Group className="mb-3" controlId="formTaskDescription">
                             <InputGroup>
                                 <InputGroup.Text>Description</InputGroup.Text>
