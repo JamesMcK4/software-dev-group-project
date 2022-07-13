@@ -1,5 +1,6 @@
 package com.group24.trelloclone.user.model;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -45,6 +46,7 @@ public class UserModel
         this.lastName = lastName;
         this.emailId = emailId;
         this.password = password;
+        workspaces = new HashSet<WorkspaceModel>();
     }
 
     public Long getId()
@@ -113,16 +115,4 @@ public class UserModel
     public void setWorkspaces(Set<WorkspaceModel> workspaces) {
         this.workspaces = workspaces;
     }
-
-    /* 
-    public String resetPasswordToken;
-
-    public void setResetPasswordToken(String resetPasswordToken) {
-        this.resetPasswordToken = resetPasswordToken;
-    }
-
-    public String getResetPasswordToken() {
-        return resetPasswordToken;
-    }
-    */
 }
