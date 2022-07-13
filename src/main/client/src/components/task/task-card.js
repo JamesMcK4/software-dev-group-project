@@ -31,6 +31,9 @@ const TaskCards = () => {
                             <Card.Text>
                                 {task.description}
                             </Card.Text>
+                            <Card.Text>
+                                <Button variant="warning" href="/Status">Status</Button>
+                            </Card.Text>
                         </Card.Body>
                     </Card>
                 </Col>))}

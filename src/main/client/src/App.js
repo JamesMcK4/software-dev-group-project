@@ -4,6 +4,7 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import {useEffect} from 'react';
 import {Home, RegisterForm, LoginForm, Header, CreateBoard, CreateWorkspace, NotFound, Board, Footer, Workspace, ForgotPass, AddUser, ResetPassword} from './index.js';
 import CreateTask from "./pages/createTask";
+import Status from "./pages/status";
 
 function App() {
 
@@ -34,6 +35,7 @@ function App() {
               <Route path="/forget-password" element={<ForgotPass/>}/>
               <Route path="/add-user/:workspaceId" element={<AddUser/>}/>
               <Route path="*" element={<Home userId = {localStorage.getItem("userId")}/>}/>
+                <Route path="/Status" element={<Status/>}/>
             </Routes>
           }
       </Container>
