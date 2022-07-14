@@ -48,6 +48,13 @@ public class TaskModel {
         this.description = description;
     }
 
+    public TaskModel(String name, String description, Date dueOn, TaskStatusEnum status) {
+        this.name = name;
+        this.description = description;
+        this.dueOn = dueOn;
+        this.status = status;
+    }
+
     public TaskModel() {
     }
 
@@ -132,4 +139,25 @@ public class TaskModel {
         this.board = board;
     }
 }
+//TODO
+/*
+ * Create task - name, description, due date, status
+ * Board Id will be in a disable field.
+ * /create-task/:boardId
+ */
 
+ //TODO
+/*
+ * Display board name - description.
+ */
+
+//TODO
+/* Only display the tasks that belong to the board -> boardId.
+ * Task name
+ * Task description
+ * Due date: 
+ * Status:
+ * Button (Change status -> redirect user to a page to change the status -> /change-task-status/:taskId)
+ * If there is no assignee -> Have a button to assign a user to the task -> redirect to a new page -> /assign-member/:taskId
+ * If there is an assignee -> display them.
+ */
