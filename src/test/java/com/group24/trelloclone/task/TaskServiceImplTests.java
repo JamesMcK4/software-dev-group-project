@@ -24,7 +24,7 @@ public class TaskServiceImplTests {
 	private TaskRepository taskRepository;
 	
 	@InjectMocks
-	private TaskService tasksServiceImpl = new TaskServiceImpl();
+	private TaskService tasksServiceImpl = (TaskService) new TaskServiceImpl();
 	
 	@Test
 	public void createTaskTest() {

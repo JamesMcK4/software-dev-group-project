@@ -26,6 +26,9 @@ import WorkspaceSetting from './components/workspace/workspace-setting';
 import BoardListHome from './components/board/boardlist-home';
 import ResetPassword from './pages/resetpassword';
 import ResetPasswordForm from './components/user-management/resetpasswordform';
+import CreateTask from './pages/createtask';
+import ChangeTaskStatus from './pages/change-task-status';
+import AssignUser from './pages/assign-user';
 
 /* Guidelines
 https://stackoverflow.com/questions/46984955/how-to-import-all-components-in-react
@@ -68,7 +71,10 @@ export {
   AddUser,
   UserList,
   ResetPassword,
-  ResetPasswordForm
+  ResetPasswordForm,
+  CreateTask,
+  ChangeTaskStatus,
+  AssignUser
 }
 
 ReactDOM.render(

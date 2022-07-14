@@ -20,7 +20,9 @@ import static io.github.handsomecoder.utils.StringUtils.isEmpty;
 import static java.util.Collections.singletonMap;
 import static org.springframework.http.ResponseEntity.status;
 
+@CrossOrigin()
 @RestController
+
 @RequestMapping("/task")
 public class TaskController {
     @Autowired
