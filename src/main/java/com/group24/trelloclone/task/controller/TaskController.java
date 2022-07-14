@@ -20,7 +20,9 @@ import static io.github.handsomecoder.utils.StringUtils.isEmpty;
 import static java.util.Collections.singletonMap;
 import static org.springframework.http.ResponseEntity.status;
 
+@CrossOrigin()
 @RestController
+
 @RequestMapping("/task")
 public class TaskController {
     @Autowired
@@ -47,9 +49,9 @@ public class TaskController {
         return taskService.getTasks();
     }
 
-    @PutMapping("/assign_task/{taskId}")
+    @PutMapping("/assign_task/{taskId}")//test this 
     public ResponseEntity<Map<String, Object>> assignTask(@PathVariable("taskId") String taskId,
-                                                          @RequestParam("userId") Long userId) throws InvalidUserIdException {
+        @RequestParam("userId") Long userId) throws InvalidUserIdException {
 
         if (isEmpty(taskId)) {
             return status(HttpStatus.BAD_REQUEST).body(singletonMap(MESSAGE, "Missing required field: [taskId]"));
@@ -58,11 +60,11 @@ public class TaskController {
         return status(HttpStatus.OK).body(singletonMap(STATUS, taskService.assignTask(Long.parseLong(taskId), userId)));
     }
 
-    @PutMapping("status/{taskId}")
+    @PutMapping("status/{taskId}")//Test this
     public ResponseEntity<Map<String, Object>> updateTaskStatus(@PathVariable("taskId") String taskId,
-                                                                @RequestParam("status") TaskStatusEnum status) {
+        @RequestParam("status") TaskStatusEnum status) {
         if (isEmpty(taskId)) {
-            return status(HttpStatus.BAD_REQUEST).body(singletonMap(MESSAGE, "Missing required field: [taskId]"));
+        return status(HttpStatus.BAD_REQUEST).body(singletonMap(MESSAGE, "Missing required field: [taskId]"));
         }
 
         return status(HttpStatus.OK).body(singletonMap(STATUS, taskService.updateTaskStatus(Long.parseLong(taskId), status)));
