@@ -22,4 +22,4 @@ const CreateTask = () => {
         <CreateTaskForm createWorkspace={createTask}/>
     );
 }
-export default CreateTask ;
+export default CreateTask;

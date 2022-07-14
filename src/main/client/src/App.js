@@ -2,9 +2,7 @@ import './App.css';
 import {Container} from 'react-bootstrap';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import {useEffect} from 'react';
-import {Home, RegisterForm, LoginForm, Header, CreateBoard, CreateWorkspace, NotFound, Board, Footer, Workspace, ForgotPass, AddUser, ResetPassword} from './index.js';
-import CreateTask from "./pages/createTask";
-import Status from "./pages/status";
+import {Home, RegisterForm, LoginForm, Header, CreateBoard, CreateWorkspace, Board, Footer, Workspace, ForgotPass, AddUser, ResetPassword, CreateTask, ChangeTaskStatus, AssignUser} from './index.js';
 
 function App() {
 
@@ -28,14 +26,15 @@ function App() {
           :
             <Routes>
               <Route path="/create-workspace" element={<CreateWorkspace/>}/>
-                <Route path="/create-Task" element={<CreateTask/>}/>
+              <Route path="/create-task/:boardId" element={<CreateTask/>}/>
               <Route path="/create-board/:workspaceId" element={<CreateBoard/>}/>
               <Route path="/board/:boardId" element={<Board/>}/>
               <Route path="/workspace/:workspaceId" element={<Workspace/>}/>
               <Route path="/forget-password" element={<ForgotPass/>}/>
               <Route path="/add-user/:workspaceId" element={<AddUser/>}/>
+              <Route path="/change-task-status/:taskId" element={<ChangeTaskStatus/>}/>
+              <Route path="/assign-user/:taskId" element={<AssignUser/>}/>
               <Route path="*" element={<Home userId = {localStorage.getItem("userId")}/>}/>
-                <Route path="/Status" element={<Status/>}/>
             </Routes>
           }
       </Container>

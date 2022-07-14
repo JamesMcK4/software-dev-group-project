@@ -17,7 +17,7 @@ const Board = () => {
                     <h2>
                         All Tasks
                     </h2>
-                    <Button variant="warning" href="/create-Task">
+                    <Button variant="warning" href="/create-task/1">
                         Create a new Task
                     </Button>
                 </Col>
