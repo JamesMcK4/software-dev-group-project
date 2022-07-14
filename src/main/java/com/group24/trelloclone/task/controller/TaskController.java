@@ -20,14 +20,16 @@ import static io.github.handsomecoder.utils.StringUtils.isEmpty;
 import static java.util.Collections.singletonMap;
 import static org.springframework.http.ResponseEntity.status;
 
+@CrossOrigin()
 @RestController
+
 @RequestMapping("/task")
 public class TaskController {
     @Autowired
     private TaskService taskService;
 
     @PostMapping("/create_task")
-    public ResponseEntity<Map<String, String>> createTask(@RequestBody TaskRequestModel request) {
+    public ResponseEntity<Map<String, Object>> createTask(@RequestBody TaskRequestModel request) {
 
         if (request.isEmpty()) {
             return status(HttpStatus.BAD_REQUEST).body(singletonMap(MESSAGE, "Missing required fields: [name, description]"));
@@ -37,7 +39,9 @@ public class TaskController {
 
         HttpStatus status = isNull(task) ? HttpStatus.CONFLICT : HttpStatus.CREATED;
 
-        return status(status).body(singletonMap(ID, Long.toString(task.getId())));
+        Map<String, Object> body = isNull(task)? singletonMap(MESSAGE, "Task name already exists. Please choose another."): singletonMap(OBJECT, task);
+
+        return status(status).body(body);
     }
 
     @GetMapping("/get_all_tasks")

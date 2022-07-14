@@ -56,7 +56,7 @@ function LoginForm(){
                             Submit
                         </Button>
                         <Nav className="flex-column">
-                            <Nav.Link variant="success" href="forget-password" className="px-0 link-success">Forgot your password?</Nav.Link>
+                            <Nav.Link variant="success" href="/forget-password" className="px-0 link-success">Forgot your password?</Nav.Link>
                             <Nav.Link variant="success" href="/register" className="px-0 link-success">Don't have an account?</Nav.Link>
                         </Nav>
                     </Form>

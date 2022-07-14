@@ -9,17 +9,20 @@ const WorkspaceSetting = ({workspace}) => {
         console.log(name);
         console.log(description);
         if (workspace.id !== undefined){
-            if (name === ""){
-                name = workspace.name;
+            if (name !== ""){
+                workspace.name = name;
             }
-            if (description === ""){
-                description = workspace.description;
+            if (description !== ""){
+                workspace.description = description;
             }
-            const id = workspace.id;
-            const workspaceInfo = {id, name, description};
-            var data = await updateWorkspace(workspaceInfo);
-            alert("Workspace updated! Workspace name is " + data.object.name + " .Description is " + data.object.description);
-            window.location.reload(false);
+            var data = await updateWorkspace(workspace);
+            if (data.object != "error"){
+                alert("Workspace updated! Workspace name is " + data.object.name + " .Description is " + data.object.description);
+                window.location.reload(false);
+            }
+            else{
+                alert("Fail to update workspace.");
+            }
         }
     };
 

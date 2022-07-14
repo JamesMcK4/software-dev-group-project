@@ -114,14 +114,12 @@ public class UserServiceImpl implements UserService
 
     @Override
     public UserModel updateUser(UserModel user) throws InvalidUserIdException {
-        UserModel dbUser = getUserById(user.getId());
-        if (dbUser != null){
+        if (userRepository.existsById(user.getId())){
             userRepository.save(user);
         }
         else{
             throw new InvalidUserIdException();
         }
-
         return user;
     }
 
