@@ -12,6 +12,13 @@ const Board = () => {
 
     const boardId = useParams().boardId;
 
+    var [allTasks, setAllTasks] = useState([]);
+    var [displayedTasks, setDisplayedTasks] = useState([]);
+
+    useEffect(() => {
+        getAllTasks();
+    }, []);
+
     useEffect(() => {
         getBoard(boardId);
     }, [boardId]);
@@ -34,12 +41,6 @@ const Board = () => {
         });
     }
 
-    var [tasks, setTasks] = useState([]);
-
-    useEffect(() => {
-        getAllTasks();
-    }, []);
-
     /*
         Not get all the tasks, but only the ones belong to a board. 
         We can use this to test search and filter while we wait for Haoming to finish adding tasks to board.
@@ -51,7 +52,8 @@ const Board = () => {
         }, {mode: 'cors'});
         response.json().then((value) => {
             console.log(value);
-            setTasks(value);
+            setAllTasks(value);
+            setDisplayedTasks(value);
         });
     }
 
@@ -73,14 +75,10 @@ const Board = () => {
                 </Col>
             </Row>
             <Row className="mt-5">
-                <SearchBar setTasks={setTasks} tasks={tasks} ></SearchBar>
+                <SearchBar setTasks={setDisplayedTasks} tasks={allTasks} ></SearchBar>
             </Row>
-            <Row className="mt-2 justify-content-md-center">
-                <Col md="auto">
-                    <FilterTask setTasks={setTasks} tasks={tasks}></FilterTask>
-                </Col>
-            </Row>
-            <TaskCards tasks={tasks}></TaskCards>
+            <FilterTask setTasks={setDisplayedTasks} tasks={allTasks}></FilterTask>
+            <TaskCards tasks={displayedTasks}></TaskCards>
         </Container>
     )
 }

@@ -5,7 +5,7 @@ import {Card, Button, Row, Col} from 'react-bootstrap';
 const TaskCards = ({tasks}) => {
 
     return (
-        <Row xs={1} md={2} className="g-4 mt-5">
+        <Row xs={1} md={2} lg={3} className="g-4 mt-5">
             {tasks.map((task, key) => (
                 <Col key={key}>
                     <Card bg="dark" text="light">
@@ -33,7 +33,7 @@ const TaskCards = ({tasks}) => {
                                 {task.assignee === null? 
                                     task.assignee
                                 : 
-                                <Button variant="warning">
+                                <Button variant="warning" href={"/assign-user/" + task.id}>
                                     Assign a user
                                 </Button>}
                             </Card.Text>
