@@ -2,12 +2,13 @@
 import {useNavigate, useParams} from "react-router-dom";
 import React, {useRef} from "react";
 import CreateTaskForm from "../components/task/createtaskform";
+
 const CreateTask = () => {
     const navigate=useNavigate();
     const boardId=useParams().boardId;
 
-    function createTask(task){
-        fetch("http://localhost:9001/task/create_task", {
+    function createTask(boardId,task){
+        fetch("http://localhost:9001/task/create_task/"+boardId, {
             method: 'POST',
             mode: 'cors',
             body: JSON.stringify(task),
@@ -19,7 +20,7 @@ const CreateTask = () => {
     }
 
     return (
-        <CreateTaskForm createWorkspace={createTask}/>
+        <CreateTaskForm createTask={createTask}/>
     );
 }
 export default CreateTask;

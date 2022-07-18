@@ -1,5 +1,4 @@
-import {Button, Card, Col, Container, Row} from "react-bootstrap";
-
+import {Button, Col, Container, Row} from "react-bootstrap";
 import TaskCards from "../components/task/task-card";
 
 const Board = () => {
@@ -10,7 +9,7 @@ const Board = () => {
                     <h1 className='text-warning'>
                         Board
                     </h1>
-                </Col>
+                </Col>))}
             </Row>
             <Row className="justify-content-md-center mb-5">
                 <Col md="auto">

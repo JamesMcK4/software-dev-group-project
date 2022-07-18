@@ -5,13 +5,16 @@ const CreateTaskForm = ({createTask}) => {
     const taskNameRef=useRef();
     const descriptionRef=useRef();
     const deadlineRef=useRef();
-
+    const assigneeRef=useRef();
     function createHandler(event){
         event.preventDefault();
         const name = taskNameRef.current.value;
         const description = descriptionRef.current.value;
         const deadline=deadlineRef.current.value;
-        const task = {name,description,deadline};
+        const assignee = assigneeRef.current.value;
+
+
+        const task = {name,description,assignee,deadline};
         console.log(task);
         createTask(task);
     }
@@ -27,7 +30,11 @@ const CreateTaskForm = ({createTask}) => {
                             <Form.Control placeholder="Task name" ref={taskNameRef}/>
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formTaskName">
-                            <Form.Label>Dealine</Form.Label>
+                            <Form.Label>Assignee</Form.Label>
+                            <Form.Control placeholder="User Name" ref={assigneeRef}/>
+                        </Form.Group>
+                        <Form.Group className="mb-3" controlId="formTaskName">
+                            <Form.Label>Deadline</Form.Label>
                             <Form.Control placeholder="Due Day" ref={deadlineRef}/>
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formTaskDescription">

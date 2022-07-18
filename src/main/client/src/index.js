@@ -26,7 +26,7 @@ import WorkspaceSetting from './components/workspace/workspace-setting';
 import BoardListHome from './components/board/boardlist-home';
 import ResetPassword from './pages/resetpassword';
 import ResetPasswordForm from './components/user-management/resetpasswordform';
-import CreateTask from './pages/createtask';
+import CreateTask from './pages/createTask';
 import ChangeTaskStatus from './pages/change-task-status';
 import AssignUser from './pages/assign-user';
 
