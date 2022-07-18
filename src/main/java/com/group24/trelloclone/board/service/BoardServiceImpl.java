@@ -75,4 +75,17 @@ public class BoardServiceImpl implements BoardService {
 	public List<BoardModel> getBoardsByID(List<Long> ids) {
 		return boardRepository.findAllById(ids);
 	}
+
+	@Override
+	public BoardModel getBoardById(Long boardId) {
+		BoardModel board = null;
+		Optional<BoardModel> optionalBoard = boardRepository.findById(boardId);
+
+		if(optionalBoard.isPresent())
+		{
+			board = optionalBoard.get();
+		}
+
+		return board;
+	}
 }

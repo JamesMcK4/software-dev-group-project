@@ -44,6 +44,13 @@ public class BoardController {
         return boardService.getBoardsByID(ids);
     }
 
+    @GetMapping("/get_board/{id}")
+    public BoardModel getWorkspaceById(@PathVariable("id") Long boardId)
+    {
+        BoardModel workspace =  boardService.getBoardById(boardId);
+        return workspace;
+    }
+
     @DeleteMapping("/delete_all_boards")
     public boolean deleteAllUsers()
     {

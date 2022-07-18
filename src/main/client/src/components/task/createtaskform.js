@@ -5,16 +5,14 @@ const CreateTaskForm = ({createTask}) => {
     const taskNameRef=useRef();
     const descriptionRef=useRef();
     const deadlineRef=useRef();
-    const assigneeRef=useRef();
+    const statusRef=useRef();
     function createHandler(event){
         event.preventDefault();
         const name = taskNameRef.current.value;
         const description = descriptionRef.current.value;
-        const deadline=deadlineRef.current.value;
-        const assignee = assigneeRef.current.value;
-
-
-        const task = {name,description,assignee,deadline};
+        const dueOn = deadlineRef.current.value;
+        const status = statusRef.current.value;
+        const task = {name,description,status,dueOn};
         console.log(task);
         createTask(task);
     }
@@ -30,18 +28,22 @@ const CreateTaskForm = ({createTask}) => {
                             <Form.Control placeholder="Task name" ref={taskNameRef}/>
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formTaskName">
-                            <Form.Label>Assignee</Form.Label>
-                            <Form.Control placeholder="User Name" ref={assigneeRef}/>
-                        </Form.Group>
-                        <Form.Group className="mb-3" controlId="formTaskName">
                             <Form.Label>Deadline</Form.Label>
-                            <Form.Control placeholder="Due Day" ref={deadlineRef}/>
+                            <Form.Control type="date" placeholder="Due Day" ref={deadlineRef}/>
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formTaskDescription">
                             <InputGroup>
                                 <InputGroup.Text>Description</InputGroup.Text>
                                 <Form.Control as="textarea" aria-label="Description" ref={descriptionRef}/>
                             </InputGroup>
+                        </Form.Group>
+                        <Form.Group className="mb-3" controlId="formTaskStatus">
+                            <Form.Label>Status</Form.Label>
+                            <Form.Select ref={statusRef}>
+                                <option>TO_DO</option>
+                                <option>DOING</option>
+                                <option>DONE</option>
+                            </Form.Select>
                         </Form.Group>
                         <Button variant="warning" type="submit">
                             Create
