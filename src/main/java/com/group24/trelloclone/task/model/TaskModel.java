@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+
 import java.util.Date;
 import java.util.Objects;
 
@@ -59,7 +60,7 @@ public class TaskModel {
     }
 
     public static TaskModel create(TaskRequestModel requestModel) {
-        return new TaskModel(requestModel.getName(), requestModel.getDescription());
+        return new TaskModel(requestModel.getName(), requestModel.getDescription(), requestModel.getDueOn(), requestModel.getStatus());
     }
 
     public Long getId() {

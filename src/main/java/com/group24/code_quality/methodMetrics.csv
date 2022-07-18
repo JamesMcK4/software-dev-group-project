@@ -159,7 +159,7 @@ Project Name,Package Name,Type Name,MethodName,LOC,CC,PC
 .,com.group24.trelloclone.user.service,UserServiceImpl,updateUser,9,2,1
 .,com.group24.trelloclone.user.service,UserServiceImpl,deleteUser,3,1,1
 .,com.group24.trelloclone.task.repository,TaskRepository,existsByName,0,1,1
-.,com.group24.trelloclone.task.controller,TaskController,createTask,8,2,1
+.,com.group24.trelloclone.task.controller,TaskController,createTask,9,2,1
 .,com.group24.trelloclone.task.controller,TaskController,getTasks,3,1,0
 .,com.group24.trelloclone.task.controller,TaskController,assignTask,6,2,2
 .,com.group24.trelloclone.task.controller,TaskController,updateTaskStatus,6,2,2
@@ -172,6 +172,7 @@ Project Name,Package Name,Type Name,MethodName,LOC,CC,PC
 .,com.group24.trelloclone.task.model,TaskRequestModel,isEmpty,3,1,0
 .,com.group24.trelloclone.task.model,TaskModel,TaskModel,6,1,4
 .,com.group24.trelloclone.task.model,TaskModel,TaskModel,4,1,2
+.,com.group24.trelloclone.task.model,TaskModel,TaskModel,6,1,4
 .,com.group24.trelloclone.task.model,TaskModel,TaskModel,2,1,0
 .,com.group24.trelloclone.task.model,TaskModel,create,3,1,1
 .,com.group24.trelloclone.task.model,TaskModel,getId,3,1,0

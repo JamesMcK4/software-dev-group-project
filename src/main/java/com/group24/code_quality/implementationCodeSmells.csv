@@ -2,3 +2,4 @@ Project Name,Package Name,Type Name,Method Name,Code Smell
 .,com.group24.trelloclone.board,BoardServiceImplTests,setUp,Magic Number
 .,com.group24.trelloclone.board,BoardServiceImplTests,setUp,Magic Number
 .,com.group24.trelloclone.user,UserServiceImplTests,build,Magic Number
+.,com.group24.trelloclone.task.controller,TaskController,createTask,Long Statement
