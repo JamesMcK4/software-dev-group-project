@@ -55,8 +55,8 @@ public class UserServiceImplTests {
         user1 = new UserModel("James", "McKinlay", "testemail@hi.com", "Helloo4!");
         user2 = new UserModel("Test", "Test", "TestEmail@Test.com", "test");
         //set Ids to test getId methods - (Also, apparently adding L to the end is casting now?)
-        user1.setId(1L);
-        user2.setId(2L);
+        user1.setId(1L); //these are magic numbers.  However, cannot be refactored as they are test ID's
+        user2.setId(2L); //these are magic numbers.  However, cannot be refactored as they are test ID's
         //Add users to list to test getAllUsers
         userList.add(user1);
         userList.add(user2);

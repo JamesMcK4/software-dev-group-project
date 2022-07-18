@@ -85,6 +85,14 @@ public class TaskServiceImpl implements TaskService{
 
         return false;
     }
+
+    public TaskModel searchForTask(String taskId){
+        TaskModel task = getTaskById(taskId);
+        //if(task == null){
+        //throw an error
+        //}
+        return task;
+    }
 }
 
 

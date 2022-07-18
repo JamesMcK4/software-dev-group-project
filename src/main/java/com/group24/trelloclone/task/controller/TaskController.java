@@ -23,6 +23,7 @@ import static org.springframework.http.ResponseEntity.status;
 @RestController
 @RequestMapping("/task")
 public class TaskController {
+
     @Autowired
     private TaskService taskService;
 
@@ -70,6 +71,11 @@ public class TaskController {
     public boolean deleteAllTasks()
     {
         return taskService.deleteAllTasks();
+    }
+
+    @GetMapping("/search_task")
+    public TaskModel searchForTask(@PathVariable("taskId") String taskId){
+        return taskService.searchForTask(taskId);
     }
 }
 

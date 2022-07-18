@@ -14,7 +14,9 @@
       <configuration>
         <setting name="validation-enabled" value="true" />
         <setting name="provider-name" value="Hibernate" />
-        <datasource-mapping />
+        <datasource-mapping>
+          <factory-entry name="group24" value="947b95d8-87db-41bd-be17-7227a1cb572b" />
+        </datasource-mapping>
         <naming-strategy-map />
       </configuration>
     </facet>
@@ -132,5 +134,6 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.springframework.security:spring-security-test:5.6.3" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.security:spring-security-core:5.6.3" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.security:spring-security-crypto:5.6.3" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.mockito:mockito-all:1.9.5" level="project" />
   </component>
 </module>

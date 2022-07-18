@@ -68,13 +68,13 @@ public class UserServiceImpl implements UserService
         Optional<UserModel> optionalUser = Optional.ofNullable(userRepository.findByEmailId(emailId));
 
         if(optionalUser.isEmpty()){
-           throw new InvalidCredentialsException();
+           throw new InvalidCredentialsException("Invalid Credentials!");
         }
         else {
             user = optionalUser.get();
         }
         if(user.getPassword() != password){
-            throw new InvalidCredentialsException();
+            throw new InvalidCredentialsException("Invalid Credentials!");
         }
         else{
             return true;
@@ -89,7 +89,7 @@ public class UserServiceImpl implements UserService
         Optional<UserModel> optionalUser = userRepository.findById(userId);
 
         if(optionalUser.isEmpty()){
-            throw new InvalidUserIdException();
+            throw new InvalidUserIdException("Invalid User Id!");
         }
         else{
             userRepository.deleteById(userId);
@@ -106,7 +106,7 @@ public class UserServiceImpl implements UserService
         Optional<UserModel> optionalUser = Optional.ofNullable(userRepository.findByEmailId(email));
         UserModel user = null;
         if(optionalUser.isEmpty()){
-            throw new InvalidUserIdException();
+            throw new InvalidUserIdException("Invalid User Id!");
         }
         else{
             user = optionalUser.get();

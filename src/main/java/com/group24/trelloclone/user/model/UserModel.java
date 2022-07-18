@@ -33,7 +33,7 @@ public class UserModel
         this.password = password;
     }
 
-    public Long getId()
+    private Long getId()
     {
         return id;
     }
@@ -44,32 +44,32 @@ public class UserModel
     }
 
 
-    public String getFirstName()
+    private String getFirstName()
     {
         return firstName;
     }
 
-    public void setFirstName(String firstName)
+    private void setFirstName(String firstName)
     {
         this.firstName = firstName;
     }
 
-    public String getLastName()
+    private String getLastName()
     {
         return lastName;
     }
 
-    public void setLastName(String lastName)
+    private void setLastName(String lastName)
     {
         this.lastName = lastName;
     }
 
-    public String getEmailId()
+    private String getEmailId()
     {
         return emailId;
     }
 
-    public void setEmailId(String emailId)
+    private void setEmailId(String emailId)
     {
         this.emailId = emailId;
     }
@@ -92,14 +92,4 @@ public class UserModel
         this.role = role;
     }
 
-
-    public String resetPasswordToken;
-
-    public void setResetPasswordToken(String resetPasswordToken) {
-        this.resetPasswordToken = resetPasswordToken;
-    }
-
-    public String getResetPasswordToken() {
-        return resetPasswordToken;
-    }
 }
