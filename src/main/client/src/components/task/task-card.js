@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import {Card, Button, Row, Col} from 'react-bootstrap';
-
+import Moment from 'moment';
 
 const TaskCards = ({tasks}) => {
 
@@ -39,7 +39,7 @@ const TaskCards = ({tasks}) => {
                             </Card.Text>
                         </Card.Body>
                         <Card.Footer>
-                            Due: {task.dueOn}
+                            Due: {Moment(task.dueOn).format('DD-MM-YYYY')}
                         </Card.Footer>
                     </Card>
                 </Col>))}

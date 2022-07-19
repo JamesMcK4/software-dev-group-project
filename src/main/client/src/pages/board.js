@@ -8,7 +8,7 @@ const Board = () => {
 
     const navigate = useNavigate();
 
-    var [board, setBoard] = useState({});
+    var [board, setBoard] = useState(undefined);
 
     const boardId = useParams().boardId;
 
@@ -16,15 +16,15 @@ const Board = () => {
     var [displayedTasks, setDisplayedTasks] = useState([]);
 
     useEffect(() => {
-        getAllTasks();
-    }, []);
-
-    useEffect(() => {
         getBoard(boardId);
     }, [boardId]);
 
     useEffect(() => {
-        console.log(board);
+        if (board !== undefined){
+            console.log(board);
+            setAllTasks(board.tasks);
+            setDisplayedTasks(board.tasks);
+        }
     }, [board]);
 
     async function getBoard(boardId) {
@@ -41,22 +41,6 @@ const Board = () => {
         });
     }
 
-    /*
-        Not get all the tasks, but only the ones belong to a board. 
-        We can use this to test search and filter while we wait for Haoming to finish adding tasks to board.
-    */
-    async function getAllTasks() {
-        // You can await here
-        const response = await fetch("http://localhost:9001/task/get_all_tasks", {
-            method: 'GET',
-        }, {mode: 'cors'});
-        response.json().then((value) => {
-            console.log(value);
-            setAllTasks(value);
-            setDisplayedTasks(value);
-        });
-    }
-
     return(
         <Container style={{width: "90%"}}>
             <BoardInfo board={board}></BoardInfo>
@@ -69,7 +53,7 @@ const Board = () => {
             </Row>
             <Row className="justify-content-md-center">
                 <Col md="auto">
-                    <Button variant="warning" href={"/create-task/" + board.id}>
+                    <Button variant="warning" href={"/create-task/" + boardId}>
                         Create a new task
                     </Button>
                 </Col>
