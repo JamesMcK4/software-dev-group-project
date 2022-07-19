@@ -46,7 +46,7 @@ public class TaskController {
             body = singletonMap(MESSAGE, "Task name already exists. Please choose another.");
         }
         else{
-            singletonMap(OBJECT, task);
+            body = singletonMap(OBJECT, task);
         }
 
         return status(status).body(body);
