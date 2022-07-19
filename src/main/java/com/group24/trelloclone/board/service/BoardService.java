@@ -24,6 +24,8 @@ public interface BoardService {
 
     public BoardModel getBoardById(Long boardId);
 
+    public BoardModel addTask(Long boardId, Long taskId);
+
     //TODO
     // public BoardModel addTask(Long boardId, Long taskId);
 }

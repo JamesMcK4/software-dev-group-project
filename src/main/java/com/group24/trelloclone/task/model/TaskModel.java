@@ -1,6 +1,5 @@
 package com.group24.trelloclone.task.model;
 
-import com.group24.trelloclone.board.model.BoardModel;
 import com.group24.trelloclone.user.model.UserModel;
 
 import javax.persistence.Column;
@@ -28,26 +27,11 @@ public class TaskModel {
     @ManyToOne(targetEntity = UserModel.class)
     private UserModel assignee;
 
-    @ManyToOne(targetEntity = BoardModel.class)
-    private BoardModel board;
-
     private TaskStatusEnum status;
 
     private Date createdOn;
 
     private Date dueOn;
-
-    public TaskModel(String name, String description, UserModel assignee, Date dueOn) {
-        this.name = name;
-        this.description = description;
-        this.assignee = assignee;
-        this.dueOn = dueOn;
-    }
-
-    public TaskModel(String name, String description) {
-        this.name = name;
-        this.description = description;
-    }
 
     public TaskModel(String name, String description, Date dueOn, TaskStatusEnum status) {
         this.name = name;
@@ -130,14 +114,6 @@ public class TaskModel {
 
     public void setDueOn(Date dueOn) {
         this.dueOn = dueOn;
-    }
-
-    public BoardModel getBoard() {
-        return board;
-    }
-
-    public void setBoard(BoardModel board) {
-        this.board = board;
     }
 }
 //TODO

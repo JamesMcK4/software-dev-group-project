@@ -1,9 +1,14 @@
 package com.group24.trelloclone.board.model;
 
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import com.group24.trelloclone.task.model.TaskModel;
 
 @Entity(name = "boards")
 public class BoardModel {
@@ -14,6 +19,9 @@ public class BoardModel {
     private String name;
 
     private String description;
+
+    @OneToMany(targetEntity = TaskModel.class)
+    private Set<TaskModel> tasks;
 
     public BoardModel(String name, String description) {
         this.name = name;

@@ -18,7 +18,6 @@ Project Name,Package Name,Type Name,Code Smell
 .,com.group24.trelloclone.user.controller,UserController,Unutilized Abstraction
 .,com.group24.trelloclone.user.service,UserServiceImpl,Unutilized Abstraction
 .,com.group24.trelloclone.task.controller,TaskController,Unutilized Abstraction
-.,com.group24.trelloclone.task.model,TaskModel,Insufficient Modularization
 .,com.group24.trelloclone.task.service,TaskServiceImpl,Unutilized Abstraction
 .,com.group24.trelloclone.exception,UnableTooAddBoardException,Unnecessary Abstraction
 .,com.group24.trelloclone.exception,UnableTooAddBoardException,Unutilized Abstraction

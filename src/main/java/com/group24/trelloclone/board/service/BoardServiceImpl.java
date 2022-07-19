@@ -88,4 +88,10 @@ public class BoardServiceImpl implements BoardService {
 
 		return board;
 	}
+
+	@Override
+	public BoardModel addTask(Long boardId, Long taskId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

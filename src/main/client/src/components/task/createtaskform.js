@@ -1,7 +1,13 @@
 import {Form, Button, Container, Row, Col, InputGroup} from 'react-bootstrap';
 import React, {useRef} from "react";
+import { useNavigate, useParams } from 'react-router-dom';
 
 const CreateTaskForm = ({createTask}) => {
+
+    const navigate = useNavigate();
+
+    const boardId = useParams().boardId;
+
     const taskNameRef=useRef();
     const descriptionRef=useRef();
     const deadlineRef=useRef();
@@ -23,6 +29,10 @@ const CreateTaskForm = ({createTask}) => {
                 <Col md='6' className="align-self-center text-center">
                     <h2>Create a new Task</h2>
                     <Form onSubmit={createHandler}>
+                        <Form.Group className="mb-3">
+                            <Form.Label>Board ID</Form.Label>
+                            <Form.Control placeholder={boardId} disabled />
+                        </Form.Group>
                         <Form.Group className="mb-3" controlId="formTaskName">
                             <Form.Label>Task name</Form.Label>
                             <Form.Control placeholder="Task name" ref={taskNameRef}/>
