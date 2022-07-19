@@ -1,0 +1,22 @@
+Project Name,Package Name,Type Name,Code Smell
+.,com.group24.trelloclone.board,BoardServiceImplTests,Unutilized Abstraction
+.,com.group24.trelloclone.workspace,WorkspaceServiceImplTests,Unutilized Abstraction
+.,com.group24.trelloclone.user,UserServiceImplTests,Unutilized Abstraction
+.,com.group24.trelloclone.task,TaskServiceImplTests,Unutilized Abstraction
+.,com.group24.trelloclone,DashboardApplicationTests,Unnecessary Abstraction
+.,com.group24.trelloclone,DashboardApplicationTests,Unutilized Abstraction
+.,com.group24.trelloclone.board.repository,BoardRepository,Unnecessary Abstraction
+.,com.group24.trelloclone.board.controller,BoardController,Unutilized Abstraction
+.,com.group24.trelloclone.board.service,BoardServiceImpl,Unutilized Abstraction
+.,com.group24.trelloclone.security,WebSecurityConfig,Unutilized Abstraction
+.,com.group24.trelloclone.workspace.repository,WorkspaceRepository,Unnecessary Abstraction
+.,com.group24.trelloclone.workspace.controller,WorkspaceController,Unutilized Abstraction
+.,com.group24.trelloclone.workspace.service,WorkspaceServiceImpl,Unutilized Abstraction
+.,com.group24.trelloclone.user.controller,UserController,Unutilized Abstraction
+.,com.group24.trelloclone.user.service,UserServiceImpl,Unutilized Abstraction
+.,com.group24.trelloclone.task.controller,TaskController,Unutilized Abstraction
+.,com.group24.trelloclone.task.service,TaskServiceImpl,Unutilized Abstraction
+.,com.group24.trelloclone.exception,UnableTooAddBoardException,Unutilized Abstraction
+.,com.group24.trelloclone.exception,InvalidWorkspaceIdException,Unutilized Abstraction
+.,com.group24.trelloclone.exception,InvalidUserIdException,Unutilized Abstraction
+.,com.group24.trelloclone.exception,EmptyPasswordException,Unutilized Abstraction

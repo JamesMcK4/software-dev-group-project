@@ -1,32 +1,42 @@
 import React from 'react';
-import {Form, Container, Row, Col, Button} from 'react-bootstrap';
+import {Form, Container, Row, Col, Button, Nav} from 'react-bootstrap';
 import { useRef } from 'react';
-import { propTypes } from 'react-bootstrap/esm/Image';
-import { useNavigate } from 'react-router-dom';
 
 function LoginForm(){
     const emailRef = useRef();
     const passwordRef = useRef();
-    const nav = useNavigate();
 
-    function loginUser(user){
-        fetch("http://localhost:9000/user/get_email/{id}", {
-            method: 'GET',
+    async function validateUser(userLogin){
+        console.log(userLogin['emailId']);
+        console.log(userLogin['password']);
+        const response = await fetch("http://localhost:9001/user/validate_user", {
+            method: 'POST',
             mode: 'cors',
+            body: JSON.stringify(userLogin),
             headers: {'Content-Type': 'application/json'}
-        }).then(() => nav('/'));
+        })
+
+        response.json().then((data) => {
+            
+            console.log(data.validated);
+            if (data.validated){
+                localStorage.setItem("userId", data.id);
+                console.log(localStorage.getItem("userId"));
+                window.location.reload(false);
+            }
+            else{
+                alert("Your login credential is invalid. Please try again.")
+            }
+        });
     }
 
     function submissionHandler(e){
         e.preventDefault();
-
-        const email = emailRef.current.value;
+        const emailId = emailRef.current.value;
         const password = passwordRef.current.value;
-        const user = {email, password};
-
-        loginUser(user);
-}
-
+        const userLogin = {emailId, password};
+        validateUser(userLogin);
+    }
 
     return (
         <Container>
@@ -45,8 +55,10 @@ function LoginForm(){
                         <Button variant="warning" type="submit">
                             Submit
                         </Button>
-                        <br></br>
-                        <a href="http://localhost:3000/forget-password" className="link-primary">Forgot your password?</a>
+                        <Nav className="flex-column">
+                            <Nav.Link variant="success" href="/forget-password" className="px-0 link-success">Forgot your password?</Nav.Link>
+                            <Nav.Link variant="success" href="/register" className="px-0 link-success">Don't have an account?</Nav.Link>
+                        </Nav>
                     </Form>
                 </Col>
             </Row>

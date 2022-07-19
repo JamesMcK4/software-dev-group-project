@@ -1,9 +1,34 @@
-import {Card, Nav, Button, Tab, Form, ListGroup} from 'react-bootstrap';
+import {Card, Nav, Button, Tab} from 'react-bootstrap';
+import {BoardList, UserList, WorkspaceSetting} from "../../index.js";
 
-const WorkspaceTabs = () => {
+const WorkspaceTabs = ({workspace}) => {
+
+    async function handleDeleteBoard(e){
+        const boardId = e.target.id;
+        console.log(boardId);
+        await deleteBoard(workspace.id, boardId);
+        alert("Delete board sucessfully!");
+        window.location.reload(false);
+    }
+
+    async function handleDeleteUser(e){
+        alert("Not implemented yet. Not in deliverable 2.");
+    }
+
+    async function deleteBoard(workspaceId, boardId){
+        const response = await fetch("http://localhost:9001/workspace/delete_board/" + workspaceId + "/" + boardId, {
+            method: 'DELETE',
+            mode: 'cors',
+            headers: {'Content-Type': 'application/json'}
+        })
+        var data = await response.json();
+        console.log(data);
+        return data;
+    }
+
     return (
         <Tab.Container defaultActiveKey="boards">
-                    <Card>
+            <Card>
             <Card.Header>
                 <Nav variant="tabs">
                 <Nav.Item>
@@ -26,42 +51,29 @@ const WorkspaceTabs = () => {
                         <Card.Text>
                         List of boards and their respective links.
                         </Card.Text>
-                        <ListGroup className="list-group-flush">
-                            <ListGroup.Item><Card.Link href="/board/1" className="link-success">Board Link</Card.Link></ListGroup.Item>
-                            <ListGroup.Item><Card.Link href="/board/1" className="link-success">Board Link</Card.Link></ListGroup.Item>
-                            <ListGroup.Item><Card.Link href="/board/1" className="link-success">Board Link</Card.Link></ListGroup.Item>
-                        </ListGroup>
+                        <Button variant="warning" href={"/create-board/" + workspace.id}>
+                            Create a board
+                        </Button>
+                        <BoardList workspaceBoards={workspace.boards === undefined? [] : workspace.boards} handleDelete={handleDeleteBoard}>
+                        </BoardList>
                     </Tab.Pane>
                     <Tab.Pane eventKey="members">
                         <Card.Title>Members</Card.Title>
+                        <Card.Subtitle className="mb-2 text-warning">Total members: {workspace.users === undefined? 0 : workspace.users.length}</Card.Subtitle>
+                        <Button variant="warning" href={"/add-user/" + workspace.id}>
+                            Add a new user
+                        </Button>
                         <Card.Text>
                         List of members.
                         </Card.Text>
-                        <ListGroup className="list-group-flush">
-                            <ListGroup.Item>Cras justo odio</ListGroup.Item>
-                            <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
-                            <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
-                        </ListGroup>
+                        <UserList workspaceUsers={workspace.users === undefined? [] : workspace.users} handleDelete={handleDeleteUser}></UserList>
                     </Tab.Pane>
                     <Tab.Pane eventKey="settings">
                         <Card.Title>Settings</Card.Title>
                         <Card.Text>
-                        With supporting text below as a natural lead-in to additional content.
+                        Change the workspace and description here.
                         </Card.Text>
-                        <Form>
-                        <Form.Group className="mb-3" controlId="formWorkspaceName">
-                            <Form.Label>Name</Form.Label>
-                            <Form.Control type="text" value="workspace name"/>
-                        </Form.Group>
-
-                        <Form.Group className="mb-3" controlId="formWorkspaceDescription">
-                            <Form.Label>Description</Form.Label>
-                            <Form.Control type="text" value="workpspace description" />
-                        </Form.Group>
-                        <Button variant="warning" type="submit">
-                            Change
-                        </Button>
-                        </Form>
+                        <WorkspaceSetting workspace={workspace}></WorkspaceSetting>
                     </Tab.Pane>
                     </Tab.Content>
             </Card.Body>

@@ -1,9 +1,19 @@
 package com.group24.trelloclone.user.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.group24.trelloclone.workspace.model.WorkspaceModel;
 
 @Entity(name = "users")
 public class UserModel
@@ -12,6 +22,7 @@ public class UserModel
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(unique=true)
     private String emailId;
 
     private String password;
@@ -22,6 +33,10 @@ public class UserModel
 
     private int role;
 
+    @ManyToMany(targetEntity = WorkspaceModel.class, fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @JsonIgnoreProperties("users")
+    private Set<WorkspaceModel> workspaces;
+
     public UserModel() {
     }
 
@@ -31,9 +46,10 @@ public class UserModel
         this.lastName = lastName;
         this.emailId = emailId;
         this.password = password;
+        workspaces = new HashSet<WorkspaceModel>();
     }
 
-    private Long getId()
+    public Long getId()
     {
         return id;
     }
@@ -44,32 +60,32 @@ public class UserModel
     }
 
 
-    private String getFirstName()
+    public String getFirstName()
     {
         return firstName;
     }
 
-    private void setFirstName(String firstName)
+    public void setFirstName(String firstName)
     {
         this.firstName = firstName;
     }
 
-    private String getLastName()
+    public String getLastName()
     {
         return lastName;
     }
 
-    private void setLastName(String lastName)
+    public void setLastName(String lastName)
     {
         this.lastName = lastName;
     }
 
-    private String getEmailId()
+    public String getEmailId()
     {
         return emailId;
     }
 
-    private void setEmailId(String emailId)
+    public void setEmailId(String emailId)
     {
         this.emailId = emailId;
     }
@@ -90,6 +106,14 @@ public class UserModel
 
     public void setRole(int role) {
         this.role = role;
+    }
+
+    public Set<WorkspaceModel> getWorkspaces() {
+        return workspaces;
+    }
+
+    public void setWorkspaces(Set<WorkspaceModel> workspaces) {
+        this.workspaces = workspaces;
     }
 
 }

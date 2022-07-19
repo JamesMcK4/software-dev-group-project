@@ -20,6 +20,18 @@ import WorkspaceInfo from './components/workspace/workspace-info';
 import WorkspaceTabs from './components/workspace/workspace-tabs';
 import WorkspaceCards from './components/workspace/workspace-cards';
 import BoardList from './components/board/boardlist';
+import AddUser from './pages/add-user';
+import UserList from './components/user-management/userlist';
+import WorkspaceSetting from './components/workspace/workspace-setting';
+import BoardListHome from './components/board/boardlist-home';
+import ResetPassword from './pages/resetpassword';
+import ResetPasswordForm from './components/user-management/resetpasswordform';
+import CreateTask from './pages/createTask';
+import ChangeTaskStatus from './pages/change-task-status';
+import AssignUser from './pages/assign-user';
+import BoardInfo from './components/board/board-info';
+import SearchBar from './components/task/searchbar';
+import FilterTask from './components/task/filter-task';
 
 /* Guidelines
 https://stackoverflow.com/questions/46984955/how-to-import-all-components-in-react
@@ -56,7 +68,19 @@ export {
   WorkspaceInfo,
   WorkspaceTabs,
   WorkspaceCards,
-  BoardList
+  WorkspaceSetting,
+  BoardList,
+  BoardListHome,
+  AddUser,
+  UserList,
+  ResetPassword,
+  ResetPasswordForm,
+  CreateTask,
+  ChangeTaskStatus,
+  AssignUser,
+  BoardInfo,
+  SearchBar,
+  FilterTask
 }
 
 ReactDOM.render(

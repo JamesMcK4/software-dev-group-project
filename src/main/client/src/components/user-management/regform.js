@@ -12,8 +12,6 @@ import Container from 'react-bootstrap/Container';
 
 
 function RegisterForm(){
-
-
     //Setting up new constants for each section of form using useRef (from tutorial vid) in order to link to backend
     const firstNameRef = useRef();
     const lastNameRef = useRef();
@@ -22,14 +20,13 @@ function RegisterForm(){
     const nav = useNavigate();
     
     function registerUser(user){
-        fetch("http://localhost:9000/user/save_user", {
+        fetch("http://localhost:9001/user/save_user", {
             method: 'POST',
             mode: 'cors',
             body: JSON.stringify(user),
             headers: {'Content-Type': 'application/json'}
         }).then(() => nav('/login'));
     }
-
         
     function passwordCheck(inputPassword){
         var passwordToCheck = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
@@ -48,25 +45,21 @@ function RegisterForm(){
             
             const firstName = firstNameRef.current.value;
             const lastName = lastNameRef.current.value;
-            const email = emailRef.current.value;
+            const emailId = emailRef.current.value;
             const password = passwordRef.current.value;
             const passwordChecker = passwordCheck(password);
             if(passwordChecker === true){
-            const user = {firstName, lastName, email, password};
+            const user = {firstName, lastName, emailId, password};
             console.log(user);
            
             console.log(firstName);
             console.log(lastName);
-            console.log(email);
+            console.log(emailId);
             console.log(password);
 
             registerUser(user);
         }
-        
-        
     }
-    
-        
     
     return(
         <Container>
@@ -89,6 +82,9 @@ function RegisterForm(){
                         <Form.Group className="mb-3" controlId="formBasicPassword">
                             <Form.Label>Password</Form.Label>
                             <Form.Control type="password" placeholder="Password" ref={passwordRef}/>
+                            <Form.Text id="passwordHelpBlock" muted>
+                                Your password must be at least 8 characters long, contain uppercase letters, numbers, and special characters.
+                            </Form.Text>
                         </Form.Group>
                         <Button variant="warning" type="submit">
                             Submit

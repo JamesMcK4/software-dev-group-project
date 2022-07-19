@@ -1,6 +1,5 @@
 import React from 'react';
 import { useNavigate } from "react-router-dom";
-import { useState } from 'react';
 import { useRef } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -12,48 +11,59 @@ import Col from 'react-bootstrap/Col';
 function ForgotPassForm(){
 
     const emailRef = useRef();
-    const passwordRef = useRef();
+    
     const nav = useNavigate();
 
 
-    function forgetPass(){
-        fetch("http://localhost:3000/user/get_email/{id}", {
+    async function forgetPass(email){
+        const response = await fetch("http://localhost:9001/user/get_email/" + email, {
             method: 'GET',
             mode: 'cors',
             headers: {'Content-Type': 'application/json'}
-        });
+        })
+        
+        var data = await response.json();
+        console.log(data);
+        if(data.validated === undefined || !data.validated){
+            alert("Your email is incorrect!");
+        }
+        else{
+            nav("/reset-password/" + email);
+        }
     }
 
-    function updatePass(){
-        fetch("http://localhost:3000/user/get_email/{id}", {
-            method: 'POST',
-            mode: 'cors',
-            body: JSON.stringify(),
-            headers: {'Content-Type': 'application/json'}
-        }).then(() => nav('/'));
-    }
+    // function updatePass(){
+    //     fetch("http://localhost:9000/user/updatePassword/" + emailRef.value, {
+    //         method: 'PUT',
+    //         mode: 'cors',
+    //         body: JSON.stringify(),
+    //         headers: {'Content-Type': 'application/json'}
+    //     }).then(() => nav('/'));
+    // }
 
+    
     function submissionHandler(e){
         e.preventDefault();
 
         const email = emailRef.current.value;
-        const password = passwordRef.current.value;
-        const user = {email, password};
+        //const password = passwordRef.current.value; //for some reason, this isnt being read properly.  If I remove .current, it just shows up
+        //as undefined, if I leave current in, it gives me a different error, but still undefined.  Not sure its needed?
+        //const user = {email};
 
         console.log(email);
-        console.log(password);
-        forgetPass(user);
+        forgetPass(email);   
 }
+
 
 return(
 <Container>
 <Row className="justify-content-md-center mt-5">
     <Col md='6' className="align-self-center">
         
-        <Form>
-        <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+        <Form onSubmit={submissionHandler}>
+        <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1" >
             <Form.Label>Security Question Sample: What is your email address?</Form.Label>
-            <Form.Control/>
+            <Form.Control type="email" placeholder="Email Address?" ref={emailRef} />
         </Form.Group>
         <Button variant="warning" type="submit">
             Submit
@@ -66,3 +76,4 @@ return(
 }
 
 export default ForgotPassForm;
+

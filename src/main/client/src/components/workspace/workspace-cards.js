@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import {Card, Button, Row, Col} from 'react-bootstrap';
-import {BoardList} from '../../index.js';
+import {BoardListHome} from '../../index.js';
 
 const WorkspaceCards = () => {
 
@@ -28,17 +28,17 @@ const WorkspaceCards = () => {
             <Card bg="dark" text="light">
                 <Card.Header as="h3" className="text-capitalize">{workspace.name}</Card.Header>
                 <Card.Body>
-                    <Card.Subtitle className="mb-2 text-warning">Total members: 10</Card.Subtitle>
+                    <Card.Subtitle className="mb-2 text-warning">Total members: {workspace.users.length}</Card.Subtitle>
                     <Card.Text>
                     {workspace.description}
                     </Card.Text>
-                    <Button variant="warning">Visit</Button>
+                    <Button variant="warning" href={"/workspace/" + workspace.id}>Visit</Button>
                 </Card.Body>
                 <Card.Body>
                     <Card.Title>Boards</Card.Title>
                 </Card.Body>
-                <BoardList boardIDs={workspace.boards}>
-                </BoardList>
+                <BoardListHome workspaceBoards={workspace.boards}>
+                </BoardListHome>
             </Card>
         </Col>))}
         </Row>

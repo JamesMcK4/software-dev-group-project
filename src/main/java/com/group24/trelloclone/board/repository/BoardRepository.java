@@ -6,7 +6,8 @@ import org.springframework.stereotype.Repository;
 import com.group24.trelloclone.board.model.BoardModel;
 
 @Repository 
-public interface BoardRepository extends JpaRepository<BoardModel, Long> 
-{    
+public interface BoardRepository extends JpaRepository<BoardModel, Long>
 
+{
+    
 }

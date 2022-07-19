@@ -1,15 +1,26 @@
 package com.group24.trelloclone.user.controller;
 
-import com.group24.trelloclone.exception.EmptyPasswordException;
 import com.group24.trelloclone.exception.InvalidCredentialsException;
 import com.group24.trelloclone.exception.InvalidUserIdException;
+import com.group24.trelloclone.user.model.UserLoginModel;
 import com.group24.trelloclone.user.model.UserModel;
 import com.group24.trelloclone.user.service.UserService;
+import com.group24.trelloclone.utils.Response;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import static com.group24.trelloclone.utils.Response.*;
+import static java.util.Collections.singletonMap;
+import static org.springframework.http.ResponseEntity.status;
+
+@CrossOrigin()
 @RestController
 @RequestMapping("/user")
 public class UserController
@@ -18,59 +29,77 @@ public class UserController
 
     private UserService userService;
 
-    @CrossOrigin
     @PostMapping("/save_user")
     public UserModel addUser(@RequestBody UserModel userModel)
     {
         return userService.addUser(userModel);
     }
 
-    @CrossOrigin
     @GetMapping("/get_user/{id}")
     public UserModel getUserById(@PathVariable("id") Long userId) throws InvalidUserIdException
     {
         UserModel user =  userService.getUserById(userId);
         return user;
     }
-    @CrossOrigin
-    @GetMapping("/get_email/{id}")
-    public UserModel getUserByEmail(@PathVariable("id") String emailId) throws InvalidCredentialsException {
-        return userService.getUserByEmailId(emailId);
 
+    @GetMapping("/get_email/{id}")
+    public ResponseEntity<Map<Response, Object>> getUserByEmail(@PathVariable("id") String emailId) throws InvalidCredentialsException {
+        UserModel user;
+        try{
+            user = userService.getUserByEmailId(emailId);
+        }
+        catch(Exception e){
+            System.out.println(e);
+            return status(HttpStatus.OK).body(singletonMap(VALIDATION_STATUS, false));
+        }
+        Map<Response, Object> returnBody = new HashMap<>();
+        returnBody.put(VALIDATION_STATUS, true);
+        returnBody.put(ID, user.getId());
+        return status(HttpStatus.OK).body(returnBody);
     }
-    @CrossOrigin
+
     @GetMapping("/get_all_users")
     public List<UserModel> getAllUsers()
     {
         return userService.getAllUsers();
     }
 
-    @CrossOrigin
     @DeleteMapping("/delete_all_users")
     public boolean deleteAllUsers()
     {
         return userService.deleteAllUsers();
     }
 
-    //Not sure this is needed either, as there really isn't a reason to delete a single user, and we already have a delete all
-    @CrossOrigin
-    @DeleteMapping("/delete_user/{id}")
-    public UserModel deleteUser(@PathVariable("id") Long id) throws InvalidUserIdException { return userService.deleteUser(id); }
-
-
-    //Work on this for validation.  Edit 06/30/2022 Not sure this is needed for anything really..
-    @CrossOrigin
-    @GetMapping("/validate_user/{id}") //THIS DOESNT WORK YET
-    public boolean validateUser(@PathVariable("id") String emailId, String password) throws InvalidUserIdException, EmptyPasswordException, InvalidCredentialsException
-    {
-            return userService.validateUser(emailId,password);
+    //Work on this for validation.
+    @PostMapping(path = "/validate_user", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<Map<Response, Object>> validateUser(@RequestBody UserLoginModel userloginModel)
+    {   
+        UserModel user;
+        try{
+            user = userService.validateUser(userloginModel);
+        }
+        catch(Exception e){
+            System.out.println(e);
+            return status(HttpStatus.OK).body(singletonMap(VALIDATION_STATUS, false));
+        }
+        Map<Response, Object> returnBody = new HashMap<>();
+        returnBody.put(VALIDATION_STATUS, true);
+        returnBody.put(ID, user.getId());
+        return status(HttpStatus.OK).body(returnBody);
     }
 
     //needs insight - ask questions
-    @CrossOrigin
-    @GetMapping("/updatePassword")
-    public boolean updatePassword(String email, String newPassword) throws EmptyPasswordException, InvalidUserIdException {
-        return userService.updatePassword(email, newPassword);
+    @PutMapping("/updatePassword")
+    public ResponseEntity<Map<Response, Object>> updatePassword(@RequestBody UserLoginModel userLoginModel) {
+        UserModel user;
+        try{
+            user = userService.updatePassword(userLoginModel);
+        }
+        catch(Exception e) {
+            System.out.println(e);
+            return status(HttpStatus.OK).body(singletonMap(MESSAGE, e.getMessage())); //this shouldnt be VALIDATION STATUS but not sure what to put here..ask advicepo
+        }
+        return status(HttpStatus.OK).body(singletonMap(OBJECT, user));
     }
 
 }

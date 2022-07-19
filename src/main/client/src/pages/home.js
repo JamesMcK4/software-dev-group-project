@@ -1,7 +1,7 @@
-import {Row, Col, Container} from 'react-bootstrap';
+import {Row, Col, Container, Button} from 'react-bootstrap';
 import {WorkspaceCards} from '../index.js';
 
-const Home = () => {
+const Home = ({userId}) => {
     return (
         <Container style={{width: "90%"}}>
             <Row className="justify-content-md-center mt-5">
@@ -11,11 +11,14 @@ const Home = () => {
                     </h1>
                 </Col>
             </Row>
-            <Row className="justify-content-md-center">
+            <Row className="justify-content-md-center mb-5">
                 <Col md="auto">
                     <h2>
-                        Your workspaces
+                        All workspaces
                     </h2>
+                    <Button variant="warning" href="/create-workspace">
+                        Create a new workspace
+                    </Button>
                 </Col>
             </Row>
             <WorkspaceCards></WorkspaceCards>
