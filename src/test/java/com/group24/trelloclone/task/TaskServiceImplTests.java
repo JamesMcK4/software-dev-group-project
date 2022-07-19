@@ -2,6 +2,8 @@ package com.group24.trelloclone.task;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import java.util.Date;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -12,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.group24.trelloclone.task.model.TaskModel;
 import com.group24.trelloclone.task.model.TaskRequestModel;
+import com.group24.trelloclone.task.model.TaskStatusEnum;
 import com.group24.trelloclone.task.repository.TaskRepository;
 import com.group24.trelloclone.task.service.TaskService;
 import com.group24.trelloclone.task.service.TaskServiceImpl;
@@ -28,7 +31,7 @@ public class TaskServiceImplTests {
 	
 	@Test
 	public void createTaskTest() {
-		TaskRequestModel request = new TaskRequestModel("Test", "Test description");
+		TaskRequestModel request = new TaskRequestModel("Test", "Test description", new Date(20220729), TaskStatusEnum.TO_DO);
 		TaskModel task = TaskModel.create(request);
 		Mockito.when(taskRepository.save(task)).thenReturn(task);
 		TaskModel savedTask = tasksServiceImpl.createTask(request);

@@ -85,6 +85,17 @@ public class TaskServiceImpl implements TaskService{
 
         return false;
     }
+
+    @Override
+    public TaskModel deleteTask(Long taskId) {
+        TaskModel deletedTask = getTaskById(taskId);
+		taskRepository.deleteById(taskId);
+		if (!taskRepository.existsById(taskId)){
+			return deletedTask;
+		}
+
+		return null;
+    }
 }
 
 

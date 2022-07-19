@@ -21,4 +21,11 @@ public interface BoardService {
     public boolean updateBoardName(Long boardId, String name);
 
     public boolean updateBoardDescription(Long boardId, String description);
+
+    public BoardModel getBoardById(Long boardId);
+
+    public BoardModel addTask(Long boardId, Long taskId);
+
+    //TODO
+    // public BoardModel addTask(Long boardId, Long taskId);
 }

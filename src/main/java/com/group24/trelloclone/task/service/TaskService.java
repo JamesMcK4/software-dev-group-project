@@ -14,4 +14,5 @@ public interface TaskService {
     public boolean assignTask(Long taskId, Long userId) throws InvalidUserIdException;
     public boolean updateTaskStatus(Long taskId, TaskStatusEnum status);
     public boolean deleteAllTasks();
+    public TaskModel deleteTask(Long taskId);
 }

@@ -49,7 +49,7 @@ public class TaskController {
         return taskService.getTasks();
     }
 
-    @PutMapping("/assign_task/{taskId}")//test this 
+    @PutMapping("/assign_task/{taskId}") 
     public ResponseEntity<Map<String, Object>> assignTask(@PathVariable("taskId") String taskId,
         @RequestParam("userId") Long userId) throws InvalidUserIdException {
 
@@ -60,7 +60,7 @@ public class TaskController {
         return status(HttpStatus.OK).body(singletonMap(STATUS, taskService.assignTask(Long.parseLong(taskId), userId)));
     }
 
-    @PutMapping("status/{taskId}")//Test this
+    @PutMapping("status/{taskId}")
     public ResponseEntity<Map<String, Object>> updateTaskStatus(@PathVariable("taskId") String taskId,
         @RequestParam("status") TaskStatusEnum status) {
         if (isEmpty(taskId)) {
@@ -74,6 +74,16 @@ public class TaskController {
     public boolean deleteAllTasks()
     {
         return taskService.deleteAllTasks();
+    }
+
+    @DeleteMapping("/delete_task/{taskId}")
+    public ResponseEntity<Map<String, Object>> deleteTask(@PathVariable("taskId") String taskId)
+    {
+        if (isEmpty(taskId)) {
+            return status(HttpStatus.BAD_REQUEST).body(singletonMap(MESSAGE, "Missing required field: [taskId]"));
+        }
+
+        return status(HttpStatus.OK).body(singletonMap(OBJECT, taskService.deleteTask(Long.parseLong(taskId))));
     }
 }
 
