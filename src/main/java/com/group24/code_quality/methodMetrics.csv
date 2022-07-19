@@ -27,7 +27,6 @@ Project Name,Package Name,Type Name,MethodName,LOC,CC,PC
 .,com.group24.trelloclone.user,UserServiceImplTests,updatePasswordTest,10,1,0
 .,com.group24.trelloclone.user,UserServiceImplTests,updateUserTest,5,1,0
 .,com.group24.trelloclone.task,TaskServiceImplTests,createTaskTest,7,1,0
-.,com.group24.trelloclone,TrelloCloneApplication,main,3,1,1
 .,com.group24.trelloclone.board.controller,BoardController,saveBoard,3,1,1
 .,com.group24.trelloclone.board.controller,BoardController,deleteBoard,3,1,1
 .,com.group24.trelloclone.board.controller,BoardController,getBoards,3,1,0
@@ -216,6 +215,7 @@ Project Name,Package Name,Type Name,MethodName,LOC,CC,PC
 .,com.group24.trelloclone.task.service,TaskServiceImpl,deleteAllTasks,7,2,0
 .,com.group24.trelloclone.task.service,TaskServiceImpl,searchForTask,4,1,1
 .,com.group24.trelloclone.task.service,TaskServiceImpl,deleteTask,8,2,1
+.,com.group24.trelloclone,TrelloCloneApplication,main,3,1,1
 .,com.group24.trelloclone.exception,UnableTooAddBoardException,UnableTooAddBoardException,2,1,0
 .,com.group24.trelloclone.exception,UnableTooAddBoardException,UnableTooAddBoardException,3,1,1
 .,com.group24.trelloclone.exception,InvalidCredentialsException,InvalidCredentialsException,2,1,0

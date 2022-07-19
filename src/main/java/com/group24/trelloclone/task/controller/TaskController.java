@@ -5,7 +5,6 @@ import com.group24.trelloclone.task.model.TaskModel;
 import com.group24.trelloclone.task.model.TaskRequestModel;
 import com.group24.trelloclone.task.model.TaskStatusEnum;
 import com.group24.trelloclone.task.service.TaskService;
-import com.group24.trelloclone.utils.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,22 +30,22 @@ public class TaskController {
     private TaskService taskService;
 
     @PostMapping("/create_task")
-    public ResponseEntity<Map<Response, Object>> createTask(@RequestBody TaskRequestModel request) {
+    public ResponseEntity<Map<String, Object>> createTask(@RequestBody TaskRequestModel request) {
 
         if (request.isEmpty()) {
-            return status(HttpStatus.BAD_REQUEST).body(singletonMap(MESSAGE, "Missing required fields: [name, description]"));
+            return status(HttpStatus.BAD_REQUEST).body(singletonMap(MESSAGE.getValue(), "Missing required fields: [name, description]"));
         }
 
         TaskModel task = taskService.createTask(request);
 
         HttpStatus status = isNull(task) ? HttpStatus.CONFLICT : HttpStatus.CREATED;
 
-        Map<Response, Object> body;
+        Map<String, Object> body;
         if (isNull(task)){
-            body = singletonMap(MESSAGE, "Task name already exists. Please choose another.");
+            body = singletonMap(MESSAGE.getValue(), "Task name already exists. Please choose another.");
         }
         else{
-            singletonMap(OBJECT, task);
+            body = singletonMap(OBJECT.getValue(), task);
         }
 
         return status(status).body(body);
@@ -58,24 +57,24 @@ public class TaskController {
     }
 
     @PutMapping("/assign_task/{taskId}") 
-    public ResponseEntity<Map<Response, Object>> assignTask(@PathVariable("taskId") String taskId,
+    public ResponseEntity<Map<String, Object>> assignTask(@PathVariable("taskId") String taskId,
         @RequestParam("userId") Long userId) throws InvalidUserIdException {
 
         if (isEmpty(taskId)) {
-            return status(HttpStatus.BAD_REQUEST).body(singletonMap(MESSAGE, "Missing required field: [taskId]"));
+            return status(HttpStatus.BAD_REQUEST).body(singletonMap(MESSAGE.getValue(), "Missing required field: [taskId]"));
         }
 
-        return status(HttpStatus.OK).body(singletonMap(STATUS, taskService.assignTask(Long.parseLong(taskId), userId)));
+        return status(HttpStatus.OK).body(singletonMap(STATUS.getValue(), taskService.assignTask(Long.parseLong(taskId), userId)));
     }
 
     @PutMapping("status/{taskId}")
-    public ResponseEntity<Map<Response, Object>> updateTaskStatus(@PathVariable("taskId") String taskId,
+    public ResponseEntity<Map<String, Object>> updateTaskStatus(@PathVariable("taskId") String taskId,
         @RequestParam("status") TaskStatusEnum status) {
         if (isEmpty(taskId)) {
-        return status(HttpStatus.BAD_REQUEST).body(singletonMap(MESSAGE, "Missing required field: [taskId]"));
+        return status(HttpStatus.BAD_REQUEST).body(singletonMap(MESSAGE.getValue(), "Missing required field: [taskId]"));
         }
 
-        return status(HttpStatus.OK).body(singletonMap(STATUS, taskService.updateTaskStatus(Long.parseLong(taskId), status)));
+        return status(HttpStatus.OK).body(singletonMap(STATUS.getValue(), taskService.updateTaskStatus(Long.parseLong(taskId), status)));
     }
 
     @DeleteMapping("/delete_all_tasks")
@@ -90,13 +89,13 @@ public class TaskController {
     }
     
     @DeleteMapping("/delete_task/{taskId}")
-    public ResponseEntity<Map<Response, Object>> deleteTask(@PathVariable("taskId") String taskId)
+    public ResponseEntity<Map<String, Object>> deleteTask(@PathVariable("taskId") String taskId)
     {
         if (isEmpty(taskId)) {
-            return status(HttpStatus.BAD_REQUEST).body(singletonMap(MESSAGE, "Missing required field: [taskId]"));
+            return status(HttpStatus.BAD_REQUEST).body(singletonMap(MESSAGE.getValue(), "Missing required field: [taskId]"));
         }
 
-        return status(HttpStatus.OK).body(singletonMap(OBJECT, taskService.deleteTask(Long.parseLong(taskId))));
+        return status(HttpStatus.OK).body(singletonMap(OBJECT.getValue(), taskService.deleteTask(Long.parseLong(taskId))));
     }
 }
 
