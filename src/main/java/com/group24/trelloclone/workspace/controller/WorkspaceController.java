@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.group24.trelloclone.board.model.BoardModel;
 import com.group24.trelloclone.exception.UnableTooAddBoardException;
-import com.group24.trelloclone.utils.Response;
 import com.group24.trelloclone.workspace.model.WorkspaceModel;
 import com.group24.trelloclone.workspace.service.WorkspaceService;
 
@@ -39,16 +38,16 @@ public class WorkspaceController {
     }
 
     @PutMapping(path = "/update_workspace", consumes = "application/json", produces = "application/json" )
-    public ResponseEntity<Map<Response, Object>>  udpdateWorkspace(@RequestBody WorkspaceModel workspace){
+    public ResponseEntity<Map<String, Object>>  udpdateWorkspace(@RequestBody WorkspaceModel workspace){
         WorkspaceModel updatedWorkspace;
         try{
             updatedWorkspace = workspaceService.updateWorkspace(workspace);        
         }
         catch(Exception e){
             System.out.println(e);
-            return status(HttpStatus.OK).body(singletonMap(OBJECT, ERROR));
+            return status(HttpStatus.OK).body(singletonMap(OBJECT.getValue(), ERROR));
         }
-        return status(HttpStatus.OK).body(singletonMap(OBJECT, updatedWorkspace));
+        return status(HttpStatus.OK).body(singletonMap(OBJECT.getValue(), updatedWorkspace));
     }
 
     @DeleteMapping("/delete_workspace/{id}")
@@ -58,20 +57,20 @@ public class WorkspaceController {
     }
 
     @PutMapping(path = "/add_board/{id}", consumes = "application/json", produces = "application/json" )
-    public ResponseEntity<Map<Response, Object>> addBoard(@PathVariable("id") Long workspaceId, @RequestBody BoardModel board) throws UnableTooAddBoardException{
+    public ResponseEntity<Map<String, Object>> addBoard(@PathVariable("id") Long workspaceId, @RequestBody BoardModel board) throws UnableTooAddBoardException{
         WorkspaceModel workspace;
         try{
             workspace = workspaceService.addBoard(workspaceId, board);        
         }
         catch(Exception e){
             System.out.println(e);
-            return status(HttpStatus.OK).body(singletonMap(OBJECT, null));
+            return status(HttpStatus.OK).body(singletonMap(OBJECT.getValue(), null));
         }
-        return status(HttpStatus.OK).body(singletonMap(OBJECT, workspace));
+        return status(HttpStatus.OK).body(singletonMap(OBJECT.getValue(), workspace));
     }
 
     @PutMapping("/add_user/{workspace_id}/{user_id}")
-    public ResponseEntity<Map<Response, Object>> addUser(@PathVariable("workspace_id") Long workspaceId, @PathVariable("user_id") Long userId)
+    public ResponseEntity<Map<String, Object>> addUser(@PathVariable("workspace_id") Long workspaceId, @PathVariable("user_id") Long userId)
     {
         WorkspaceModel workspace;
         try{
@@ -79,22 +78,22 @@ public class WorkspaceController {
         }
         catch(Exception e){
             System.out.println(e);
-            return status(HttpStatus.OK).body(singletonMap(OBJECT, null));
+            return status(HttpStatus.OK).body(singletonMap(OBJECT.getValue(), null));
         }
-        return status(HttpStatus.OK).body(singletonMap(OBJECT, workspace));
+        return status(HttpStatus.OK).body(singletonMap(OBJECT.getValue(), workspace));
     }
 
     @DeleteMapping(path = "/delete_all_users/{workspace_id}")
-    public ResponseEntity<Map<Response, Object>> deleteAllUsers(@PathVariable("workspace_id") Long workspaceId)
+    public ResponseEntity<Map<String, Object>> deleteAllUsers(@PathVariable("workspace_id") Long workspaceId)
     {   
         try{
             workspaceService.deleteAllUsers(workspaceId);
         }
         catch(Exception e){
             System.out.println(e);
-            return status(HttpStatus.OK).body(singletonMap(STATUS, false));
+            return status(HttpStatus.OK).body(singletonMap(STATUS.getValue(), false));
         }
-        return status(HttpStatus.OK).body(singletonMap(STATUS, true));
+        return status(HttpStatus.OK).body(singletonMap(STATUS.getValue(), true));
     }
 
     @DeleteMapping("/delete_board/{workspace_id}/{board_id}")

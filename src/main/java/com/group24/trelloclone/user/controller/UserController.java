@@ -5,7 +5,6 @@ import com.group24.trelloclone.exception.InvalidUserIdException;
 import com.group24.trelloclone.user.model.UserLoginModel;
 import com.group24.trelloclone.user.model.UserModel;
 import com.group24.trelloclone.user.service.UserService;
-import com.group24.trelloclone.utils.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -43,18 +42,18 @@ public class UserController
     }
 
     @GetMapping("/get_email/{id}")
-    public ResponseEntity<Map<Response, Object>> getUserByEmail(@PathVariable("id") String emailId) throws InvalidCredentialsException {
+    public ResponseEntity<Map<String, Object>> getUserByEmail(@PathVariable("id") String emailId) throws InvalidCredentialsException {
         UserModel user;
         try{
             user = userService.getUserByEmailId(emailId);
         }
         catch(Exception e){
             System.out.println(e);
-            return status(HttpStatus.OK).body(singletonMap(VALIDATION_STATUS, false));
+            return status(HttpStatus.OK).body(singletonMap(VALIDATED.getValue(), false));
         }
-        Map<Response, Object> returnBody = new HashMap<>();
-        returnBody.put(VALIDATION_STATUS, true);
-        returnBody.put(ID, user.getId());
+        Map<String, Object> returnBody = new HashMap<>();
+        returnBody.put(VALIDATED.getValue(), true);
+        returnBody.put(ID.getValue(), user.getId());
         return status(HttpStatus.OK).body(returnBody);
     }
 
@@ -72,7 +71,7 @@ public class UserController
 
     //Work on this for validation.
     @PostMapping(path = "/validate_user", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Map<Response, Object>> validateUser(@RequestBody UserLoginModel userloginModel)
+    public ResponseEntity<Map<String, Object>> validateUser(@RequestBody UserLoginModel userloginModel)
     {   
         UserModel user;
         try{
@@ -80,26 +79,26 @@ public class UserController
         }
         catch(Exception e){
             System.out.println(e);
-            return status(HttpStatus.OK).body(singletonMap(VALIDATION_STATUS, false));
+            return status(HttpStatus.OK).body(singletonMap(VALIDATED.getValue(), false));
         }
-        Map<Response, Object> returnBody = new HashMap<>();
-        returnBody.put(VALIDATION_STATUS, true);
-        returnBody.put(ID, user.getId());
+        Map<String, Object> returnBody = new HashMap<>();
+        returnBody.put(VALIDATED.getValue(), true);
+        returnBody.put(ID.getValue(), user.getId());
         return status(HttpStatus.OK).body(returnBody);
     }
 
     //needs insight - ask questions
     @PutMapping("/updatePassword")
-    public ResponseEntity<Map<Response, Object>> updatePassword(@RequestBody UserLoginModel userLoginModel) {
+    public ResponseEntity<Map<String, Object>> updatePassword(@RequestBody UserLoginModel userLoginModel) {
         UserModel user;
         try{
             user = userService.updatePassword(userLoginModel);
         }
         catch(Exception e) {
             System.out.println(e);
-            return status(HttpStatus.OK).body(singletonMap(MESSAGE, e.getMessage())); //this shouldnt be VALIDATION STATUS but not sure what to put here..ask advicepo
+            return status(HttpStatus.OK).body(singletonMap(MESSAGE.getValue(), e.getMessage())); //this shouldnt be VALIDATION STATUS but not sure what to put here..ask advicepo
         }
-        return status(HttpStatus.OK).body(singletonMap(OBJECT, user));
+        return status(HttpStatus.OK).body(singletonMap(OBJECT.getValue(), user));
     }
 
 }
