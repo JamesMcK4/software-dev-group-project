@@ -15,6 +15,8 @@ Project Name,Package Name,Type Name,Code Smell
 .,com.group24.trelloclone.task.controller,TaskController,Unutilized Abstraction
 .,com.group24.trelloclone.task.service,TaskServiceImpl,Unutilized Abstraction
 .,com.group24.trelloclone.exception,UnableTooAddBoardException,Unutilized Abstraction
+.,com.group24.trelloclone.exception,InvalidBoardIdException,Unutilized Abstraction
+.,com.group24.trelloclone.exception,InvalidTaskIdException,Unutilized Abstraction
 .,com.group24.trelloclone.exception,InvalidWorkspaceIdException,Unutilized Abstraction
 .,com.group24.trelloclone.exception,InvalidUserIdException,Unutilized Abstraction
 .,com.group24.trelloclone.exception,EmptyPasswordException,Unutilized Abstraction

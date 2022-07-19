@@ -1,10 +1,8 @@
 import {Form, Button, Container, Row, Col, InputGroup} from 'react-bootstrap';
 import React, {useRef} from "react";
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 const CreateTaskForm = ({createTask}) => {
-
-    const navigate = useNavigate();
 
     const boardId = useParams().boardId;
 
@@ -20,7 +18,7 @@ const CreateTaskForm = ({createTask}) => {
         const status = statusRef.current.value;
         const task = {name,description,status,dueOn};
         console.log(task);
-        //createTask(task);
+        createTask(boardId, task);
     }
 
     return (

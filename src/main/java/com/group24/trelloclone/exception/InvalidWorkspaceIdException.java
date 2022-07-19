@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class InvalidWorkspaceIdException extends Exception{
 
     public InvalidWorkspaceIdException() {
+        super("Invalid Workspace Id!");
     }
 
     public InvalidWorkspaceIdException(String message) {

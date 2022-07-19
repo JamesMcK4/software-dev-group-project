@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.group24.trelloclone.board.model.BoardModel;
+import com.group24.trelloclone.exception.InvalidBoardIdException;
+import com.group24.trelloclone.exception.InvalidTaskIdException;
 
 @Service
 public interface BoardService {
@@ -24,7 +26,7 @@ public interface BoardService {
 
     public BoardModel getBoardById(Long boardId);
 
-    public BoardModel addTask(Long boardId, Long taskId);
+    public BoardModel addTask(Long boardId, Long taskId) throws InvalidTaskIdException, InvalidBoardIdException;
 
     //TODO
     // public BoardModel addTask(Long boardId, Long taskId);

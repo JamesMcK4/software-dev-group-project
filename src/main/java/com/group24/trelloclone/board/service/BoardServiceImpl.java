@@ -3,17 +3,29 @@ package com.group24.trelloclone.board.service;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.group24.trelloclone.board.model.BoardModel;
 import com.group24.trelloclone.board.repository.BoardRepository;
+import com.group24.trelloclone.exception.InvalidBoardIdException;
+import com.group24.trelloclone.exception.InvalidTaskIdException;
+import com.group24.trelloclone.task.model.TaskModel;
+import com.group24.trelloclone.task.service.TaskService;
+
+import static io.github.handsomecoder.utils.ObjectUtils.isNull;
+
 
 @Service
 public class BoardServiceImpl implements BoardService {
     
     @Autowired
 	BoardRepository boardRepository;
+
+	@Autowired
+	TaskService taskService;
 
 	@Override
 	public BoardModel saveBoard(BoardModel board) {
@@ -54,11 +66,13 @@ public class BoardServiceImpl implements BoardService {
 
 	}
 
+	@Transactional
 	@Override
 	public boolean updateBoardName(Long boardId, String name) {
 		return false;
 	}
 
+	@Transactional
 	@Override
 	public boolean updateBoardDescription(Long boardId, String description) {
 
@@ -89,9 +103,22 @@ public class BoardServiceImpl implements BoardService {
 		return board;
 	}
 
+	@Transactional
 	@Override
-	public BoardModel addTask(Long boardId, Long taskId) {
-		// TODO Auto-generated method stub
-		return null;
+	public BoardModel addTask(Long boardId, Long taskId) throws InvalidTaskIdException, InvalidBoardIdException{
+		BoardModel board = getBoardById(boardId);
+		TaskModel task = taskService.getTaskById(taskId);
+
+		if (isNull(board)) {
+			throw new InvalidBoardIdException();
+		}
+
+		if (isNull(task)) {
+			throw new InvalidTaskIdException();
+		}
+
+		board.getTasks().add(task);
+
+		return boardRepository.save(board);
 	}
 }
