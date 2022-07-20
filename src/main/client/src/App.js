@@ -32,8 +32,8 @@ function App() {
               <Route path="/workspace/:workspaceId" element={<Workspace/>}/>
               <Route path="/forget-password" element={<ForgotPass/>}/>
               <Route path="/add-user/:workspaceId" element={<AddUser/>}/>
-              <Route path="/change-task-status/:taskId" element={<ChangeTaskStatus/>}/>
-              <Route path="/assign-user/:taskId" element={<AssignUser/>}/>
+              <Route path="/change-task-status/:boardId/:taskId" element={<ChangeTaskStatus/>}/>
+              <Route path="/assign-user/:boardId/:taskId" element={<AssignUser/>}/>
               <Route path="*" element={<Home userId = {localStorage.getItem("userId")}/>}/>
             </Routes>
           }

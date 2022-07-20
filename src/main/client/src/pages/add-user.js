@@ -9,7 +9,7 @@ const AddUser = () => {
     const workspaceId = useParams().workspaceId;
 
     const [show, setShow] = useState(false);
-    const [validated, setValidated] = useState('');
+    const [validated, setValidated] = useState(false);
 
     const handleClose = () => {
         setShow(false);

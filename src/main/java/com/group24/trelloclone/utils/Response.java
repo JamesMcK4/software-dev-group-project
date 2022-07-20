@@ -1,7 +1,7 @@
 package com.group24.trelloclone.utils;
 
 public enum Response {
-    ID("ID"), STATUS("STATUS"), MESSAGE("MESSAGE"), OBJECT("object"), VALIDATED("validated"), ERROR("error");
+    ID("id"), STATUS("status"), MESSAGE("message"), OBJECT("object"), VALIDATED("validated"), ERROR("error");
 
     //TODO change ApplicationConstant to enum.
     private String value;

@@ -62,7 +62,7 @@ const Board = () => {
                 <SearchBar setTasks={setDisplayedTasks} tasks={allTasks} ></SearchBar>
             </Row>
             <FilterTask setTasks={setDisplayedTasks} tasks={allTasks}></FilterTask>
-            <TaskCards tasks={displayedTasks}></TaskCards>
+            <TaskCards tasks={displayedTasks} boardId = {boardId}></TaskCards>
         </Container>
     )
 }

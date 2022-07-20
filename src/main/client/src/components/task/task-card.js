@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import {Card, Button, Row, Col} from 'react-bootstrap';
 import Moment from 'moment';
 
-const TaskCards = ({tasks}) => {
+const TaskCards = ({tasks, boardId}) => {
 
     return (
         <Row xs={1} md={2} lg={3} className="g-4 mt-5">
@@ -24,18 +24,19 @@ const TaskCards = ({tasks}) => {
                                 {task.status}
                             </Card.Text>
                             <Card.Text>
-                                <Button variant="warning" href={"/change-task-status/" + task.id}>Change task status</Button>
+                                <Button variant="warning" href={"/change-task-status/" + boardId + "/" + task.id}>Change task status</Button>
                             </Card.Text>
                             <Card.Title>
                                 Assignee
                             </Card.Title>
                             <Card.Text>
-                                {task.assignee === null? 
-                                    task.assignee
-                                : 
-                                <Button variant="warning" href={"/assign-user/" + task.id}>
+                                {task.assignee === undefined? 
+                                <Button variant="warning" href={"/assign-user/" + boardId + "/" + task.id}>
                                     Assign a user
-                                </Button>}
+                                </Button>
+                                :
+                                    task.assignee.emailId
+                                }
                             </Card.Text>
                         </Card.Body>
                         <Card.Footer>
