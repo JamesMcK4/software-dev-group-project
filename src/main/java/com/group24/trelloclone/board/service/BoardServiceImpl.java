@@ -19,6 +19,8 @@ public class BoardServiceImpl implements BoardService {
     
     @Autowired
 	BoardRepository boardRepository;
+	@Autowired
+	TaskService taskService;
 
 	@Override
 	public BoardModel saveBoard(BoardModel board) {
@@ -101,13 +103,12 @@ public class BoardServiceImpl implements BoardService {
 			throw new InvalidBoardIdException();
 		}
 
-		TaskModel task = TaskService.getTaskById(taskId);
+		TaskModel task = taskService.getTaskById(taskId);
 		if (task == null){
 			throw new InvalidTaskIdException();
 		}
 
 		board.getTasks().add(task);
-
 		return boardRepository.save(board);
 	}
 }

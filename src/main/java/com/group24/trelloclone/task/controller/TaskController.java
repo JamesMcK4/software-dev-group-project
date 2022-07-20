@@ -88,7 +88,7 @@ public class TaskController {
     @GetMapping("/get_task/{id}")
     public TaskModel getTaskById(@PathVariable("id") Long taskId)
     {
-        TaskModel task = TaskService.getTaskById(taskId);
+        TaskModel task = taskService.getTaskById(taskId);
         return task;
     }
 }
