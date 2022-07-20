@@ -58,13 +58,13 @@ public class TaskController {
 
     @PutMapping("/assign_task/{taskId}") 
     public ResponseEntity<Map<String, Object>> assignTask(@PathVariable("taskId") String taskId,
-        @RequestParam("userId") Long userId) throws InvalidUserIdException {
+        @RequestParam("userId") String userId) throws InvalidUserIdException {
 
         if (isEmpty(taskId)) {
             return status(HttpStatus.BAD_REQUEST).body(singletonMap(MESSAGE.getValue(), "Missing required field: [taskId]"));
         }
 
-        return status(HttpStatus.OK).body(singletonMap(STATUS.getValue(), taskService.assignTask(Long.parseLong(taskId), userId)));
+        return status(HttpStatus.OK).body(singletonMap(STATUS.getValue(), taskService.assignTask(Long.parseLong(taskId), Long.parseLong(userId))));
     }
 
     @PutMapping("status/{taskId}")

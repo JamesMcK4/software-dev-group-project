@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class EmptyPasswordException extends Exception{
 
     public EmptyPasswordException() {
+        super("Password cannot be null!");
     }
 
     public EmptyPasswordException(String message) {

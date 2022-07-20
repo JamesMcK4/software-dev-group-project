@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class InvalidCredentialsException extends Exception {
 
     public InvalidCredentialsException() {
+        super("Invalid Credential!");
     }
 
     public InvalidCredentialsException(String message) {

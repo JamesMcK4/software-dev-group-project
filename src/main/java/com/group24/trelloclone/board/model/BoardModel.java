@@ -55,4 +55,12 @@ public class BoardModel {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public Set<TaskModel> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(Set<TaskModel> tasks) {
+        this.tasks = tasks;
+    }
 }
