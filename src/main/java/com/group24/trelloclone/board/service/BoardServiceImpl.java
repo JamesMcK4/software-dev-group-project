@@ -107,7 +107,6 @@ public class BoardServiceImpl implements BoardService {
 		if (task == null){
 			throw new InvalidTaskIdException();
 		}
-
 		board.getTasks().add(task);
 		return boardRepository.save(board);
 	}

@@ -5,6 +5,7 @@ import React, {useRef} from "react";
 
 const CreateTask = () => {
     const navigate=useNavigate();
+    const boardId=useParams().boardId;
     function createTask(task){
         fetch("http://localhost:9001/task/create_task/", {
             method: 'POST',
@@ -13,7 +14,9 @@ const CreateTask = () => {
             headers: {'Content-Type': 'application/json'}
         }).then((res) => res.json()).
         then((data) => {
-            navigate('/board/' + data.id)
+            console.log(data.object.id)
+            addTask(boardId,data.object.id)
+            navigate('/board/' + boardId)
             // After you create the task, it will return a task model, which contains the task Id.
             // You need to call the backend method addTask(boardId, taskId) and pass to it the task Id of the one you just create.
             // After it returns successfully, redirect the user back to the board.
@@ -22,7 +25,7 @@ const CreateTask = () => {
 
     async function addTask(boardId, taskId) {
         // You can await here
-        const response = await fetch("http://localhost:9001/board/addTask/" + boardId + "/" + taskId, {
+        const response = await fetch("http://localhost:9001/board/add_task/" + boardId + "/" + taskId, {
             method: 'PUT',
             mode: 'cors',
             headers: {'Content-Type': 'application/json'}
