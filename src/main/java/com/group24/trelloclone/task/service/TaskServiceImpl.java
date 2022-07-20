@@ -37,6 +37,7 @@ public class TaskServiceImpl implements TaskService{
         return Streamable.of(taskRepository.findAll()).toList();
     }
 
+    @Override
     public TaskModel getTaskById(Long taskId){
         TaskModel task = null;
         Optional<TaskModel> optionalTask = taskRepository.findById(taskId);

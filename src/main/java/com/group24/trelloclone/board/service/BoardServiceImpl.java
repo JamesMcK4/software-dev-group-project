@@ -3,6 +3,11 @@ package com.group24.trelloclone.board.service;
 import java.util.List;
 import java.util.Optional;
 
+import com.group24.trelloclone.exception.InvalidBoardIdException;
+import com.group24.trelloclone.exception.InvalidTaskIdException;
+
+import com.group24.trelloclone.task.model.TaskModel;
+import com.group24.trelloclone.task.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -90,8 +95,19 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public BoardModel addTask(Long boardId, Long taskId) {
-		// TODO Auto-generated method stub
-		return null;
+	public BoardModel addTask(Long boardId, Long taskId) throws InvalidTaskIdException, InvalidBoardIdException {
+		BoardModel board = getBoardByID(boardId);
+		if (board == null){
+			throw new InvalidBoardIdException();
+		}
+
+		TaskModel task = TaskService.getTaskById(taskId);
+		if (task == null){
+			throw new InvalidTaskIdException();
+		}
+
+		board.getTasks().add(task);
+
+		return boardRepository.save(board);
 	}
 }

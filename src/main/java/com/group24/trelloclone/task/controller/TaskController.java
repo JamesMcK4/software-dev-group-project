@@ -85,5 +85,11 @@ public class TaskController {
 
         return status(HttpStatus.OK).body(singletonMap(OBJECT, taskService.deleteTask(Long.parseLong(taskId))));
     }
+    @GetMapping("/get_task/{id}")
+    public TaskModel getTaskById(@PathVariable("id") Long taskId)
+    {
+        TaskModel task = TaskService.getTaskById(taskId);
+        return task;
+    }
 }
 

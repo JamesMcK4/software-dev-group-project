@@ -55,4 +55,7 @@ public class BoardModel {
     public void setDescription(String description) {
         this.description = description;
     }
+    public Set<TaskModel> getTasks(){
+        return tasks;
+    }
 }
