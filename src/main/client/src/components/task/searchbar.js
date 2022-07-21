@@ -5,13 +5,13 @@ import {Card, Row, Col} from 'react-bootstrap';
 import { Board } from '../..';
 
 function SearchBar({tasks, setTasks}){
-
+   
    const searchTask = (e) => {
-
-        const searchItem = e.target.value;
+    e.preventDefault();
+        const searchItem = e.target.search.value;
         console.log(searchItem);
         const searchForTask = tasks.filter(task => {
-            if(task.name.toLowercase().includes(searchItem.toLowercase())){
+            if(task.name.toLowerCase().includes(searchItem.toLowerCase())){
                 return task;
             }
         });
@@ -23,14 +23,15 @@ function SearchBar({tasks, setTasks}){
 
 
     return (
-    <Form className="d-flex">
+    <Form className="d-flex" onSubmit={searchTask}>
         <Form.Control
         type="search"
         placeholder="Search for a task using full task name"
         className="me-2"
         aria-label="Search"
+        name = 'search'
         />
-    <Button variant="outline-success" type="submit" onClick={searchTask}>Search</Button>
+    <Button variant="outline-success" type="submit" >Search</Button>
     </Form>
     );
     }
