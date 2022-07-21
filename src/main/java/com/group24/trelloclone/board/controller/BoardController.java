@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import static com.group24.trelloclone.utils.Response.*;
-import static io.github.handsomecoder.utils.ObjectUtils.isNull;
 import static io.github.handsomecoder.utils.StringUtils.isEmpty;
 import static java.util.Collections.singletonMap;
 import static org.springframework.http.ResponseEntity.status;
@@ -89,6 +88,20 @@ public class BoardController {
     public boolean deleteAllUsers()
     {
         return boardService.deleteAllBoards();
+    }
+
+    @PutMapping("/add_task/{board_id}/{task_id}")
+    public ResponseEntity<Map<String, Object>> addTask(@PathVariable("board_id") Long boardId, @PathVariable("task_id") Long taskId)
+    {
+        BoardModel board;
+        try{
+            board = boardService.addTask(boardId, taskId);
+        }
+        catch(Exception e){
+            System.out.println(e);
+            return status(HttpStatus.OK).body(singletonMap(MESSAGE.getValue(), e.getMessage()));
+        }
+        return status(HttpStatus.OK).body(singletonMap(OBJECT.getValue(), board));
     }
 
 }

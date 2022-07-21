@@ -1,7 +1,7 @@
-
+import CreateTaskForm from "../components/task/createtaskform";
 import {useNavigate, useParams} from "react-router-dom";
 import React, {useRef} from "react";
-import CreateTaskForm from "../components/task/createtaskform";
+
 
 const CreateTask = () => {
     const navigate = useNavigate();
@@ -37,6 +37,17 @@ const CreateTask = () => {
         });
         var data = await response.json();
         console.log(data);
+        return data;
+    }
+
+    async function addTask(boardId, taskId) {
+        // You can await here
+        const response = await fetch("http://localhost:9001/board/add_task/" + boardId + "/" + taskId, {
+            method: 'PUT',
+            mode: 'cors',
+            headers: {'Content-Type': 'application/json'}
+        });
+        var data = await response.json();
         return data;
     }
 

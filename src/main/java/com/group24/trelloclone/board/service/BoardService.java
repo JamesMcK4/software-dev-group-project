@@ -27,7 +27,4 @@ public interface BoardService {
     public BoardModel getBoardById(Long boardId);
 
     public BoardModel addTask(Long boardId, Long taskId) throws InvalidTaskIdException, InvalidBoardIdException;
-
-    //TODO
-    // public BoardModel addTask(Long boardId, Long taskId);
 }
