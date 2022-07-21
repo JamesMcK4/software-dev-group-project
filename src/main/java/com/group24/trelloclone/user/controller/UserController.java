@@ -33,6 +33,7 @@ public class UserController
     {
         return userService.addUser(userModel);
     }
+    @PostMapping()
 
     @GetMapping("/get_user/{id}")
     public UserModel getUserById(@PathVariable("id") Long userId) throws InvalidUserIdException
