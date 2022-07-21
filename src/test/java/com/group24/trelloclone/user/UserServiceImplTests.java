@@ -42,6 +42,10 @@ public class UserServiceImplTests {
     private UserModel user1;
     private UserModel user2;
 
+    private long idNumberOne = 1L;
+    private long idNumberTwo = 2L;
+
+
     private List<UserModel> userList = new ArrayList<>();
 
     //setting up a method to be run before each test for setup and testing purposes.
@@ -51,8 +55,8 @@ public class UserServiceImplTests {
         user1 = new UserModel("James", "McKinlay", "testemail@hi.com", "Helloo4!");
         user2 = new UserModel("Test", "Test", "TestEmail@Test.com", "test");
         //set Ids to test getId methods - (Also, apparently adding L to the end is casting now?)
-        user1.setId(1L);
-        user2.setId(2L);
+        user1.setId(idNumberOne);
+        user2.setId(idNumberTwo);
         //Add users to list to test getAllUsers
         userList.add(user1);
         userList.add(user2);
