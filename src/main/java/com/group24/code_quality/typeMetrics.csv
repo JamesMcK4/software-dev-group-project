@@ -4,7 +4,7 @@ Project Name,Package Name,Type Name,NOF,NOPF,NOM,NOPM,LOC,WMC,NC,DIT,LCOM,FANIN,
 .,com.group24.trelloclone.user,UserServiceImplTests,6,0,10,10,72,10,0,0,0.0,0,5
 .,com.group24.trelloclone.task,TaskServiceImplTests,2,0,1,1,11,1,0,0,0.0,0,4
 .,com.group24.trelloclone.board.repository,BoardRepository,0,0,0,0,2,0,0,0,-1.0,2,0
-.,com.group24.trelloclone.board.controller,BoardController,1,0,7,7,39,9,0,0,0.0,0,2
+.,com.group24.trelloclone.board.controller,BoardController,1,0,8,8,50,10,0,0,0.0,0,2
 .,com.group24.trelloclone.board.model,BoardModel,4,0,10,10,36,10,0,0,0.4,8,0
 .,com.group24.trelloclone.board.service,BoardServiceImpl,2,0,10,10,62,16,0,1,0.3,0,4
 .,com.group24.trelloclone.board.service,BoardService,0,0,10,10,12,10,1,0,-1.0,4,1
@@ -21,7 +21,7 @@ Project Name,Package Name,Type Name,NOF,NOPF,NOM,NOPM,LOC,WMC,NC,DIT,LCOM,FANIN,
 .,com.group24.trelloclone.user.service,UserService,0,0,9,9,11,9,1,0,-1.0,5,2
 .,com.group24.trelloclone.user.service,UserServiceImpl,1,0,9,9,80,16,0,1,0.2222222222222222,0,3
 .,com.group24.trelloclone.task.repository,TaskRepository,0,0,1,0,3,1,0,0,-1.0,2,0
-.,com.group24.trelloclone.task.controller,TaskController,1,0,7,7,45,12,0,0,0.0,0,3
+.,com.group24.trelloclone.task.controller,TaskController,1,0,8,8,49,13,0,0,0.0,0,3
 .,com.group24.trelloclone.task.model,TaskRequestModel,4,0,10,10,39,10,0,0,0.0,5,0
 .,com.group24.trelloclone.task.model,TaskModel,7,0,19,19,75,21,0,0,0.2631578947368421,5,3
 .,com.group24.trelloclone.task.service,TaskService,0,0,8,8,10,8,1,0,-1.0,3,1
