@@ -18,6 +18,7 @@ const Component = ({property}) => {
         <p>{stateVariable}</p>
         <input type="text" onChange={handleOnChange}></input>
         <button onClick={handleOnClick}>Register Form</button>
+        <button onClick={handleOnClick}>Change status</button>
         </>
     )
 }
