@@ -55,6 +55,8 @@ public class BoardModel {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public void setTasks(Set<TaskModel> tasks){this.tasks=tasks;}
     public Set<TaskModel> getTasks(){
         return tasks;
     }
