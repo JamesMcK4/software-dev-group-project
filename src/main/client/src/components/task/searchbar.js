@@ -22,12 +22,11 @@ function SearchBar({tasks, setTasks}){
     <Form className="d-flex" onSubmit={searchTask}>
         <Form.Control
         type="search"
-        placeholder="Search for a task using full task name"
+        placeholder="Enter some keywords to search for tasks"
         className="me-2"
         aria-label="Search"
         name = "search"
         />
-    <Button variant="outline-success" type="submit" >Search</Button>
     </Form>
     );
     }
