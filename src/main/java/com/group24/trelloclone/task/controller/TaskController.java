@@ -82,11 +82,6 @@ public class TaskController {
     {
         return taskService.deleteAllTasks();
     }
-
-    @GetMapping("/search_task/{taskId}")
-    public TaskModel searchForTask(@PathVariable("taskId") Long taskId){
-        return taskService.searchForTask(taskId);
-    }
     
     @DeleteMapping("/delete_task/{taskId}")
     public ResponseEntity<Map<String, Object>> deleteTask(@PathVariable("taskId") String taskId)

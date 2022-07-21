@@ -1,8 +1,5 @@
 package com.group24.trelloclone.task;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Optional;
@@ -17,12 +14,15 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.group24.trelloclone.exception.InvalidUserIdException;
 import com.group24.trelloclone.task.model.TaskModel;
 import com.group24.trelloclone.task.model.TaskRequestModel;
 import com.group24.trelloclone.task.model.TaskStatusEnum;
 import com.group24.trelloclone.task.repository.TaskRepository;
 import com.group24.trelloclone.task.service.TaskService;
 import com.group24.trelloclone.task.service.TaskServiceImpl;
+import com.group24.trelloclone.user.model.UserModel;
+import com.group24.trelloclone.user.service.UserService;
 
 @ExtendWith(MockitoExtension.class)
 public class TaskServiceImplTests {
@@ -30,6 +30,10 @@ public class TaskServiceImplTests {
 	@Mock
 	@Autowired
 	private TaskRepository taskRepository;
+
+	@Mock
+	@Autowired
+	private UserService userService;
 	
 	@InjectMocks
 	private TaskService tasksServiceImpl = (TaskService) new TaskServiceImpl();
@@ -39,16 +43,22 @@ public class TaskServiceImplTests {
 	private ArrayList<TaskModel> tasks=new ArrayList<TaskModel>();
 
 	private long task1Id = 1;
+	private TaskStatusEnum testStatus = TaskStatusEnum.DONE;
+
+	private long userId = 1;
+	private UserModel user;
 
 	@BeforeEach
 	public void setUp(){
 		TaskRequestModel request1 = new TaskRequestModel("Test1", "Test1 description", new Date(20220729), TaskStatusEnum.TO_DO);
-		task1=TaskModel.create(request1);
+		task1 = TaskModel.create(request1);
 		task1.setId(task1Id);
 		TaskRequestModel request2 = new TaskRequestModel("Test1", "Test1 description", new Date(20220729), TaskStatusEnum.TO_DO);
 		task2 = TaskModel.create(request2);
 		tasks.add(task1);
 		tasks.add(task2);
+		user = new UserModel();
+		user.setId(userId);
 	}
 
 	@Test
@@ -57,7 +67,7 @@ public class TaskServiceImplTests {
 		TaskModel task = TaskModel.create(request);
 		Mockito.when(taskRepository.save(task)).thenReturn(task);
 		TaskModel savedTask = tasksServiceImpl.createTask(request);
-		assertNotNull(savedTask);
+		Assertions.assertNotNull(savedTask);
 	}
 	@Test
 	public void getAllTaskTest(){
@@ -72,7 +82,7 @@ public class TaskServiceImplTests {
 	@Test
 	public void deleteAllTaskTest(){
 		Mockito.when(taskRepository.count()).thenReturn(0L);
-		assertTrue(tasksServiceImpl.deleteAllTasks());
+		Assertions.assertTrue(tasksServiceImpl.deleteAllTasks());
 	}
 	@Test
 	public void deleteTaskByIdTest(){
@@ -80,22 +90,20 @@ public class TaskServiceImplTests {
 		Assertions.assertEquals(task1, tasksServiceImpl.deleteTask(task1Id));
 	}
 
-	/* 
 	@Test
-	public void getAllTasksForBoardTest() {
-		String boardTitle = "Test";
-		List<Tasks> listOfTasks = taskRepository.getTasksInABoard(boardTitle);
-		assertNotNull(listOfTasks);
+	public void assignTaskTest() throws InvalidUserIdException{
+		Mockito.when(taskRepository.findById(task1Id)).thenReturn(Optional.of(task1));
+		Mockito.when(userService.getUserById(userId)).thenReturn(user);
+		task1.setAssignee(user);
+		Mockito.when(taskRepository.save(task1)).thenReturn(task1);
+		Assertions.assertTrue(tasksServiceImpl.assignTask(task1Id, userId));
 	}
-	
-	
+
 	@Test
-	public void updateTasksTest() {
-		Tasks t = new Tasks();
-		Mockito.when(taskRepository.updateAssignee(anyString(), anyInt())).thenReturn(t);
-		assertNotNull(t);
-		t = tasksServiceImpl.updateAssigneeForTask(anyString(), anyInt());
-		assertNotNull(t);
+    public void updateTaskStatusTest(){
+		Mockito.when(taskRepository.findById(task1Id)).thenReturn(Optional.of(task1));
+		task1.setStatus(testStatus);
+		Mockito.when(taskRepository.save(task1)).thenReturn(task1);
+		Assertions.assertTrue(tasksServiceImpl.updateTaskStatus(task1Id, testStatus));
 	}
-*/
 }

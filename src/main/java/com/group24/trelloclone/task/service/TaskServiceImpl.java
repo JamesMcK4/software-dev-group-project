@@ -51,7 +51,7 @@ public class TaskServiceImpl implements TaskService{
     @Transactional
     public boolean assignTask(Long taskId, Long userId) throws InvalidUserIdException {
         TaskModel task = getTaskById(taskId);
-        UserModel assignee= userService.getUserById(userId);
+        UserModel assignee = userService.getUserById(userId);
 
         if (isNull(task) ||  isNull(assignee)) {
             return false;
@@ -85,14 +85,6 @@ public class TaskServiceImpl implements TaskService{
         }
 
         return false;
-    }
-
-    public TaskModel searchForTask(Long taskId){
-        TaskModel task = getTaskById(taskId);
-        //if(task == null){
-        //throw an error
-        //}
-        return task;
     }
     
     @Override
