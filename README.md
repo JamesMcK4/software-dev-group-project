@@ -37,7 +37,7 @@
 
 ## Running the Frontend
 
-- Once you have npm successfully installed, as well as node.js, please move to the correct directory (see above) using the cd command, and run 'npm start' in your terminal window.  This should start the front end service.
+- Once you have npm successfully installed, as well as node.js, please move to the correct directory (src/main/client) using the cd command, and run 'npm start' in your terminal window.  This should start the front end service.
 - The front end uses port 3000, so please make sure it is not used by another application.
 - Before log-in, you need to register first. Or you can use the following credentials to log in:
 
