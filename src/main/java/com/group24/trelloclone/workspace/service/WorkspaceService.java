@@ -15,13 +15,7 @@ public interface WorkspaceService {
     public WorkspaceModel deleteWorkspace(Long workspaceId);
     public boolean deleteAllUsers(Long workspaceId) throws InvalidWorkspaceIdException;
     public WorkspaceModel addUser(Long workspaceId, Long userId) throws InvalidWorkspaceIdException, InvalidUserIdException;
-    public WorkspaceModel addUsers(Long workspaceId, List<Long> usersId);
-    public WorkspaceModel deleteUser(Long workspaceId, Long userId);
-    public WorkspaceModel deleteUsers(Long workspaceId, List<Long> usersId);
-    public WorkspaceModel updateWorkspaceName(Long workspaceId, String name);
-    public WorkspaceModel updateWorkspaceDescription(Long workspaceId, String description);
     public WorkspaceModel updateWorkspace(WorkspaceModel workspace) throws InvalidWorkspaceIdException;
-    public WorkspaceModel addBoard(Long workspaceId, Long boardId);
     public WorkspaceModel addBoard(Long workspaceId, BoardModel board) throws UnableTooAddBoardException;
     public WorkspaceModel deleteBoard(Long workspaceId, Long boardId);
 }

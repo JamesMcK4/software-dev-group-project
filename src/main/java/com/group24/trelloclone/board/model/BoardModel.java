@@ -1,9 +1,15 @@
 package com.group24.trelloclone.board.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import com.group24.trelloclone.task.model.TaskModel;
 
 @Entity(name = "boards")
 public class BoardModel {
@@ -14,6 +20,9 @@ public class BoardModel {
     private String name;
 
     private String description;
+
+    @OneToMany(targetEntity = TaskModel.class)
+    private Set<TaskModel> tasks = new HashSet<TaskModel>();
 
     public BoardModel(String name, String description) {
         this.name = name;
@@ -46,5 +55,13 @@ public class BoardModel {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Set<TaskModel> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(Set<TaskModel> tasks) {
+        this.tasks = tasks;
     }
 }

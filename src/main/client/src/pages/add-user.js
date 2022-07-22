@@ -9,7 +9,7 @@ const AddUser = () => {
     const workspaceId = useParams().workspaceId;
 
     const [show, setShow] = useState(false);
-    const [validated, setValidated] = useState('');
+    const [validated, setValidated] = useState(false);
 
     const handleClose = () => {
         setShow(false);
@@ -56,9 +56,9 @@ const AddUser = () => {
     async function addUser(userId, workspaceId) {
         // You can await here
         const response = await fetch("http://localhost:9001/workspace/add_user/" + workspaceId + "/" + userId, {
-            method: 'PUT',
-            mode: 'cors',
-            headers: {'Content-Type': 'application/json'}
+                method: 'PUT',
+                mode: 'cors',
+                headers: {'Content-Type': 'application/json'}
             });
         var data = await response.json();
         return data;

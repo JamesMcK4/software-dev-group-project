@@ -21,7 +21,7 @@ import com.group24.trelloclone.exception.UnableTooAddBoardException;
 import com.group24.trelloclone.workspace.model.WorkspaceModel;
 import com.group24.trelloclone.workspace.service.WorkspaceService;
 
-import static com.group24.trelloclone.utils.ApplicationConstant.*;
+import static com.group24.trelloclone.utils.Response.*;
 import static java.util.Collections.singletonMap;
 import static org.springframework.http.ResponseEntity.status;
 
@@ -45,9 +45,9 @@ public class WorkspaceController {
         }
         catch(Exception e){
             System.out.println(e);
-            return status(HttpStatus.OK).body(singletonMap(OBJECT, ERROR));
+            return status(HttpStatus.OK).body(singletonMap(OBJECT.getValue(), ERROR));
         }
-        return status(HttpStatus.OK).body(singletonMap(OBJECT, updatedWorkspace));
+        return status(HttpStatus.OK).body(singletonMap(OBJECT.getValue(), updatedWorkspace));
     }
 
     @DeleteMapping("/delete_workspace/{id}")
@@ -64,9 +64,9 @@ public class WorkspaceController {
         }
         catch(Exception e){
             System.out.println(e);
-            return status(HttpStatus.OK).body(singletonMap(OBJECT, null));
+            return status(HttpStatus.OK).body(singletonMap(OBJECT.getValue(), null));
         }
-        return status(HttpStatus.OK).body(singletonMap(OBJECT, workspace));
+        return status(HttpStatus.OK).body(singletonMap(OBJECT.getValue(), workspace));
     }
 
     @PutMapping("/add_user/{workspace_id}/{user_id}")
@@ -78,9 +78,9 @@ public class WorkspaceController {
         }
         catch(Exception e){
             System.out.println(e);
-            return status(HttpStatus.OK).body(singletonMap(OBJECT, null));
+            return status(HttpStatus.OK).body(singletonMap(OBJECT.getValue(), null));
         }
-        return status(HttpStatus.OK).body(singletonMap(OBJECT, workspace));
+        return status(HttpStatus.OK).body(singletonMap(OBJECT.getValue(), workspace));
     }
 
     @DeleteMapping(path = "/delete_all_users/{workspace_id}")
@@ -91,9 +91,9 @@ public class WorkspaceController {
         }
         catch(Exception e){
             System.out.println(e);
-            return status(HttpStatus.OK).body(singletonMap(STATUS, false));
+            return status(HttpStatus.OK).body(singletonMap(STATUS.getValue(), false));
         }
-        return status(HttpStatus.OK).body(singletonMap(STATUS, true));
+        return status(HttpStatus.OK).body(singletonMap(STATUS.getValue(), true));
     }
 
     @DeleteMapping("/delete_board/{workspace_id}/{board_id}")

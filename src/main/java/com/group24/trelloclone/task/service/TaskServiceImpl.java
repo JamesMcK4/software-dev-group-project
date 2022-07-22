@@ -37,6 +37,7 @@ public class TaskServiceImpl implements TaskService{
         return Streamable.of(taskRepository.findAll()).toList();
     }
 
+    @Override
     public TaskModel getTaskById(Long taskId){
         TaskModel task = null;
         Optional<TaskModel> optionalTask = taskRepository.findById(taskId);
@@ -50,7 +51,7 @@ public class TaskServiceImpl implements TaskService{
     @Transactional
     public boolean assignTask(Long taskId, Long userId) throws InvalidUserIdException {
         TaskModel task = getTaskById(taskId);
-        UserModel assignee= userService.getUserById(userId);
+        UserModel assignee = userService.getUserById(userId);
 
         if (isNull(task) ||  isNull(assignee)) {
             return false;
@@ -84,6 +85,17 @@ public class TaskServiceImpl implements TaskService{
         }
 
         return false;
+    }
+    
+    @Override
+    public TaskModel deleteTask(Long taskId) {
+        TaskModel deletedTask = getTaskById(taskId);
+		taskRepository.deleteById(taskId);
+		if (!taskRepository.existsById(taskId)){
+			return deletedTask;
+		}
+
+		return null;
     }
 }
 

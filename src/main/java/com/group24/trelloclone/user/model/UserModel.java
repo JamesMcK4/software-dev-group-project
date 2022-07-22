@@ -34,7 +34,7 @@ public class UserModel
     private int role;
 
     @ManyToMany(targetEntity = WorkspaceModel.class, fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-    @JsonIgnoreProperties("users")
+    @JsonIgnoreProperties({"users", "boards"})
     private Set<WorkspaceModel> workspaces;
 
     public UserModel() {
@@ -115,4 +115,5 @@ public class UserModel
     public void setWorkspaces(Set<WorkspaceModel> workspaces) {
         this.workspaces = workspaces;
     }
+
 }

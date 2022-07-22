@@ -1,0 +1,1 @@
+java -jar DesigniteJava.jar -i ./ -o ./src/main/java/com/group24/code_quality/

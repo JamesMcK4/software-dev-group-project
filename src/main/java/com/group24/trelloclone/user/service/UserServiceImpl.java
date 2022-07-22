@@ -78,13 +78,13 @@ public class UserServiceImpl implements UserService
         Optional<UserModel> optionalUser = userRepository.findByEmailId(emailId);
 
         if(optionalUser.isEmpty()){
-           throw new InvalidCredentialsException();
+           throw new InvalidCredentialsException("Invalid Credentials!");
         }
         else {
             user = optionalUser.get();
         }
-        if(!user.getPassword().equals(password) || !user.getEmailId().equals(emailId)){
-            throw new InvalidCredentialsException();
+        if(!user.getPassword().equals(password)){
+            throw new InvalidCredentialsException("Invalid Credentials!");
         }
         else{
             return user;
@@ -104,7 +104,7 @@ public class UserServiceImpl implements UserService
             user = optionalUser.get();
         }
         else{
-            throw new InvalidUserIdException();
+            throw new InvalidUserIdException("User does not exist!");
         }
 
         user.setPassword(password);
@@ -121,11 +121,5 @@ public class UserServiceImpl implements UserService
             throw new InvalidUserIdException();
         }
         return user;
-    }
-
-    @Override
-    public UserModel deleteUser(Long userId) throws InvalidUserIdException {
-        // TODO Auto-generated method stub
-        return null;
     }
 }
