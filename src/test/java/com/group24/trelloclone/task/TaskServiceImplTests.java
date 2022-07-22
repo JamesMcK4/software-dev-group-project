@@ -50,11 +50,9 @@ public class TaskServiceImplTests {
 
 	@BeforeEach
 	public void setUp(){
-		TaskRequestModel request1 = new TaskRequestModel("Test1", "Test1 description", new Date(20220729), TaskStatusEnum.TO_DO);
-		task1 = TaskModel.create(request1);
+		task1 = new TaskModel();
 		task1.setId(task1Id);
-		TaskRequestModel request2 = new TaskRequestModel("Test1", "Test1 description", new Date(20220729), TaskStatusEnum.TO_DO);
-		task2 = TaskModel.create(request2);
+		task2 = new TaskModel();
 		tasks.add(task1);
 		tasks.add(task2);
 		user = new UserModel();
@@ -63,7 +61,7 @@ public class TaskServiceImplTests {
 
 	@Test
 	public void createTaskTest() {
-		TaskRequestModel request = new TaskRequestModel("Test", "Test description", new Date(20220729), TaskStatusEnum.TO_DO);
+		TaskRequestModel request = new TaskRequestModel("Test", "Test description", new Date(), TaskStatusEnum.TO_DO);
 		TaskModel task = TaskModel.create(request);
 		Mockito.when(taskRepository.save(task)).thenReturn(task);
 		TaskModel savedTask = tasksServiceImpl.createTask(request);

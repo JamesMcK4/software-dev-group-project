@@ -1,5 +1,6 @@
 package com.group24.trelloclone.board.model;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -21,7 +22,7 @@ public class BoardModel {
     private String description;
 
     @OneToMany(targetEntity = TaskModel.class)
-    private Set<TaskModel> tasks;
+    private Set<TaskModel> tasks = new HashSet<TaskModel>();
 
     public BoardModel(String name, String description) {
         this.name = name;

@@ -104,24 +104,7 @@ public class WorkspaceServiceImpl implements WorkspaceService {
         return workspaceRepository.save(workspace);
     }
 
-    @Override
-    public WorkspaceModel addUsers(Long workspaceId, List<Long> usersId) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public WorkspaceModel deleteUser(Long workspaceId, Long userId) {
-        return null;
-    }
-
-    @Override
-    public WorkspaceModel deleteUsers(Long workspaceId, List<Long> usersId) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    // TODO refactoring
+    // TODO refactoring - another time.
     @Override
     public WorkspaceModel addBoard(Long workspaceId, BoardModel board) throws UnableTooAddBoardException {
         WorkspaceModel workspace = getWorkspaceById(workspaceId);
@@ -135,34 +118,14 @@ public class WorkspaceServiceImpl implements WorkspaceService {
         return workspaceRepository.save(workspace);
     }
 
-    // saveBoard(BoardModel) - BoardService -> calls workspaceService.addBoard()
-
     @Override
     public WorkspaceModel deleteBoard(Long workspaceId, Long boardId) {
         WorkspaceModel workspace = getWorkspaceById(workspaceId);
         if (workspace != null){
-            BoardModel deletedBoard = boardService.getBoardByID(boardId);
+            BoardModel deletedBoard = boardService.getBoardById(boardId);
             workspace.getBoards().remove(deletedBoard);
         }
         return workspaceRepository.save(workspace);
-    }
-
-    @Override
-    public WorkspaceModel addBoard(Long workspaceId, Long boardId) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public WorkspaceModel updateWorkspaceName(Long workspaceId, String name) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public WorkspaceModel updateWorkspaceDescription(Long workspaceId, String description) {
-        // TODO Auto-generated method stub
-        return null;
     }
 
     @Override

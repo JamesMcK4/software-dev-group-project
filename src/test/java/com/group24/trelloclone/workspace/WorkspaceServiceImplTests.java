@@ -74,7 +74,7 @@ public class WorkspaceServiceImplTests {
     public void deleteBoardTest(){
 		workspace.setBoards(boards);
 		Mockito.when(workspaceRepository.findById(workspaceId)).thenReturn(Optional.of(workspace));
-		Mockito.when(boardService.getBoardByID(boardId)).thenReturn(board);
+		Mockito.when(boardService.getBoardById(boardId)).thenReturn(board);
 		workspace.getBoards().remove(board);
 		Mockito.when(workspaceRepository.save(workspace)).thenReturn(workspace);
 		Assertions.assertEquals(workspace, workspaceServiceImpl.deleteBoard(workspaceId, boardId));
@@ -122,4 +122,20 @@ public class WorkspaceServiceImplTests {
 		Mockito.when(workspaceRepository.save(workspace)).thenReturn(workspace);
 		Assertions.assertEquals(workspace, workspaceServiceImpl.updateWorkspace(workspace));
 	}
+
+	@Test
+	public void deleteAllUsersTest() throws InvalidUserIdException, InvalidWorkspaceIdException{
+		Mockito.when(workspaceRepository.findById(workspaceId)).thenReturn(Optional.of(workspace));
+		Mockito.when(userService.updateUser(user)).thenReturn(user);
+		Mockito.when(workspaceRepository.save(workspace)).thenReturn(workspace);
+		user.getWorkspaces().add(workspace);
+		workspace.getUsers().add(user);
+		Assertions.assertTrue(workspaceServiceImpl.deleteAllUsers(workspaceId));
+	};
+
+	@Test
+	public void deleteWorkspaceTest(){
+		Mockito.when(workspaceRepository.findById(workspaceId)).thenReturn(Optional.of(workspace));
+		Assertions.assertEquals(workspace, workspaceServiceImpl.deleteWorkspace(workspaceId));
+	};
 }

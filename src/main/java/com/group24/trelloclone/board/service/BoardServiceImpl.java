@@ -34,9 +34,9 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public BoardModel deleteBoard(Long boardId) {
-		BoardModel deletedBoard = getBoardByID(boardId);
+		BoardModel deletedBoard = getBoardById(boardId);
 		boardRepository.deleteById(boardId);
-		if (getBoardByID(boardId) == null){
+		if (getBoardById(boardId) == null){
 			return deletedBoard;
 		}
 
@@ -45,39 +45,12 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public boolean deleteAllBoards() {
-		// TODO Auto-generated method stub
 		boardRepository.deleteAll();
         if (boardRepository.count()==0){
             return true;
         }
         return false;
 
-	}
-
-	@Override
-	public BoardModel getBoardByID(Long boardId) {
-		BoardModel board = null;
-        Optional<BoardModel> optionalBoard = boardRepository.findById(boardId);
-        if(optionalBoard.isPresent())
-        {
-            board = optionalBoard.get();
-        }
-        return board;
-
-	}
-
-	@Transactional
-	@Override
-	public boolean updateBoardName(Long boardId, String name) {
-		return false;
-	}
-
-	@Transactional
-	@Override
-	public boolean updateBoardDescription(Long boardId, String description) {
-
-		// TODO Auto-generated method stub
-		return false;
 	}
 
 	@Override

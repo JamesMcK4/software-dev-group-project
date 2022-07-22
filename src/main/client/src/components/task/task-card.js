@@ -29,14 +29,13 @@ const TaskCards = ({tasks, boardId}) => {
                             <Card.Title>
                                 Assignee
                             </Card.Title>
+                            {task.assignee !== undefined? 
+                                <Card.Text>{task.assignee.emailId}</Card.Text>: <></>  
+                            }
                             <Card.Text>
-                                {task.assignee === undefined? 
                                 <Button variant="warning" href={"/assign-user/" + boardId + "/" + task.id}>
-                                    Assign a user
+                                    Assign user
                                 </Button>
-                                :
-                                    task.assignee.emailId
-                                }
                             </Card.Text>
                         </Card.Body>
                         <Card.Footer>

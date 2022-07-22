@@ -122,10 +122,4 @@ public class UserServiceImpl implements UserService
         }
         return user;
     }
-
-    @Override
-    public UserModel deleteUser(Long userId) throws InvalidUserIdException {
-        // TODO Auto-generated method stub
-        return null;
-    }
 }
